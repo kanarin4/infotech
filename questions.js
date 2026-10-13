@@ -1,6 +1,5 @@
-// InfoTech (Fundamentals of Information Technology / 情報技術基礎)
-// Comprehensive In-Class Prep Quiz Bank for Chapters 1 - 14
-// Course Curriculum & Learning Objectives
+// InfoTech — In-Class Prep Quiz Bank for Chapters 1 - 14
+// Interactive Curriculum & Learning Objectives
 
 const courseSections = [
   {

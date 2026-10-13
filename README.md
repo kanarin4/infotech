@@ -1,6 +1,6 @@
 # InfoTech — Interactive Prep Quiz Hub
 
-An interactive web application designed for students to prepare for weekly in-class quizzes in **Information Technology (情報技術基礎)**.
+An interactive web application designed for students to prepare for weekly in-class quizzes in **InfoTech**.
 
 Features bilingual (Japanese 🇯🇵 & English 🇺🇸) question banks, practice mode with immediate code execution traces, and exam simulation mode with comprehensive "Why & How" explanations.
 
@@ -71,16 +71,18 @@ Simply double-click `index.html` or open it directly in any modern browser.
 ## 📁 Repository Structure
 
 ```
-├── index.html       # Main semantic application layout
-├── style.css        # Modern glassmorphism theme and animations
-├── questions.js     # Bilingual 14-chapter quiz question bank
-├── app.js           # Interactive state management, scoring, and review engine
-├── .gitignore       # Ignore system files (.DS_Store, logs)
-└── README.md        # Documentation and curriculum guide
+├── index.html                  # Main semantic application layout
+├── style.css                   # Glassmorphic terminal design & tactile animations
+├── questions.js                # Bilingual 14-chapter quiz question bank
+├── app.js                      # Interactive state management, scoring, and review engine
+├── ascp-logo.png               # spacecaret emblem
+├── LeagueSpartan-ExtraBold.ttf # spacecaret branding typography
+├── .gitignore                  # Ignore system files (.DS_Store, logs)
+└── README.md                   # Documentation and curriculum guide
 ```
 
 ---
 
-## 📄 License
+## 📄 License & Branding
 
-MIT License. Free for educational and personal study use.
+© 2026 spacecaret. MIT License. Free for educational and personal study use.

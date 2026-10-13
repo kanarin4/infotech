@@ -20,8 +20,8 @@
   // Content Strings & Localizations
   const i18n = {
     ja: {
-      appTitle: "情報技術基礎 小テスト対策ハブ",
-      appSubtitle: "Fundamentals of Information Technology • Quiz Prep",
+      appTitle: "InfoTech",
+      appSubtitle: "小テスト対策ハブ",
       heroBadge: "Interactive Prep Terminal",
       heroTitle: "授業前クイズで理解度を完全チェック",
       heroDesc: "本講義は事前学習を前提としたハイブリッド形式です。講義カリキュラムに基づき、各回の授業内小テストで頻出するコード追跡・重要概念・典型的な引っ掛け問題を章ごとに特訓できます。",
@@ -53,8 +53,8 @@
       verdictReviewDesc: "いくつかの重要なトラップや概念でつまずきがありました。下の解説（Why & How）を熟読し、もう一度チャレンジしてみましょう。"
     },
     en: {
-      appTitle: "InfoTech Quiz Hub",
-      appSubtitle: "Fundamentals of Information Technology • Quiz Preparation",
+      appTitle: "InfoTech",
+      appSubtitle: "Interactive Prep Terminal",
       heroBadge: "Interactive Prep Terminal",
       heroTitle: "Master Weekly In-Class Quizzes in Advance",
       heroDesc: "This is a hybrid course where students must prepare beforehand. Practice key code-tracing questions, essential RL concepts, and typical traps chapter by chapter.",
@@ -184,6 +184,7 @@
   function applyLanguage() {
     const t = i18n[state.lang];
     document.documentElement.lang = state.lang;
+    document.title = state.lang === 'ja' ? "InfoTech | 小テスト対策ハブ" : "InfoTech | Interactive Prep Terminal";
 
     el.appTitleText.textContent = t.appTitle;
     el.appSubtitleText.textContent = t.appSubtitle;
