@@ -1,10 +1,10 @@
-// InfoTech Quiz Hub Application Logic
-// Supports Chapters 1-14, Bilingual JA/EN, Practice Mode & Test Mode, LocalStorage Tracking
+// InfoTech — Vanguard Quiz Hub Application Engine
+// Supports Chapters 1-14, Bilingual JA/EN, Practice/Test Modes, Tactile Feedback & Keyboard Shortcuts
 
 (function () {
   'use strict';
 
-  // State
+  // Global App State
   const state = {
     lang: 'ja', // 'ja' | 'en'
     mode: 'practice', // 'practice' | 'test'
@@ -12,20 +12,19 @@
     currentChapterId: 1,
     currentQuestionIndex: 0,
     currentQuestions: [],
-    userAnswers: [], // array of indices
+    userAnswers: [], // array of numbers or null
     practiceAnswered: false,
     reviewFilter: 'all' // 'all' | 'missed'
   };
 
-  // Translations
+  // Content Strings & Localizations
   const i18n = {
     ja: {
       appTitle: "情報技術基礎 小テスト対策ハブ",
       appSubtitle: "Fundamentals of Information Technology • Quiz Prep",
-      heroBadge: "✨ 2026年度 新シラバス対応",
+      heroBadge: "Interactive Prep Terminal",
       heroTitle: "授業前クイズで理解度を完全チェック",
       heroDesc: "本講義は事前学習を前提としたハイブリッド形式です。講義カリキュラムに基づき、各回の授業内小テストで頻出するコード追跡・重要概念・典型的な引っ掛け問題を章ごとに特訓できます。",
-      heroTextbook: "カリキュラム:",
       heroTotalQ: "全 14 章 / 56 問収録",
       heroModeDesc: "モード: 練習（即時解説）または本番テスト（採点）",
       practiceMode: "💡 練習モード",
@@ -56,10 +55,9 @@
     en: {
       appTitle: "InfoTech Quiz Hub",
       appSubtitle: "Fundamentals of Information Technology • Quiz Preparation",
-      heroBadge: "✨ Updated 2026 Curriculum",
+      heroBadge: "Interactive Prep Terminal",
       heroTitle: "Master Weekly In-Class Quizzes in Advance",
       heroDesc: "This is a hybrid course where students must prepare beforehand. Practice key code-tracing questions, essential RL concepts, and typical traps chapter by chapter.",
-      heroTextbook: "Curriculum:",
       heroTotalQ: "14 Chapters / 56 Questions",
       heroModeDesc: "Mode: Practice (Instant Feedback) or Test (Exam Sim)",
       practiceMode: "💡 Practice Mode",
@@ -89,12 +87,15 @@
     }
   };
 
-  // DOM Elements
+  // DOM Elements Cache
   const el = {
     // Views
     hubView: document.getElementById('hub-view'),
     quizView: document.getElementById('quiz-view'),
     resultsView: document.getElementById('results-view'),
+
+    // Branding Trigger
+    brandHomeTrigger: document.getElementById('brand-home-trigger'),
 
     // Header Controls
     langJaBtn: document.getElementById('lang-ja-btn'),
@@ -147,7 +148,7 @@
     reviewCardsContainer: document.getElementById('review-cards-container')
   };
 
-  // Safe escape
+  // Safe HTML Escaping
   function escapeHtml(str) {
     if (!str) return '';
     return str
@@ -179,7 +180,7 @@
     }
   }
 
-  // Apply Current Language Texts
+  // Apply Language Settings
   function applyLanguage() {
     const t = i18n[state.lang];
     document.documentElement.lang = state.lang;
@@ -211,9 +212,8 @@
     }
   }
 
-  // Render Hub Chapter Cards
+  // Render Hub Chapter Cards with Double-Bezel Architecture
   function renderHub() {
-    const t = i18n[state.lang];
     el.coursePartsContainer.innerHTML = '';
 
     courseSections.forEach(part => {
@@ -224,7 +224,8 @@
       const titleBar = document.createElement('div');
       titleBar.className = 'part-title-bar';
       titleBar.innerHTML = `
-        <h3><span class="part-indicator"></span>${escapeHtml(partTitle)}</h3>
+        <h3>${escapeHtml(partTitle)}</h3>
+        <span class="part-number-pill">Part ${part.partId}</span>
       `;
       partSection.appendChild(titleBar);
 
@@ -239,32 +240,39 @@
         // Check local storage for score
         const savedScore = localStorage.getItem(`it_score_ch_${ch.id}`);
 
-        const card = document.createElement('article');
-        card.className = 'chapter-card';
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.innerHTML = `
-          <div class="chapter-card-top">
-            <span class="chapter-number-tag">CHAPTER ${ch.id}</span>
-            <h4 class="chapter-title">${escapeHtml(title)}</h4>
-            <p class="chapter-desc">${escapeHtml(topics)}</p>
-          </div>
-          <div class="chapter-card-bottom">
-            <span class="question-count-badge">${questions.length} Questions</span>
-            ${savedScore ? `<span class="score-chip">Best: ${savedScore}</span>` : ''}
-            <span class="start-quiz-btn">${t.startQuiz} →</span>
+        const cardShell = document.createElement('article');
+        cardShell.className = `chapter-card-shell ${savedScore ? 'completed' : ''}`;
+        cardShell.setAttribute('role', 'button');
+        cardShell.setAttribute('tabindex', '0');
+        cardShell.setAttribute('aria-label', `${title} - ${questions.length} questions`);
+
+        cardShell.innerHTML = `
+          <div class="chapter-card-core">
+            <div class="chapter-card-top">
+              <div class="chapter-id-badge">
+                <span>CHAPTER ${ch.id}</span>
+                <span class="chapter-status-dot"></span>
+              </div>
+              <h4 class="chapter-title">${escapeHtml(title)}</h4>
+              <p class="chapter-desc">${escapeHtml(topics)}</p>
+            </div>
+            <div class="chapter-card-bottom">
+              <span class="question-count-badge">${questions.length} Questions</span>
+              ${savedScore ? `<span class="score-chip">${savedScore}</span>` : ''}
+              <span class="start-link-arrow">&rarr;</span>
+            </div>
           </div>
         `;
 
-        card.addEventListener('click', () => startChapterQuiz(ch.id));
-        card.addEventListener('keydown', (e) => {
+        cardShell.addEventListener('click', () => startChapterQuiz(ch.id));
+        cardShell.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             startChapterQuiz(ch.id);
           }
         });
 
-        grid.appendChild(card);
+        grid.appendChild(cardShell);
       });
 
       partSection.appendChild(grid);
@@ -316,7 +324,7 @@
     el.practiceFeedbackBox.style.display = 'none';
     el.feedbackExplanationText.textContent = '';
 
-    // Render Options
+    // Render Option Tiles
     el.qOptionsContainer.innerHTML = '';
     const letters = ['A', 'B', 'C', 'D'];
     const chosenIndex = state.userAnswers[state.currentQuestionIndex];
@@ -324,7 +332,8 @@
     qData.options.forEach((optText, idx) => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'option-btn';
+      btn.className = 'option-tile';
+      btn.setAttribute('data-index', idx);
 
       if (chosenIndex === idx) {
         btn.classList.add('selected');
@@ -334,14 +343,14 @@
       if (state.mode === 'practice' && chosenIndex !== null) {
         btn.disabled = true;
         if (idx === q.correctIndex) {
-          btn.classList.add('correct-feedback');
+          btn.classList.add('correct-state');
         } else if (chosenIndex === idx) {
-          btn.classList.add('incorrect-feedback');
+          btn.classList.add('incorrect-state');
         }
       }
 
       btn.innerHTML = `
-        <span class="option-indicator">${letters[idx]}</span>
+        <span class="option-key-badge">${letters[idx]}</span>
         <span class="option-label">${escapeHtml(optText)}</span>
       `;
 
@@ -358,7 +367,7 @@
     updateNextButtonState();
   }
 
-  // Handle Option Click
+  // Handle Option Selection
   function onOptionSelect(selectedIndex) {
     const q = state.currentQuestions[state.currentQuestionIndex];
     if (!q) return;
@@ -366,25 +375,24 @@
     state.userAnswers[state.currentQuestionIndex] = selectedIndex;
 
     if (state.mode === 'practice') {
-      // In practice mode, lock and give instant feedback
       const qData = q[state.lang];
       const isCorrect = selectedIndex === q.correctIndex;
 
       // Update button classes
-      const optionButtons = el.qOptionsContainer.querySelectorAll('.option-btn');
+      const optionButtons = el.qOptionsContainer.querySelectorAll('.option-tile');
       optionButtons.forEach((btn, idx) => {
         btn.disabled = true;
         if (idx === q.correctIndex) {
-          btn.classList.add('correct-feedback');
+          btn.classList.add('correct-state');
         } else if (idx === selectedIndex) {
-          btn.classList.add('incorrect-feedback');
+          btn.classList.add('incorrect-state');
         }
       });
 
       showPracticeFeedback(isCorrect, qData.explanation);
     } else {
-      // In test mode, just highlight selected
-      const optionButtons = el.qOptionsContainer.querySelectorAll('.option-btn');
+      // In test mode, toggle selected class
+      const optionButtons = el.qOptionsContainer.querySelectorAll('.option-tile');
       optionButtons.forEach((btn, idx) => {
         btn.classList.toggle('selected', idx === selectedIndex);
       });
@@ -399,15 +407,15 @@
     el.practiceFeedbackBox.style.display = 'block';
 
     if (isCorrect) {
-      el.feedbackStatusBadge.className = 'feedback-badge correct';
-      el.feedbackStatusBadge.innerHTML = `✓ ${t.statusCorrect}`;
+      el.feedbackStatusBadge.className = 'feedback-status-row correct';
+      el.feedbackStatusBadge.innerHTML = `<span>✓</span> <span>${t.statusCorrect}</span>`;
     } else {
-      el.feedbackStatusBadge.className = 'feedback-badge incorrect';
-      el.feedbackStatusBadge.innerHTML = `✕ ${t.statusIncorrect}`;
+      el.feedbackStatusBadge.className = 'feedback-status-row incorrect';
+      el.feedbackStatusBadge.innerHTML = `<span>✕</span> <span>${t.statusIncorrect}</span>`;
     }
 
     el.feedbackExplanationText.innerHTML = `
-      <strong>${t.explanationLabel}</strong><br>
+      <strong style="color: #38BDF8; font-family: var(--font-mono); font-size: 0.8rem; display: block; margin-bottom: 6px;">${t.explanationLabel}</strong>
       ${escapeHtml(explanation)}
     `;
   }
@@ -422,24 +430,23 @@
     el.nextBtnText.textContent = isLastQ ? t.finishQuiz : t.nextQ;
   }
 
-  // Go to Next Question or Results
+  // Advance to Next Question or Finish
   function onNextQuestionClick() {
     const totalQ = state.currentQuestions.length;
     if (state.currentQuestionIndex < totalQ - 1) {
       state.currentQuestionIndex++;
       renderCurrentQuestion();
     } else {
-      // Complete Quiz
       finishQuiz();
     }
   }
 
-  // Finish Quiz & Compute Score
+  // Complete Quiz & Route to Results
   function finishQuiz() {
     showView('results');
   }
 
-  // Render Results & Why/How Review
+  // Render Results Dashboard & Analytics
   function renderResults() {
     const t = i18n[state.lang];
     const totalQ = state.currentQuestions.length;
@@ -456,18 +463,18 @@
     // Save to LocalStorage
     localStorage.setItem(`it_score_ch_${state.currentChapterId}`, `${correctCount}/${totalQ} (${percent}%)`);
 
-    // Animate Circle
+    // Update Percentage
     el.resultScorePercent.textContent = `${percent}%`;
     el.resultScoreFraction.textContent = `${correctCount} / ${totalQ} ${t.scoreSuffix}`;
 
-    // Circumference = 2 * PI * 60 = ~377
+    // Animate Radial Gauge (Circumference: 2 * PI * 60 = 377)
     const circumference = 377;
     const offset = circumference - (percent / 100) * circumference;
     setTimeout(() => {
       el.resultCircleProgress.style.strokeDashoffset = offset;
-    }, 100);
+    }, 60);
 
-    // Color stroke based on pass/fail
+    // Color stroke based on mastery
     if (percent >= 75) {
       el.resultCircleProgress.style.stroke = 'var(--accent-emerald)';
     } else if (percent >= 50) {
@@ -476,7 +483,7 @@
       el.resultCircleProgress.style.stroke = 'var(--accent-rose)';
     }
 
-    // Verdict titles
+    // Verdict copy
     if (percent === 100) {
       el.resultVerdictTitle.textContent = t.verdictPerfectTitle;
       el.resultVerdictDesc.textContent = t.verdictPerfectDesc;
@@ -488,7 +495,7 @@
       el.resultVerdictDesc.textContent = t.verdictReviewDesc;
     }
 
-    // Render detailed review cards
+    // Render breakdown review
     renderReviewCards();
   }
 
@@ -508,8 +515,8 @@
       }
 
       const qData = q[state.lang];
-      const card = document.createElement('div');
-      card.className = `review-card ${isCorrect ? 'correct-card' : 'incorrect-card'}`;
+      const shell = document.createElement('div');
+      shell.className = 'review-item-shell';
 
       let optionsRowsHtml = '';
       qData.options.forEach((optText, optIdx) => {
@@ -526,7 +533,7 @@
 
         optionsRowsHtml += `
           <div class="${rowClass}">
-            <span style="margin-right: 8px; font-weight: 700;">${prefix}</span>
+            <span style="font-family: var(--font-mono); font-weight: 700; margin-right: 8px;">${prefix}</span>
             <span>${escapeHtml(optText)}</span>
           </div>
         `;
@@ -535,40 +542,91 @@
       let codeSnippetHtml = '';
       if (q.code) {
         codeSnippetHtml = `
-          <div class="code-box" style="margin: 12px 0 16px;">
-            <div class="code-box-header"><span>python3 snippet</span></div>
+          <div class="terminal-code-box" style="margin: 12px 0 16px;">
+            <div class="terminal-header"><span>python3 &bull; snippet</span></div>
             <pre><code>${escapeHtml(q.code)}</code></pre>
           </div>
         `;
       }
 
-      card.innerHTML = `
-        <div class="review-card-top">
-          <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">${t.qCountPrefix} ${idx + 1}</span>
-          <span class="review-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
-            ${isCorrect ? t.statusCorrect : t.statusIncorrect}
-          </span>
-        </div>
-        <h5 class="review-question-text">${escapeHtml(qData.question)}</h5>
-        ${codeSnippetHtml}
-        <div class="review-options-summary">
-          ${optionsRowsHtml}
-        </div>
-        <div class="review-explanation-box">
-          <div class="review-explanation-title">${t.explanationLabel}</div>
-          <div class="review-explanation-text">${escapeHtml(qData.explanation)}</div>
+      shell.innerHTML = `
+        <div class="review-item-core ${isCorrect ? 'pass-border' : 'fail-border'}">
+          <div class="review-card-top-row">
+            <span class="review-q-number">${t.qCountPrefix} ${idx + 1}</span>
+            <span class="review-status-tag ${isCorrect ? 'correct' : 'incorrect'}">
+              ${isCorrect ? t.statusCorrect : t.statusIncorrect}
+            </span>
+          </div>
+          <h5 class="review-question-text">${escapeHtml(qData.question)}</h5>
+          ${codeSnippetHtml}
+          <div class="review-options-list">
+            ${optionsRowsHtml}
+          </div>
+          <div class="review-explanation-card">
+            <div class="review-explanation-title">${t.explanationLabel}</div>
+            <div class="review-explanation-text">${escapeHtml(qData.explanation)}</div>
+          </div>
         </div>
       `;
 
-      el.reviewCardsContainer.appendChild(card);
+      el.reviewCardsContainer.appendChild(shell);
     });
 
     if (el.reviewCardsContainer.children.length === 0) {
       el.reviewCardsContainer.innerHTML = `
-        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-          <p>🎉 不正解の問題はありません！全問正解です。</p>
+        <div style="text-align: center; padding: 48px; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-inner); border: 1px solid var(--border-subtle);">
+          <p style="font-family: var(--font-display); font-size: 1.1rem; color: var(--accent-emerald);">🎉 不正解の問題はありません！全問正解です。</p>
         </div>
       `;
+    }
+  }
+
+  // Keyboard Shortcuts (Linear/Raycast-grade tactile navigation)
+  function handleKeyboardShortcuts(e) {
+    // If typing in an input, don't hijack
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (state.activeView === 'quiz') {
+      const key = e.key.toLowerCase();
+      // Select option with 1-4 or a-d
+      if (['1', 'a'].includes(key)) {
+        e.preventDefault();
+        onOptionSelect(0);
+      } else if (['2', 'b'].includes(key)) {
+        e.preventDefault();
+        onOptionSelect(1);
+      } else if (['3', 'c'].includes(key)) {
+        e.preventDefault();
+        onOptionSelect(2);
+      } else if (['4', 'd'].includes(key)) {
+        e.preventDefault();
+        onOptionSelect(3);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!el.quizNextBtn.disabled) {
+          onNextQuestionClick();
+        }
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        showView('hub');
+      }
+    } else if (state.activeView === 'results') {
+      if (e.key === 'Enter' || e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        startChapterQuiz(state.currentChapterId);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        showView('hub');
+      }
+    } else if (state.activeView === 'hub') {
+      if (e.key === 'l' || e.key === 'L') {
+        // Toggle language
+        e.preventDefault();
+        state.lang = state.lang === 'ja' ? 'en' : 'ja';
+        el.langJaBtn.classList.toggle('active', state.lang === 'ja');
+        el.langEnBtn.classList.toggle('active', state.lang === 'en');
+        applyLanguage();
+      }
     }
   }
 
@@ -616,7 +674,18 @@
       }
     });
 
-    // Back to Hub
+    // Brand Home Link
+    if (el.brandHomeTrigger) {
+      el.brandHomeTrigger.addEventListener('click', () => showView('hub'));
+      el.brandHomeTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showView('hub');
+        }
+      });
+    }
+
+    // Back Buttons
     el.quizBackBtn.addEventListener('click', () => showView('hub'));
     el.resultsHubBtn.addEventListener('click', () => showView('hub'));
 
@@ -647,16 +716,18 @@
       el.filterAllBtn.classList.remove('active');
       renderReviewCards();
     });
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', handleKeyboardShortcuts);
   }
 
-  // Initialization
+  // App Initialization
   function init() {
     initListeners();
     applyLanguage();
     showView('hub');
   }
 
-  // Run on DOM Ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
