@@ -325,13 +325,17 @@
           const subRowsHtml = ch.subsections.map(sub => {
             const subTitle = state.lang === 'ja' ? sub.titleJa : sub.titleEn;
             const displayId = sub.id.replace('_', '–');
+            const subScore = localStorage.getItem(`it_score_sub_${ch.id}_${sub.id}`);
             return `
               <div class="subsection-item-row">
                 <div class="sub-meta-group">
                   <span class="sub-id-badge">§ ${displayId}</span>
                   <span class="sub-title-text" title="${escapeHtml(subTitle)}">${escapeHtml(subTitle)}</span>
                 </div>
-                <button type="button" class="btn-drill-sub" data-chid="${ch.id}" data-subid="${sub.id}" aria-label="${escapeHtml(subTitle)}">${t.drillBtn}</button>
+                <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                  ${subScore ? `<span class="score-chip" style="font-size: 0.68rem; padding: 1px 6px;">${subScore}</span>` : ''}
+                  <button type="button" class="btn-drill-sub" data-chid="${ch.id}" data-subid="${sub.id}" aria-label="${escapeHtml(subTitle)}">${t.drillBtn}</button>
+                </div>
               </div>
             `;
           }).join('');
