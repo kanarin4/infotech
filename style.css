@@ -523,6 +523,170 @@ body {
   color: #38BDF8;
 }
 
+/* Subsection Drawer & Drill Controls */
+.subsections-accordion {
+  margin-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+}
+
+.subsections-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-snap) var(--ease-snappy);
+  touch-action: manipulation;
+}
+
+.subsections-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-pure);
+}
+
+.subsections-toggle-btn .toggle-icon {
+  margin-right: 6px;
+}
+
+.subsections-toggle-btn .toggle-chevron {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  transition: transform var(--duration-snap) var(--ease-snappy);
+}
+
+.subsections-toggle-btn[aria-expanded="true"] .toggle-chevron {
+  transform: rotate(180deg);
+}
+
+.subsections-list {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 4px;
+}
+
+.subsections-list.open {
+  display: flex;
+}
+
+.subsection-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-sm);
+  gap: 8px;
+  transition: background var(--duration-snap);
+}
+
+.subsection-item-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sub-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.sub-id-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+  white-space: nowrap;
+}
+
+.sub-title-text {
+  font-size: 0.78rem;
+  color: var(--text-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-drill-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  min-height: 32px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--duration-snap) var(--ease-snappy);
+  touch-action: manipulation;
+}
+
+.btn-drill-sub:hover {
+  background: var(--accent-emerald-bg);
+  border-color: var(--accent-emerald-border);
+  color: var(--accent-emerald);
+}
+
+/* Chapter Card Primary Full Quiz Button */
+.btn-chapter-full-quiz {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-pure);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--duration-snap) var(--ease-snappy);
+  touch-action: manipulation;
+}
+
+.btn-chapter-full-quiz:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+}
+
+.q-subsection-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 8px;
+}
+
 /* ==========================================================================
    Quiz Interface: Focused Studio View
    ========================================================================== */

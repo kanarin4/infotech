@@ -1,6 +1,7 @@
 // InfoTech - In-Class Prep Quiz Bank for Chapters 1 - 14
-// 168 questions across 14 chapters (4 question slots per chapter, 3 dynamic varieties per slot)
-// Shuffled dynamically at runtime to prevent rote memorization and encourage conceptual understanding.
+// Subsection-Enriched Architecture: Practice by Subsection or Take Full Chapter Quizzes
+// 192 total questions across 14 chapters and 64 topic slots.
+// Options and question varieties are sampled and shuffled dynamically at runtime.
 
 const courseSections = [
   {
@@ -13,8 +14,50 @@ const courseSections = [
         "slug": "01_program_intro",
         "titleJa": "第1章 プログラムとは",
         "titleEn": "Ch 1: What is a Program?",
-        "topicsJa": "コンピュータの動作、CPU、主記憶と補助記憶、Python/IDLE環境",
-        "topicsEn": "Computer Architecture, CPU, Main/Secondary Storage, IDLE"
+        "topicsJa": "コンピュータの動作、CPU、主記憶と補助記憶、Python/IDLE環境、四則演算、変数、関数",
+        "topicsEn": "Computer Architecture, CPU, Main/Secondary Storage, IDLE, Operators, Variables, Functions",
+        "subsections": [
+          {
+            "id": "1.1",
+            "titleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+            "titleEn": "1.1 Computer Architecture (CPU & Memory)"
+          },
+          {
+            "id": "1.2",
+            "titleJa": "1.2 プログラミング言語とPythonの特徴",
+            "titleEn": "1.2 Programming Languages & Python"
+          },
+          {
+            "id": "1.3_1.4",
+            "titleJa": "1.3-1.4 IDLE環境・対話型シェル・スクリプト実行",
+            "titleEn": "1.3-1.4 IDLE, Shell & Script Execution"
+          },
+          {
+            "id": "1.5.1",
+            "titleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+            "titleEn": "1.5.1 print() & Arithmetic Operators"
+          },
+          {
+            "id": "1.5.2_1.5.4",
+            "titleJa": "1.5.2-1.5.4 実行順序・空白・全角スペース・コメント",
+            "titleEn": "1.5.2-1.5.4 Execution Order & Whitespace"
+          },
+          {
+            "id": "1.5.5_1.5.6",
+            "titleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+            "titleEn": "1.5.5-1.5.6 Variables & Reassignment"
+          },
+          {
+            "id": "1.5.7_1.5.9",
+            "titleJa": "1.5.7-1.5.9 関数呼び出し・関数定義(def/return)・モジュール",
+            "titleEn": "1.5.7-1.5.9 Functions & Modules"
+          },
+          {
+            "id": "1.6",
+            "titleJa": "1.6 まとめとノート練習問題（秒数計算・BMI等）",
+            "titleEn": "1.6 Practice Exercises (Seconds/Year, BMI, etc.)"
+          }
+        ]
       },
       {
         "id": 2,
@@ -22,7 +65,29 @@ const courseSections = [
         "titleJa": "第2章 場合分けと繰り返し",
         "titleEn": "Ch 2: Branching & Loops",
         "topicsJa": "input()、型キャスト、if/elif/else、for/while、range",
-        "topicsEn": "input(), Type Casting, if/elif/else, for/while, range()"
+        "topicsEn": "input(), Type Casting, if/elif/else, for/while, range()",
+        "subsections": [
+          {
+            "id": "2.1",
+            "titleJa": "2.1 キーボードからの入力（input・型変換・IDLE）",
+            "titleEn": "2.1 User Input & Type Casting"
+          },
+          {
+            "id": "2.2",
+            "titleJa": "2.2 場合分け（if / elif / else・真偽値・比較演算子）",
+            "titleEn": "2.2 Conditionals & Booleans"
+          },
+          {
+            "id": "2.3",
+            "titleJa": "2.3 繰り返し（for / while・無限ループ）",
+            "titleEn": "2.3 Loops (for & while)"
+          },
+          {
+            "id": "2.4_2.5",
+            "titleJa": "2.4-2.5 range関数と多重ループ（ネスト）",
+            "titleEn": "2.4-2.5 range() & Nested Loops"
+          }
+        ]
       },
       {
         "id": 3,
@@ -30,7 +95,29 @@ const courseSections = [
         "titleJa": "第3章 データ型",
         "titleEn": "Ch 3: Data Types & Data Structures",
         "topicsJa": "リスト、辞書(dict)、インデックス、スライス、可変性",
-        "topicsEn": "Lists, Dictionaries, Indexing, Slicing, Mutability"
+        "topicsEn": "Lists, Dictionaries, Indexing, Slicing, Mutability",
+        "subsections": [
+          {
+            "id": "3.1",
+            "titleJa": "3.1 データ型の基礎（int, float, str, bool, list, dict）",
+            "titleEn": "3.1 Fundamental Data Types"
+          },
+          {
+            "id": "3.2",
+            "titleJa": "3.2 リストの詳細（インデックス・スライス・append）",
+            "titleEn": "3.2 Lists & Slicing"
+          },
+          {
+            "id": "3.3",
+            "titleJa": "3.3 辞書（キーと値・KeyError・in演算子）",
+            "titleEn": "3.3 Dictionaries (dict)"
+          },
+          {
+            "id": "3.4",
+            "titleJa": "3.4 可変性と参照（ミュータブル vs イミュータブル）",
+            "titleEn": "3.4 Mutability & References"
+          }
+        ]
       },
       {
         "id": 4,
@@ -38,7 +125,29 @@ const courseSections = [
         "titleJa": "第4章 アルゴリズムの性質",
         "titleEn": "Ch 4: Nature of Algorithms & Coding Agents",
         "topicsJa": "coding agent、vibe coding、停止性、計算量 O(n)",
-        "topicsEn": "Coding Agents, Vibe Coding, Halting Problem, Big-O"
+        "topicsEn": "Coding Agents, Vibe Coding, Halting Problem, Big-O",
+        "subsections": [
+          {
+            "id": "4.1",
+            "titleJa": "4.1 アルゴリズムの基礎と要件",
+            "titleEn": "4.1 Algorithm Fundamentals"
+          },
+          {
+            "id": "4.2",
+            "titleJa": "4.2 アラン・チューリングと停止問題（Halting Problem）",
+            "titleEn": "4.2 Turing & The Halting Problem"
+          },
+          {
+            "id": "4.3",
+            "titleJa": "4.3 計算量（Big-O記法・線形探索 vs 二分探索）",
+            "titleEn": "4.3 Computational Complexity (Big-O)"
+          },
+          {
+            "id": "4.4",
+            "titleJa": "4.4 コーディングエージェントと検証責任（単体テスト）",
+            "titleEn": "4.4 Coding Agents & Verification"
+          }
+        ]
       }
     ]
   },
@@ -53,7 +162,29 @@ const courseSections = [
         "titleJa": "第5章 機械学習",
         "titleEn": "Ch 5: Machine Learning & Git",
         "topicsJa": "AI・ML・DL、3大分類、強化学習の特徴、Gitバージョン管理",
-        "topicsEn": "AI/ML/DL, 3 Major Classes, RL Traits, Git Version Control"
+        "topicsEn": "AI/ML/DL, 3 Major Classes, RL Traits, Git Version Control",
+        "subsections": [
+          {
+            "id": "5.1",
+            "titleJa": "5.1 AI・機械学習・深層学習の包含関係",
+            "titleEn": "5.1 AI, ML & Deep Learning Hierarchy"
+          },
+          {
+            "id": "5.2",
+            "titleJa": "5.2 3大学習パラダイム（教師あり・教師なし・強化学習）",
+            "titleEn": "5.2 3 Paradigms of Machine Learning"
+          },
+          {
+            "id": "5.3",
+            "titleJa": "5.3 強化学習の特徴（試行錯誤・遅延報酬）",
+            "titleEn": "5.3 Key Characteristics of RL"
+          },
+          {
+            "id": "5.4",
+            "titleJa": "5.4 Gitによるバージョン管理（add, commit, リポジトリ）",
+            "titleEn": "5.4 Git Version Control Fundamentals"
+          }
+        ]
       },
       {
         "id": 6,
@@ -61,7 +192,29 @@ const courseSections = [
         "titleJa": "第6章 多腕バンディット問題",
         "titleEn": "Ch 6: Multi-Armed Bandit Problem",
         "topicsJa": "探索と活用のトレードオフ、ε-greedy法、標本平均法",
-        "topicsEn": "Exploration vs Exploitation, ε-greedy, Sample-average"
+        "topicsEn": "Exploration vs Exploitation, ε-greedy, Sample-average",
+        "subsections": [
+          {
+            "id": "6.1",
+            "titleJa": "6.1 多腕バンディット問題の定式化",
+            "titleEn": "6.1 Multi-Armed Bandit Formulation"
+          },
+          {
+            "id": "6.2",
+            "titleJa": "6.2 探索と活用のトレードオフ",
+            "titleEn": "6.2 Exploration vs Exploitation"
+          },
+          {
+            "id": "6.3",
+            "titleJa": "6.3 標本平均法と逐次更新式",
+            "titleEn": "6.3 Sample-Average Method"
+          },
+          {
+            "id": "6.4",
+            "titleJa": "6.4 ε-greedy法（探索率εの調整）",
+            "titleEn": "6.4 ε-greedy Action Selection"
+          }
+        ]
       },
       {
         "id": 7,
@@ -69,7 +222,29 @@ const courseSections = [
         "titleJa": "第7章 強化学習の基礎",
         "titleEn": "Ch 7: Foundations of Reinforcement Learning",
         "topicsJa": "エージェントと環境、MDP、割引率γ、状態・行動価値関数",
-        "topicsEn": "Agent & Environment, MDP, Discount Factor γ, V(s) & Q(s,a)"
+        "topicsEn": "Agent & Environment, MDP, Discount Factor γ, V(s) & Q(s,a)",
+        "subsections": [
+          {
+            "id": "7.1",
+            "titleJa": "7.1 エージェントと環境の相互作用ループ",
+            "titleEn": "7.1 Agent-Environment Interaction Loop"
+          },
+          {
+            "id": "7.2",
+            "titleJa": "7.2 マルコフ決定プロセス（MDP）とマルコフ性",
+            "titleEn": "7.2 Markov Decision Processes (MDP)"
+          },
+          {
+            "id": "7.3",
+            "titleJa": "7.3 収益 G_t と割引率 γ",
+            "titleEn": "7.3 Return G_t & Discount Factor γ"
+          },
+          {
+            "id": "7.4",
+            "titleJa": "7.4 状態価値関数 V(s) と行動価値関数 Q(s, a)",
+            "titleEn": "7.4 Value Functions V(s) & Q(s,a)"
+          }
+        ]
       }
     ]
   },
@@ -84,7 +259,29 @@ const courseSections = [
         "titleJa": "第8章 強化学習の例(1) - Cliff Walking",
         "titleEn": "Ch 8: Cliff Walking (Gymnasium Basics)",
         "topicsJa": "Gymnasium API、env.reset/step、崖歩き環境、状態価値可視化",
-        "topicsEn": "Gymnasium API, env.step/reset, Cliff Walking, Value Maps"
+        "topicsEn": "Gymnasium API, env.step/reset, Cliff Walking, Value Maps",
+        "subsections": [
+          {
+            "id": "8.1",
+            "titleJa": "8.1 Gymnasium Core API（reset, step 5要素）",
+            "titleEn": "8.1 Gymnasium Core API (reset & step)"
+          },
+          {
+            "id": "8.2",
+            "titleJa": "8.2 Cliff Walking環境の構造と崖転落ペナルティ",
+            "titleEn": "8.2 Cliff Walking Grid Dynamics"
+          },
+          {
+            "id": "8.3",
+            "titleJa": "8.3 最短崖際ルート vs 安全大回りルート（Q vs SARSA）",
+            "titleEn": "8.3 Optimal vs Safe Detour (Q vs SARSA)"
+          },
+          {
+            "id": "8.4",
+            "titleJa": "8.4 行動空間・観測空間と環境レンダリング",
+            "titleEn": "8.4 Observation & Action Spaces"
+          }
+        ]
       },
       {
         "id": 9,
@@ -92,7 +289,29 @@ const courseSections = [
         "titleJa": "第9章 強化学習の例(2) - Blackjack",
         "titleEn": "Ch 9: Blackjack (Monte Carlo Method)",
         "topicsJa": "行動価値関数 Q(s,a)、モンテカルロ法、エピソード収益平均化",
-        "topicsEn": "Action-Value Q(s,a), Monte Carlo Method, Episode Returns"
+        "topicsEn": "Action-Value Q(s,a), Monte Carlo Method, Episode Returns",
+        "subsections": [
+          {
+            "id": "9.1",
+            "titleJa": "9.1 モンテカルロ法の基本原理（エピソード収益平均化）",
+            "titleEn": "9.1 Monte Carlo Principle"
+          },
+          {
+            "id": "9.2",
+            "titleJa": "9.2 Blackjackの状態表現（手札合計, 見せ札, 使えるA）",
+            "titleEn": "9.2 Blackjack State Tuple"
+          },
+          {
+            "id": "9.3",
+            "titleJa": "9.3 収益 G_t 計算トレースとQ値標本平均更新",
+            "titleEn": "9.3 Return Calculation & Sample-Average"
+          },
+          {
+            "id": "9.4",
+            "titleJa": "9.4 初回訪問MC vs 全訪問MC、最適方策抽出",
+            "titleEn": "9.4 First-visit vs Every-visit MC"
+          }
+        ]
       },
       {
         "id": 10,
@@ -100,7 +319,29 @@ const courseSections = [
         "titleJa": "第10章 強化学習の例(3) - Frozen Lake",
         "titleEn": "Ch 10: Frozen Lake (TD Learning & Q-Learning)",
         "topicsJa": "凍った湖、TD学習、Q-learning更新式、学習率α、確率的遷移",
-        "topicsEn": "Frozen Lake, TD Learning, Q-Learning Equation, Learning Rate α"
+        "topicsEn": "Frozen Lake, TD Learning, Q-Learning Equation, Learning Rate α",
+        "subsections": [
+          {
+            "id": "10.1",
+            "titleJa": "10.1 TD学習（時間的差分学習）とブートストラップ",
+            "titleEn": "10.1 TD Learning & Bootstrapping"
+          },
+          {
+            "id": "10.2",
+            "titleJa": "10.2 Q-learning更新式（Off-policy, TD誤差, 学習率α）",
+            "titleEn": "10.2 Q-Learning Update Equation"
+          },
+          {
+            "id": "10.3",
+            "titleJa": "10.3 Q値更新の数値計算トレース",
+            "titleEn": "10.3 Q-Table Calculation Trace"
+          },
+          {
+            "id": "10.4",
+            "titleJa": "10.4 滑る氷の確率的遷移（is_slippery=True）",
+            "titleEn": "10.4 Slippery Surface Dynamics"
+          }
+        ]
       },
       {
         "id": 11,
@@ -108,7 +349,29 @@ const courseSections = [
         "titleJa": "第11章 強化学習の例(4) - Cart Pole",
         "titleEn": "Ch 11: Cart Pole (Continuous State & Discretization)",
         "topicsJa": "倒立振子、連続状態空間、表形式の限界、ビニング（離散化）",
-        "topicsEn": "Cart Pole, Continuous States, Table Limits, Discretization/Binning"
+        "topicsEn": "Cart Pole, Continuous States, Table Limits, Discretization/Binning",
+        "subsections": [
+          {
+            "id": "11.1",
+            "titleJa": "11.1 CartPole-v1の4連続物理状態と行動空間",
+            "titleEn": "11.1 CartPole 4D Continuous State"
+          },
+          {
+            "id": "11.2",
+            "titleJa": "11.2 連続状態空間における表形式手法の限界と次元の呪い",
+            "titleEn": "11.2 Curse of Dimensionality"
+          },
+          {
+            "id": "11.3",
+            "titleJa": "11.3 離散化（ビニング）と np.digitize 計算トレース",
+            "titleEn": "11.3 Discretization via np.digitize"
+          },
+          {
+            "id": "11.4",
+            "titleJa": "11.4 終了条件（角度 ±12度, 500ステップ, 攻略基準）",
+            "titleEn": "11.4 CartPole Termination & Solved Criteria"
+          }
+        ]
       }
     ]
   },
@@ -123,7 +386,29 @@ const courseSections = [
         "titleJa": "第12章 自作ゲームの作成",
         "titleEn": "Ch 12: Creating a Custom Gymnasium Env",
         "topicsJa": "gymnasium.Env継承、reset/step/render、GridTreasureEnv",
-        "topicsEn": "Subclassing gym.Env, reset/step/render, GridTreasureEnv"
+        "topicsEn": "Subclassing gym.Env, reset/step/render, GridTreasureEnv",
+        "subsections": [
+          {
+            "id": "12.1",
+            "titleJa": "12.1 gymnasium.Env のサブクラス化とメソッド",
+            "titleEn": "12.1 Subclassing gym.Env"
+          },
+          {
+            "id": "12.2",
+            "titleJa": "12.2 行動空間・観測空間の定義（Discrete, Box）",
+            "titleEn": "12.2 Action & Observation Spaces"
+          },
+          {
+            "id": "12.3",
+            "titleJa": "12.3 グリッド座標更新と np.clip 境界クリッピング",
+            "titleEn": "12.3 Grid Step & Boundary Clipping"
+          },
+          {
+            "id": "12.4",
+            "titleJa": "12.4 step戻り値型仕様と check_env 検証",
+            "titleEn": "12.4 Step Signature & check_env"
+          }
+        ]
       },
       {
         "id": 13,
@@ -131,7 +416,29 @@ const courseSections = [
         "titleJa": "第13章 自作ゲームのAI育成",
         "titleEn": "Ch 13: Training Custom Game AI",
         "topicsJa": "Q-learning適用、ε-decay（減衰）、ハイパーパラメータ調整",
-        "topicsEn": "Applying Q-learning, ε-decay, Hyperparameter Tuning"
+        "topicsEn": "Applying Q-learning, ε-decay, Hyperparameter Tuning",
+        "subsections": [
+          {
+            "id": "13.1",
+            "titleJa": "13.1 強化学習トレーニングループの実装",
+            "titleEn": "13.1 RL Training Loop Architecture"
+          },
+          {
+            "id": "13.2",
+            "titleJa": "13.2 ε-decay（減衰）スケジュール計算トレース",
+            "titleEn": "13.2 ε-Decay Schedules"
+          },
+          {
+            "id": "13.3",
+            "titleJa": "13.3 評価フェーズにおけるグリーディ方策適用",
+            "titleEn": "13.3 Greedy Evaluation Mode"
+          },
+          {
+            "id": "13.4",
+            "titleJa": "13.4 報酬設計（Reward Shaping）と報酬ハッキング防止",
+            "titleEn": "13.4 Reward Shaping & Hacking Prevention"
+          }
+        ]
       },
       {
         "id": 14,
@@ -139,7 +446,29 @@ const courseSections = [
         "titleJa": "第14章 まとめ",
         "titleEn": "Ch 14: Summary & Deep RL Roadmap",
         "topicsJa": "表形式の限界、深層強化学習(DQN)、AI検証とエンジニアの役割",
-        "topicsEn": "Tabular Limits, Deep Q-Networks (DQN), Verification & Ethics"
+        "topicsEn": "Tabular Limits, Deep Q-Networks (DQN), Verification & Ethics",
+        "subsections": [
+          {
+            "id": "14.1",
+            "titleJa": "14.1 表形式の限界と深層強化学習（DQN: 関数近似）",
+            "titleEn": "14.1 Tabular Limits & DQN"
+          },
+          {
+            "id": "14.2",
+            "titleJa": "14.2 DQNの安定化技術（Experience Replay と Target Network）",
+            "titleEn": "14.2 Experience Replay & Target Network"
+          },
+          {
+            "id": "14.3",
+            "titleJa": "14.3 AI生成コードの検証責任と単体テスト",
+            "titleEn": "14.3 Code Verification & Unit Testing"
+          },
+          {
+            "id": "14.4",
+            "titleJa": "14.4 現代強化学習の応用（LLMのRLHF、バンディット配信）",
+            "titleEn": "14.4 Real-World RL & AI Alignment"
+          }
+        ]
       }
     ]
   }
@@ -149,308 +478,1032 @@ const quizData = {
   "1": [
     [
       {
-        "id": "ch1_q1_v1",
+        "id": "ch1_sub1_1_q1_v1",
+        "sectionId": "1.1",
+        "sectionTitleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+        "sectionTitleEn": "1.1 Computer Architecture (CPU & Memory)",
+        "code": null,
+        "ja": {
+          "question": "CPUの内部で、足し算や掛け算などの数値計算および値の大小比較などの論理演算を専門に担当する部位は何ですか？",
+          "options": [
+            "ALU（演算部 / Arithmetic Logic Unit）",
+            "制御部（Control Unit）",
+            "主記憶（メインメモリ）",
+            "SSD（補助記憶装置）"
+          ],
+          "explanation": "CPUは主に「制御部」と「演算部（ALU: Arithmetic Logic Unit）」で構成されます。ALUが四則演算や論理演算を実行し、制御部はプログラムの命令を解読して各装置へ指示を出します。"
+        },
+        "en": {
+          "question": "Which component inside the CPU is specifically responsible for arithmetic calculations and logical comparisons?",
+          "options": [
+            "ALU (Arithmetic Logic Unit)",
+            "Control Unit",
+            "Main Memory (RAM)",
+            "SSD (Secondary Storage)"
+          ],
+          "explanation": "The ALU (Arithmetic Logic Unit) executes mathematical computations and logic evaluations, while the Control Unit fetches, decodes, and orchestrates instruction execution."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_1_q1_v2",
+        "sectionId": "1.1",
+        "sectionTitleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+        "sectionTitleEn": "1.1 Computer Architecture (CPU & Memory)",
+        "code": null,
+        "ja": {
+          "question": "CPUが命令を実行する基本サイクルとして、正しい順序で並んでいるものはどれですか？",
+          "options": [
+            "命令の取り出し（Fetch）→ 命令の解読（Decode）→ 命令の実行（Execute）→ 結果の書き戻し（Write Back）",
+            "命令の実行（Execute）→ 命令の取り出し（Fetch）→ 命令の解読（Decode）→ 結果の書き戻し",
+            "命令の解読（Decode）→ 命令の取り出し（Fetch）→ 結果の書き戻し → 命令の実行",
+            "結果の書き戻し → 命令の解読 → 命令の取り出し → 命令の実行"
+          ],
+          "explanation": "CPUは「①命令取り出し（Fetch）→ ②解読（Decode）→ ③実行（Execute）→ ④書き戻し（Write Back）」のサイクルを1秒間に数十億回（GHz）繰り返すことでプログラムを動作させます。"
+        },
+        "en": {
+          "question": "What is the correct sequential order of the CPU fundamental instruction cycle?",
+          "options": [
+            "Fetch → Decode → Execute → Write Back",
+            "Execute → Fetch → Decode → Write Back",
+            "Decode → Fetch → Write Back → Execute",
+            "Write Back → Decode → Fetch → Execute"
+          ],
+          "explanation": "The standard Von Neumann CPU instruction cycle repeats: 1. Fetch from memory, 2. Decode instruction, 3. Execute in ALU, 4. Write back results to registers/memory."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_1_q1_v3",
+        "sectionId": "1.1",
+        "sectionTitleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+        "sectionTitleEn": "1.1 Computer Architecture (CPU & Memory)",
+        "code": null,
+        "ja": {
+          "question": "CPUが直接理解して実行できる唯一の言語である「0 と 1 のビット列」で表現された言語を何と呼びますか？",
+          "options": [
+            "機械語（マシン語）",
+            "アセンブリ言語",
+            "高水準言語",
+            "バイトコード"
+          ],
+          "explanation": "CPUが物理的に直接理解できるのは0と1の電気信号（ビット列）で構成される「機械語」だけです。人間が理解しやすいPythonなどの高水準言語は、機械語へ翻訳されてから実行されます。"
+        },
+        "en": {
+          "question": "What is the term for the raw sequence of binary bits (0s and 1s) that the CPU can directly interpret and execute natively?",
+          "options": [
+            "Machine Language (Machine Code)",
+            "Assembly Language",
+            "High-level Language",
+            "Bytecode"
+          ],
+          "explanation": "Machine language is the native binary language composed of 0s and 1s processed directly by hardware logic gates without further translation."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_1_q2_v1",
+        "sectionId": "1.1",
+        "sectionTitleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+        "sectionTitleEn": "1.1 Computer Architecture (CPU & Memory)",
         "code": null,
         "ja": {
           "question": "PCの電源を切ると記憶内容がすべて失われる主記憶（DRAMなど）の特性を何と呼びますか？",
           "options": [
-            "不揮発性（Non-volatile）",
             "揮発性（Volatile）",
+            "不揮発性（Non-volatile）",
             "永続性（Persistent）",
             "仮想記憶性（Virtual memory）"
           ],
           "explanation": "主記憶（メインメモリ / DRAM）は通電中のみデータを保持する「揮発性（Volatile）」を持ちます。一方、SSDやHDDなどの補助記憶は電源を切ってもデータが残る「不揮発性（Non-volatile）」です。"
         },
         "en": {
-          "question": "Which term describes the property of main memory (e.g., DRAM) where all stored data is lost when power is turned off?",
+          "question": "Which term describes the characteristic of main memory (e.g., DRAM) where all data is lost when power is disconnected?",
           "options": [
-            "Non-volatile",
             "Volatile",
+            "Non-volatile",
             "Persistent",
             "Virtual memory"
           ],
-          "explanation": "Main memory (DRAM) is volatile, meaning it requires continuous electric power to retain data. Secondary storage (SSD/HDD) is non-volatile, keeping data across reboots."
+          "explanation": "Main memory (DRAM) is volatile—it requires continuous electric power to sustain charge in capacitors. Secondary storage (SSD/HDD) is non-volatile."
         },
-        "correctIndex": 1
+        "correctIndex": 0
       },
       {
-        "id": "ch1_q1_v2",
+        "id": "ch1_sub1_1_q2_v2",
+        "sectionId": "1.1",
+        "sectionTitleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+        "sectionTitleEn": "1.1 Computer Architecture (CPU & Memory)",
         "code": null,
         "ja": {
-          "question": "CPUがプログラムを実行する際、SSDから直接命令を実行せず、まず主記憶（DRAM）に読み込む主な理由は何ですか？",
+          "question": "CPUがプログラムを実行する際、SSDから直接命令を1つずつ読み込まず、あらかじめ主記憶（DRAM）にコピーしてから実行する主な理由は何ですか？",
           "options": [
-            "SSDには実行可能ファイルを保存する機能がないため",
-            "主記憶はSSDと比較して読み書き速度が桁違いに高速であるため",
-            "SSDのデータは揮発性であり、実行中に消失する危険があるため",
-            "主記憶はSSDよりも大容量で安価であるため"
+            "主記憶の読み書き速度がSSDに比べて桁違いに高速であるため",
+            "SSDにはプログラムを保存する権限がないため",
+            "SSDのデータは揮発性で壊れやすいため",
+            "主記憶の方がSSDよりも大容量で安価だから"
           ],
-          "explanation": "主記憶（DRAM）のデータ転送速度はSSDよりもはるかに高速です。高速なCPUの演算速度に追従するため、実行するプログラムやデータはあらかじめ主記憶上に展開されます。"
+          "explanation": "主記憶（DRAM）のデータ転送速度はSSDよりもはるかに高速です。高速なCPUの演算速度に追従するため、実行するプログラムはSSDから一度主記憶に展開（ロード）されて実行されます。"
         },
         "en": {
-          "question": "Why does the CPU load programs into main memory (DRAM) before executing them, rather than reading directly from an SSD?",
+          "question": "Why does the CPU load executable programs into main memory (DRAM) rather than fetching instructions directly from an SSD?",
           "options": [
-            "SSDs cannot store executable binary files",
-            "Main memory has substantially higher access speeds than secondary storage",
-            "SSD data is volatile and risks corruption during execution",
-            "Main memory provides much greater capacity at lower cost than SSDs"
+            "Main memory access speeds are orders of magnitude faster than SSD storage",
+            "SSDs lack permissions to store executable files",
+            "SSD memory cells are volatile and lose data during execution",
+            "Main memory provides much greater capacity at a lower price point"
           ],
-          "explanation": "Main memory access speeds are orders of magnitude faster than SSD storage. Programs must reside in RAM so the CPU can fetch instructions without massive latency."
+          "explanation": "DRAM read/write latency is nanoseconds compared to microseconds for SSDs. To avoid stalling the fast CPU execution pipelines, instructions are loaded into fast main memory."
         },
-        "correctIndex": 1
+        "correctIndex": 0
       },
       {
-        "id": "ch1_q1_v3",
+        "id": "ch1_sub1_1_q2_v3",
+        "sectionId": "1.1",
+        "sectionTitleJa": "1.1 コンピュータの動作（CPU・主記憶・補助記憶）",
+        "sectionTitleEn": "1.1 Computer Architecture (CPU & Memory)",
         "code": null,
         "ja": {
-          "question": "PCでアプリケーションを起動したときの動作として、正しい説明はどれですか？",
+          "question": "主記憶（RAM）と補助記憶（SSD/HDD）の比較として、正しい組み合わせはどれですか？",
           "options": [
-            "補助記憶にあるプログラムのコピーが主記憶（メモリ）に読み込まれ、CPUがそれを実行する",
-            "主記憶にあるデータが補助記憶に上書きされ、補助記憶上でCPUが直接実行する",
-            "CPU内部のレジスタにアプリケーションの全コードが一度に保存される",
-            "プログラムは保存されず、毎回インターネットから再ダウンロードされて実行される"
+            "主記憶: 高速・小容量・揮発性 / 補助記憶: 低速・大容量・不揮発性",
+            "主記憶: 低速・大容量・不揮発性 / 補助記憶: 高速・小容量・揮発性",
+            "主記憶: 高速・大容量・不揮発性 / 補助記憶: 低速・小容量・揮発性",
+            "両者とも揮発性であり、速度にも差はない"
           ],
-          "explanation": "プログラム起動時、OSは補助記憶（SSD/HDD）に保存されている実行ファイルを主記憶（メモリ）に読み込み（ロード）、CPUがその先頭番地から順に命令を実行します。"
+          "explanation": "主記憶はCPUの直近で超高速に動作する反面、比較的高価で容量が限られ電源断で消えます。補助記憶は電源を切っても永続保存できますが、アクセス速度は主記憶より遅くなります。"
         },
         "en": {
-          "question": "Which statement accurately describes what happens when a program is launched on a computer?",
+          "question": "Which comparison accurately contrasts main memory (RAM) with secondary storage (SSD/HDD)?",
           "options": [
-            "The program binary is copied from secondary storage into main memory, where the CPU executes it",
-            "Data in main memory overwrites secondary storage and the CPU executes directly on the drive",
-            "The entire program binary is permanently stored inside CPU registers at once",
-            "The computer discards local files and re-downloads the executable over the network"
+            "Main Memory: Fast, smaller capacity, volatile / Secondary Storage: Slower, large capacity, non-volatile",
+            "Main Memory: Slower, large capacity, non-volatile / Secondary Storage: Fast, smaller capacity, volatile",
+            "Main Memory: Fast, large capacity, non-volatile / Secondary Storage: Slower, smaller capacity, volatile",
+            "Both are volatile with identical latency profiles"
           ],
-          "explanation": "When an application launches, the OS loads its instructions from secondary storage into main memory so the CPU can rapidly fetch and execute them."
+          "explanation": "Main memory provides high-speed, volatile working space for active processes, whereas secondary storage provides high-capacity, non-volatile persistence."
         },
         "correctIndex": 0
       }
     ],
     [
       {
-        "id": "ch1_q2_v1",
+        "id": "ch1_sub1_2_q1_v1",
+        "sectionId": "1.2",
+        "sectionTitleJa": "1.2 プログラミング言語とPythonの特徴",
+        "sectionTitleEn": "1.2 Programming Languages & Python",
         "code": null,
         "ja": {
-          "question": "CPU内部で、四則演算や値の大小比較などの論理演算を担当する構成要素はどれですか？",
+          "question": "高校「情報I」で学んだ、あらゆる高水準プログラムを組み立てる3つの基本制御構造（基本3構造）は何ですか？",
           "options": [
-            "制御部（Control Unit）",
-            "演算部（ALU: Arithmetic Logic Unit）",
-            "補助記憶（Secondary Storage）",
-            "バス（Bus）"
+            "順次（上から下へ実行）、分岐（if文）、反復（for/while文）",
+            "入力（input）、代入（=）、出力（print）",
+            "整数（int）、小数（float）、文字列（str）",
+            "設計、実装、テスト"
           ],
-          "explanation": "演算部（ALU: Arithmetic Logic Unit）が足し算や掛け算などの算術演算、および大小比較や真偽判定などの論理演算を担当します。"
+          "explanation": "構造化プログラミングの基本3構造は「順次（Sequence）」「分岐（Selection / if）」「反復（Iteration / for, while）」であり、複雑なアルゴリズムもこの3つの組み合わせで構築されます。"
         },
         "en": {
-          "question": "Within the CPU, which component is directly responsible for arithmetic calculations and logical comparisons?",
+          "question": "What are the three fundamental algorithmic control structures taught in foundational computer science?",
           "options": [
-            "Control Unit",
-            "Arithmetic Logic Unit (ALU)",
-            "Secondary Storage",
-            "System Bus"
+            "Sequence (step-by-step), Selection (branching with if), Iteration (looping with for/while)",
+            "Input, Assignment, Output",
+            "Integer, Float, String",
+            "Design, Implementation, Testing"
           ],
-          "explanation": "The ALU handles mathematical operations (addition, multiplication) as well as logical evaluations (comparisons, equality checks)."
-        },
-        "correctIndex": 1
-      },
-      {
-        "id": "ch1_q2_v2",
-        "code": null,
-        "ja": {
-          "question": "CPU内部の「制御部（Control Unit）」が果たす役割として、最も適切なものはどれですか？",
-          "options": [
-            "主記憶から命令を取り出し、解読して各装置に指示を出す",
-            "画像や音声データを圧縮してストレージに書き込む",
-            "浮動小数点数の掛け算を直接計算する",
-            "電源のオン・オフを物理的に制御するスイッチの役割を果たす"
-          ],
-          "explanation": "制御部（Control Unit）は、主記憶から命令を取り出して解読（デコード）し、演算部や記憶部、入出力装置に指示信号を送って全体の動作を制御します。"
-        },
-        "en": {
-          "question": "What is the primary responsibility of the Control Unit inside a CPU?",
-          "options": [
-            "Fetching instructions from memory, decoding them, and directing other components",
-            "Compressing image and audio assets for storage",
-            "Directly computing floating-point multiplication in hardware",
-            "Acting as a mechanical power switch for the computer"
-          ],
-          "explanation": "The Control Unit orchestrates processor operations: it fetches instructions from memory, decodes what operation to perform, and issues control signals."
+          "explanation": "Structured programming relies on three core primitives: Sequence (ordered execution), Selection (conditional branches), and Iteration (repetition)."
         },
         "correctIndex": 0
       },
       {
-        "id": "ch1_q2_v3",
+        "id": "ch1_sub1_2_q1_v2",
+        "sectionId": "1.2",
+        "sectionTitleJa": "1.2 プログラミング言語とPythonの特徴",
+        "sectionTitleEn": "1.2 Programming Languages & Python",
         "code": null,
         "ja": {
-          "question": "CPU内部に存在し、演算の直前・直後のデータや次に実行する命令のアドレスを一時保持する超高速な記憶領域は何ですか？",
+          "question": "Pythonが「インタプリタ型言語」と呼ばれる理由として、最も適切なものはどれですか？",
           "options": [
-            "レジスタ（Register）",
-            "キャッシュメモリ（L3 Cache）",
-            "メインメモリ（DRAM）",
-            "BIOS / UEFI"
+            "実行前に全体を一括コンパイルせず、プログラムを1行ずつ解釈（翻訳）しながら実行するから",
+            "Pythonは機械語そのもので書かれているから",
+            "インターネットに常時接続していないとプログラムが動かないから",
+            "コードのブロックを波括弧 `{ }` で囲む必要があるから"
           ],
-          "explanation": "レジスタはCPU内部に設けられた極めて小容量かつ最高速の記憶回路で、演算データの一時保持やプログラムカウンタ（次に実行する命令のアドレス保持）などに使われます。"
+          "explanation": "C言語などは事前に一括して機械語ファイル（.exe等）へコンパイルしますが、Pythonはインタプリタが1行ずつ解釈しながら実行するため、対話的実行や手軽な試行錯誤が可能です。"
         },
         "en": {
-          "question": "What are the ultra-fast, small temporary storage locations built directly inside the CPU called?",
+          "question": "Why is Python classified as an 'interpreted' programming language?",
           "options": [
-            "Registers",
-            "L3 Cache",
-            "Main Memory (DRAM)",
-            "BIOS / UEFI"
+            "It parses and executes code line-by-line interactively at runtime rather than requiring pre-compilation of the entire binary",
+            "Python source files are written directly in native machine binary",
+            "It requires constant high-speed internet connectivity to evaluate syntax",
+            "It mandates enclosing code blocks inside curly brackets `{}`"
           ],
-          "explanation": "Registers are tiny, ultra-high-speed memory cells inside the CPU chip, holding immediate operands, intermediate calculation results, and the instruction pointer."
+          "explanation": "Interpreters translate and evaluate program statements on-the-fly line by line, contrasting with ahead-of-time compilers like C++ or Rust."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_2_q1_v3",
+        "sectionId": "1.2",
+        "sectionTitleJa": "1.2 プログラミング言語とPythonの特徴",
+        "sectionTitleEn": "1.2 Programming Languages & Python",
+        "code": null,
+        "ja": {
+          "question": "C言語やJavaなど他の多くの言語と比較したときの、Pythonの構文上の大きな特徴として正しいものはどれですか？",
+          "options": [
+            "コードのブロック（まとまり）を波括弧 `{ }` ではなく「インデント（字下げ）」で表現する",
+            "すべての行の末尾にセミコロン `;` を書くことが必須である",
+            "変数を使う前に必ず型の宣言（例: `int x;`）を行わなければならない",
+            "数値計算を行うことが文法上禁止されている"
+          ],
+          "explanation": "Pythonは誰が書いても読みやすく統一感のあるコードになるよう、ブロックの範囲をインデント（空白4文字など）で厳密に指定する文法ルールを採用しています。"
+        },
+        "en": {
+          "question": "What is a signature syntax characteristic of Python compared to languages like C or Java?",
+          "options": [
+            "It represents code blocks using indentation (whitespace) rather than curly braces `{}`",
+            "Every statement must terminate with a mandatory semicolon `;`",
+            "Variables must be declared with explicit static types (e.g. `int x;`) before use",
+            "Arithmetic computations are forbidden by default syntax rules"
+          ],
+          "explanation": "Python enforces block scoping via indentation whitespace, ensuring clean, uniform readability across different developers' code."
         },
         "correctIndex": 0
       }
     ],
     [
       {
-        "id": "ch1_q3_v1",
-        "code": null,
+        "id": "ch1_sub1_3_q1_v1",
+        "sectionId": "1.3_1.4",
+        "sectionTitleJa": "1.3-1.4 IDLE環境・対話型シェル・スクリプト実行",
+        "sectionTitleEn": "1.3-1.4 IDLE, Shell & Script Execution",
+        "code": ">>> print('Hello')\nHello\n>>> 10 + 20\n30",
         "ja": {
-          "question": "CPUが主記憶からプログラムの命令を読み込んで実行する基本サイクルの正しい順序はどれですか？",
+          "question": "Pythonの公式インストーラに標準付属する初心者向け統合開発環境「IDLE」の対話型シェル（Python Shell）において、入力待ち状態を示すプロンプト記号は何ですか？",
           "options": [
-            "実行 (Execute) → 取り出し (Fetch) → 解読 (Decode) → 書き戻し (Write Back)",
-            "解読 (Decode) → 取り出し (Fetch) → 実行 (Execute) → 書き戻し (Write Back)",
-            "取り出し (Fetch) → 解読 (Decode) → 実行 (Execute) → 書き戻し (Write Back)",
-            "書き戻し (Write Back) → 実行 (Execute) → 解読 (Decode) → 取り出し (Fetch)"
+            ">>>",
+            "###",
+            "===",
+            "::: "
           ],
-          "explanation": "命令実行サイクルは「①取り出し (Fetch) → ②解読 (Decode) → ③実行 (Execute) → ④書き戻し (Write Back)」の順序で繰り返されます。"
+          "explanation": "対話型シェル（REPL）では `>>>` というプロンプトが表示され、ここにコードを1行入力してEnterを押すと即座に結果が評価されて返されます。"
         },
         "en": {
-          "question": "Which of the following correctly orders the basic CPU instruction cycle?",
+          "question": "In IDLE's interactive Python Shell, what prompt symbol signifies that the interpreter is ready to receive input?",
           "options": [
-            "Execute → Fetch → Decode → Write Back",
-            "Decode → Fetch → Execute → Write Back",
-            "Fetch → Decode → Execute → Write Back",
-            "Write Back → Execute → Decode → Fetch"
+            ">>>",
+            "###",
+            "===",
+            "::: "
           ],
-          "explanation": "The instruction execution cycle runs: Fetch (retrieve from RAM) → Decode (interpret opcode) → Execute (perform on ALU) → Write Back (save result)."
-        },
-        "correctIndex": 2
-      },
-      {
-        "id": "ch1_q3_v2",
-        "code": null,
-        "ja": {
-          "question": "CPUが「次にフェッチ（取り出し）すべき命令のメモリアドレス」を保持している専用レジスタは何ですか？",
-          "options": [
-            "アキュムレータ（累算器）",
-            "プログラムカウンタ（PC / 命令ポインタ）",
-            "フラグレジスタ",
-            "スタックポインタ"
-          ],
-          "explanation": "プログラムカウンタ（Program Counter / PC）は、CPUが次に実行すべき命令のアドレスを記憶しており、命令が取り出されると自動的に次のアドレスへと更新されます。"
-        },
-        "en": {
-          "question": "Which special CPU register holds the memory address of the next instruction to be fetched?",
-          "options": [
-            "Accumulator",
-            "Program Counter (PC / Instruction Pointer)",
-            "Flag Register",
-            "Stack Pointer"
-          ],
-          "explanation": "The Program Counter (PC) stores the memory address of the next instruction to be executed and advances after each fetch."
-        },
-        "correctIndex": 1
-      },
-      {
-        "id": "ch1_q3_v3",
-        "code": null,
-        "ja": {
-          "question": "CPUのクロック周波数が「3.0 GHz」であるとき、これは何を意味していますか？",
-          "options": [
-            "主記憶の容量が3ギガバイトであることを示す",
-            "1秒間に約30億回のクロック信号（動作の基準タイミング）を発生させることを示す",
-            "インターネットの通信速度が毎秒3ギガビットであることを示す",
-            "CPU内部の温度が300度に達することを示す"
-          ],
-          "explanation": "クロック周波数（Hz）は1秒あたりのクロックパルス数を表します。3.0 GHzは1秒間に約30億回の周期信号を送り、各回路の動作タイミングを同期させています。"
-        },
-        "en": {
-          "question": "What does a CPU clock speed of 3.0 GHz indicate?",
-          "options": [
-            "The computer has exactly 3 gigabytes of main memory installed",
-            "The processor internal clock pulses roughly 3 billion times per second to synchronize operations",
-            "The network connection speed transfers 3 gigabits per second",
-            "The internal silicon temperature reaches 300 degrees"
-          ],
-          "explanation": "Clock speed measures the frequency of pulses generated by the internal clock generator. 3.0 GHz corresponds to approximately 3 billion cycles per second."
-        },
-        "correctIndex": 1
-      }
-    ],
-    [
-      {
-        "id": "ch1_q4_v1",
-        "code": null,
-        "ja": {
-          "question": "Pythonのプログラム実行方式（インタプリタ型）に関する説明として、最も適切なものはどれですか？",
-          "options": [
-            "ソースコードを事前にすべて機械語に一括変換してから実行ファイル（.exe等）を作成する",
-            "ソースコードを1行または1ブロックずつ解読しながら順次実行する",
-            "インターネット接続がないとプログラムを一切解読できない",
-            "CPUを使わずGPUだけで全コードを処理する"
-          ],
-          "explanation": "Pythonはインタプリタ型の言語であり、事前に機械語へ一括コンパイルするのではなく、実行時にソースコードを順次解読・実行するため、手軽に対話的な動作確認ができます。"
-        },
-        "en": {
-          "question": "Which statement correctly describes how Python executes source code as an interpreted language?",
-          "options": [
-            "It compiles the entire codebase into native binary machine code before producing an executable",
-            "It interprets and executes instructions line by line or block by block at runtime",
-            "It requires an active internet connection to evaluate any program expression",
-            "It bypasses the CPU entirely and computes strictly on dedicated GPUs"
-          ],
-          "explanation": "Python is an interpreted language; the Python interpreter parses and executes source statements incrementally at runtime without an ahead-of-time binary build step."
-        },
-        "correctIndex": 1
-      },
-      {
-        "id": "ch1_q4_v2",
-        "code": null,
-        "ja": {
-          "question": "Python標準の開発環境であるIDLEやターミナルで表示される「>>>」は何と呼ばれますか？",
-          "options": [
-            "対話プロンプト（Interactive Prompt）",
-            "構文エラーインジケータ",
-            "コメント開始記号",
-            "バイナリ変換マーク"
-          ],
-          "explanation": "「>>>」は対話プロンプト（Interactive Prompt）と呼ばれ、Pythonがユーザからの次のコマンド入力を待ち受けている状態を示します。"
-        },
-        "en": {
-          "question": "What is the '>>>' symbol shown in the Python IDLE shell or interactive terminal called?",
-          "options": [
-            "Interactive Prompt",
-            "Syntax Error Indicator",
-            "Comment Delimiter",
-            "Binary Compilation Mark"
-          ],
-          "explanation": "The '>>>' symbol is the interactive prompt, signaling that the Python REPL (Read-Eval-Print Loop) is ready to accept and execute user commands."
+          "explanation": "The standard interactive Python Shell prompt is `>>>`. Typing an expression and pressing Enter executes it immediately."
         },
         "correctIndex": 0
       },
       {
-        "id": "ch1_q4_v3",
+        "id": "ch1_sub1_3_q1_v2",
+        "sectionId": "1.3_1.4",
+        "sectionTitleJa": "1.3-1.4 IDLE環境・対話型シェル・スクリプト実行",
+        "sectionTitleEn": "1.3-1.4 IDLE, Shell & Script Execution",
         "code": null,
         "ja": {
-          "question": "Pythonのファイル（スクリプト）を作成・実行する際、標準的なファイル拡張子はどれですか？",
+          "question": "IDLEのエディタで作成したPythonスクリプトファイルを保存する際、ファイル名の末尾に必ず付けるべき半角の拡張子は何ですか？",
           "options": [
             ".py",
-            ".pyt",
             ".python",
-            ".pt"
+            ".txt",
+            ".idle"
           ],
-          "explanation": "Pythonスクリプトファイルの標準拡張子は「.py」です。"
+          "explanation": "Pythonのプログラムファイル（スクリプト）は、末尾に必ず拡張子 `.py`（例: `hello.py`）を付けて保存します。"
         },
         "en": {
-          "question": "What is the standard file extension used for Python source script files?",
+          "question": "When saving a Python script file in IDLE, what standard filename extension must be used?",
           "options": [
             ".py",
-            ".pyt",
             ".python",
-            ".pt"
+            ".txt",
+            ".idle"
           ],
-          "explanation": "Python files use the standard '.py' extension (e.g., script.py)."
+          "explanation": "Python scripts must end with the `.py` extension (e.g. `hello.py`)."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_3_q1_v3",
+        "sectionId": "1.3_1.4",
+        "sectionTitleJa": "1.3-1.4 IDLE環境・対話型シェル・スクリプト実行",
+        "sectionTitleEn": "1.3-1.4 IDLE, Shell & Script Execution",
+        "code": null,
+        "ja": {
+          "question": "IDLEのエディタウィンドウで開いているプログラム（.py）を実行するための標準的なキーボードショートカットは何ですか？",
+          "options": [
+            "F5 キー（環境により Fn + F5）",
+            "Ctrl + C（Cmd + C）",
+            "Space キー",
+            "Esc キー"
+          ],
+          "explanation": "IDLEエディタでプログラムを実行するには、メニューの「Run」→「Run Module」を選択するか、ショートカットキー `F5`（Mac等では `Fn + F5`）を押します。"
+        },
+        "en": {
+          "question": "What keyboard shortcut triggers 'Run Module' to execute a script file in the IDLE editor?",
+          "options": [
+            "F5 key (or Fn + F5 depending on keyboard)",
+            "Ctrl + C (Cmd + C)",
+            "Spacebar",
+            "Escape key"
+          ],
+          "explanation": "Pressing F5 (or Fn + F5 on macOS laptops) launches Run Module, transferring execution to the Python Shell."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_1_q1_v1",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(20 / 4)",
+        "ja": {
+          "question": "Pythonで `print(20 / 4)` を実行したときの正確な出力結果として正しいものはどれですか？",
+          "options": [
+            "5.0",
+            "5",
+            "4",
+            "SyntaxError"
+          ],
+          "explanation": "Pythonの通常除算演算子 `/` は、割り切れる場合であっても常に「浮動小数点数（float型）」を返します。そのため `5` ではなく `5.0` と出力されます。"
+        },
+        "en": {
+          "question": "What is the exact output when running `print(20 / 4)` in Python?",
+          "options": [
+            "5.0",
+            "5",
+            "4",
+            "SyntaxError"
+          ],
+          "explanation": "In Python, the standard forward-slash division operator `/` always produces a floating-point number (float), yielding `5.0` rather than the integer `5`."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_1_q1_v2",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(17 // 3)",
+        "ja": {
+          "question": "Pythonで `print(17 // 3)` を実行したときに出力される値は何ですか？",
+          "options": [
+            "5",
+            "5.666666666666667",
+            "2",
+            "6"
+          ],
+          "explanation": "`//` は「整数の商（整数部分の切り捨て除算）」を求める演算子です。17 ÷ 3 = 5 余り 2 なので、商である `5` が整数で出力されます。"
+        },
+        "en": {
+          "question": "What value is printed by `print(17 // 3)` in Python?",
+          "options": [
+            "5",
+            "5.666666666666667",
+            "2",
+            "6"
+          ],
+          "explanation": "The floor division operator `//` computes the integer quotient discarding the fractional remainder. 17 // 3 yields 5."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_1_q1_v3",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(10 / 2)\nprint(10 // 2)",
+        "ja": {
+          "question": "上記の2行を実行したとき、それぞれの行で表示される値の組み合わせとして正しいものはどれですか？",
+          "options": [
+            "1行目: 5.0、2行目: 5",
+            "1行目: 5、2行目: 5",
+            "1行目: 5.0、2行目: 5.0",
+            "1行目: 5、2行目: 5.0"
+          ],
+          "explanation": "割り算 `/` は常に float 型（`5.0`）を返し、切り捨て除算 `//` は整数同士の計算では int 型（`5`）を返します。"
+        },
+        "en": {
+          "question": "What is the output for each line when executing `print(10 / 2)` followed by `print(10 // 2)`?",
+          "options": [
+            "Line 1: 5.0, Line 2: 5",
+            "Line 1: 5, Line 2: 5",
+            "Line 1: 5.0, Line 2: 5.0",
+            "Line 1: 5, Line 2: 5.0"
+          ],
+          "explanation": "True division `/` yields float `5.0`, while integer floor division `//` between integers yields int `5`."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_1_q2_v1",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(17 % 5)",
+        "ja": {
+          "question": "Pythonで `print(17 % 5)` を実行したときに出力される値は何ですか？",
+          "options": [
+            "2",
+            "3",
+            "3.4",
+            "12"
+          ],
+          "explanation": "`%` は「割り算の余り（剰余）」を求める演算子です。17 を 5 で割ると商が 3 で余りが `2` なので、`2` が出力されます。"
+        },
+        "en": {
+          "question": "What value is printed by `print(17 % 5)` in Python?",
+          "options": [
+            "2",
+            "3",
+            "3.4",
+            "12"
+          ],
+          "explanation": "The modulo operator `%` calculates the remainder of division. 17 divided by 5 is 3 with remainder 2, so it outputs `2`."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_1_q2_v2",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(2 ** 4)",
+        "ja": {
+          "question": "Pythonで `print(2 ** 4)` を実行したときに出力される値は何ですか？",
+          "options": [
+            "16",
+            "8",
+            "6",
+            "24"
+          ],
+          "explanation": "`**` は「べき乗（累乗）」を計算する演算子です。2 の 4 乗（$2 \\times 2 \\times 2 \\times 2$）なので `16` となります。"
+        },
+        "en": {
+          "question": "What value is printed by `print(2 ** 4)` in Python?",
+          "options": [
+            "16",
+            "8",
+            "6",
+            "24"
+          ],
+          "explanation": "The `**` operator denotes exponentiation (power). 2 to the power of 4 ($2^4 = 2 \\times 2 \\times 2 \\times 2$) equals 16."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_1_q2_v3",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(10 % 3 + 3 ** 2)",
+        "ja": {
+          "question": "式 `10 % 3 + 3 ** 2` を評価した結果として正しいものはどれですか？",
+          "options": [
+            "10 （1 + 9）",
+            "19",
+            "7",
+            "1"
+          ],
+          "explanation": "`3 ** 2`（3の2乗 = 9）と `10 % 3`（10を3で割った余り = 1）が加算より優先され、`1 + 9 = 10` と計算されます。"
+        },
+        "en": {
+          "question": "What is the evaluated output of `print(10 % 3 + 3 ** 2)`?",
+          "options": [
+            "10 (1 + 9)",
+            "19",
+            "7",
+            "1"
+          ],
+          "explanation": "Exponentiation `3 ** 2 = 9` and modulo `10 % 3 = 1` take precedence over addition, yielding $1 + 9 = 10$."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_1_q3_v1",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(2 + 3 * 4)\nprint((2 + 3) * 4)",
+        "ja": {
+          "question": "上記のコードを実行したとき、表示される2つの数値として正しいものはどれですか？",
+          "options": [
+            "14 と 20",
+            "20 と 20",
+            "14 と 14",
+            "24 と 20"
+          ],
+          "explanation": "数学と同様に掛け算 `*` は足し算 `+` より優先されるため、1行目は `2 + 12 = 14` です。カッコ `()` を付けるとカッコ内が最優先されるため、2行目は `5 * 4 = 20` になります。"
+        },
+        "en": {
+          "question": "What are the two numbers printed by `print(2 + 3 * 4)` followed by `print((2 + 3) * 4)`?",
+          "options": [
+            "14 and 20",
+            "20 and 20",
+            "14 and 14",
+            "24 and 20"
+          ],
+          "explanation": "Multiplication precedes addition, so `2 + (3 * 4) = 14`. Parentheses override precedence, so `(2 + 3) * 4 = 5 * 4 = 20`."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_1_q3_v2",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(20 - 4 / 2)",
+        "ja": {
+          "question": "式 `20 - 4 / 2` を評価したときの正確な出力結果は何ですか？",
+          "options": [
+            "18.0",
+            "18",
+            "8.0",
+            "8"
+          ],
+          "explanation": "除算 `4 / 2` が優先されて `2.0`（float）となり、`20 - 2.0 = 18.0`（float）が出力されます。"
+        },
+        "en": {
+          "question": "What is the evaluated output of `print(20 - 4 / 2)`?",
+          "options": [
+            "18.0",
+            "18",
+            "8.0",
+            "8"
+          ],
+          "explanation": "Division takes precedence and evaluates to float `2.0`. Subtracting from 20 results in float `18.0`."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_1_q3_v3",
+        "sectionId": "1.5.1",
+        "sectionTitleJa": "1.5.1 print関数と四則演算子（+, -, *, /, //, %, **）",
+        "sectionTitleEn": "1.5.1 print() & Arithmetic Operators",
+        "code": "print(2 ** 3 ** 2)",
+        "ja": {
+          "question": "べき乗演算子 `**` が連続した場合、結合の向き（計算順序）はどうなりますか？",
+          "options": [
+            "右結合（右から左へ計算され、2 ** (3 ** 2) = 2 ** 9 = 512 となる）",
+            "左結合（左から右へ計算され、(2 ** 3) ** 2 = 8 ** 2 = 64 となる）",
+            "エラーになり実行できない",
+            "ランダムな順序で計算される"
+          ],
+          "explanation": "Pythonのべき乗演算子 `**` は「右結合」です。右側の `3 ** 2 = 9` が先に計算され、次に `2 ** 9 = 512` と評価されます。"
+        },
+        "en": {
+          "question": "How are chained exponentiation operators `2 ** 3 ** 2` evaluated in Python?",
+          "options": [
+            "Right-to-left associativity: `2 ** (3 ** 2) = 2 ** 9 = 512`",
+            "Left-to-right associativity: `(2 ** 3) ** 2 = 8 ** 2 = 64`",
+            "Raises a SyntaxError",
+            "Evaluated in random order"
+          ],
+          "explanation": "The exponentiation operator `**` has right-to-left associativity in Python. Thus `3 ** 2 = 9` evaluates first, resulting in $2^9 = 512$."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_2_q1_v1",
+        "sectionId": "1.5.2_1.5.4",
+        "sectionTitleJa": "1.5.2-1.5.4 実行順序・空白・全角スペース・コメント",
+        "sectionTitleEn": "1.5.2-1.5.4 Execution Order, Whitespace & Comments",
+        "code": "print('Apple')\n# print('Banana')\nprint('Cherry') # fruits",
+        "ja": {
+          "question": "上記のコードを実行したときに出力される行として正しいものはどれですか？",
+          "options": [
+            "Apple と Cherry の2行が表示される",
+            "Apple, Banana, Cherry の3行が表示される",
+            "Apple と Banana の2行が表示される",
+            "# が画面に表示される"
+          ],
+          "explanation": "`#`（シャープ記号）から行末まではコメントとして扱われ、インタープリタから完全に無視されます。そのため `Banana` の行は実行されず、`Apple` と `Cherry` の2行が表示されます。"
+        },
+        "en": {
+          "question": "What is printed to the screen when executing the code above?",
+          "options": [
+            "Two lines: Apple followed by Cherry",
+            "Three lines: Apple, Banana, and Cherry",
+            "Two lines: Apple and Banana",
+            "The literal '#' symbol"
+          ],
+          "explanation": "Any text following the `#` symbol to the end of the line is a comment ignored by the Python interpreter. Banana is skipped."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_2_q1_v2",
+        "sectionId": "1.5.2_1.5.4",
+        "sectionTitleJa": "1.5.2-1.5.4 実行順序・空白・全角スペース・コメント",
+        "sectionTitleEn": "1.5.2-1.5.4 Execution Order, Whitespace & Comments",
+        "code": " print('Hello')",
+        "ja": {
+          "question": "上記のコードのように、行の先頭に理由なく半角スペースを1文字入れて実行した場合、発生するエラーは何ですか？",
+          "options": [
+            "IndentationError: unexpected indent",
+            "SyntaxError: invalid character",
+            "NameError: name 'print' is not defined",
+            "エラーは起きず正常に実行される"
+          ],
+          "explanation": "Pythonでは行頭の空白（インデント）が文法構造を表す特別な意味を持つため、理由なく行頭にインデントを置くと `IndentationError: unexpected indent` が発生します。"
+        },
+        "en": {
+          "question": "If an accidental leading space is inserted before `print('Hello')`, what exception is raised?",
+          "options": [
+            "IndentationError: unexpected indent",
+            "SyntaxError: invalid character",
+            "NameError: name 'print' is not defined",
+            "No error occurs and it runs normally"
+          ],
+          "explanation": "Leading whitespace denotes structural indentation blocks in Python. Unexpected leading whitespace at top-level triggers `IndentationError`."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_2_q1_v3",
+        "sectionId": "1.5.2_1.5.4",
+        "sectionTitleJa": "1.5.2-1.5.4 実行順序・空白・全角スペース・コメント",
+        "sectionTitleEn": "1.5.2-1.5.4 Execution Order, Whitespace & Comments",
+        "code": "print(10　+ 20)",
+        "ja": {
+          "question": "ノート練習問題01-04より: コード中に日本語文字の「全角空白（U+3000）」が紛れ込んだ場合、発生するエラーとして正しいものはどれですか？",
+          "options": [
+            "SyntaxError: invalid character '　' (U+3000)",
+            "TypeError: unsupported operand",
+            "ZeroDivisionError",
+            "全角空白は自動で半角スペースに変換され実行される"
+          ],
+          "explanation": "Pythonのコード中に全角空白が含まれていると、半角スペースとは解釈されず未定義の記号とみなされて `SyntaxError: invalid character '　' (U+3000)` が発生します。初心者が最もハマりやすい罠の1つです。"
+        },
+        "en": {
+          "question": "From Exercise 01-04: If a full-width Japanese space (`\\u3000`) is accidentally typed into Python code, what error is raised?",
+          "options": [
+            "SyntaxError: invalid character '　' (U+3000)",
+            "TypeError: unsupported operand",
+            "ZeroDivisionError",
+            "The interpreter automatically converts it to ASCII spaces"
+          ],
+          "explanation": "Full-width spaces are non-ASCII characters outside string literals. Python does not treat them as whitespace delimiters and raises `SyntaxError: invalid character`."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_5_q1_v1",
+        "sectionId": "1.5.5_1.5.6",
+        "sectionTitleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+        "sectionTitleEn": "1.5.5-1.5.6 Variables & Reassignment",
+        "code": null,
+        "ja": {
+          "question": "Pythonの変数名（識別子）として**文法上使用できない**ものはどれですか？",
+          "options": [
+            "1st_player （先頭が数字）",
+            "player_1",
+            "_count",
+            "totalScore"
+          ],
+          "explanation": "Pythonの変数名にはアルファベット・数字・アンダースコア（_）が使えますが、「先頭の文字に数字を使うことはできない」という絶対のルールがあります。"
+        },
+        "en": {
+          "question": "Which of the following identifier names is SYNTACTICALLY INVALID as a Python variable name?",
+          "options": [
+            "1st_player (starts with a digit)",
+            "player_1",
+            "_count",
+            "totalScore"
+          ],
+          "explanation": "Python variable identifiers cannot begin with a numeric digit. They must start with an ASCII letter or underscore."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_5_q1_v2",
+        "sectionId": "1.5.5_1.5.6",
+        "sectionTitleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+        "sectionTitleEn": "1.5.5-1.5.6 Variables & Reassignment",
+        "code": "score = 100\nScore = 200\nprint(score)",
+        "ja": {
+          "question": "上記のコードを実行したとき、画面に出力される値は何ですか？",
+          "options": [
+            "100",
+            "200",
+            "300",
+            "SyntaxError"
+          ],
+          "explanation": "Pythonでは変数名の大文字と小文字が厳密に区別されます。`score` と `Score` は全く別の変数として共存するため、`print(score)` では `100` が出力されます。"
+        },
+        "en": {
+          "question": "What is printed when running `score = 100; Score = 200; print(score)`?",
+          "options": [
+            "100",
+            "200",
+            "300",
+            "SyntaxError"
+          ],
+          "explanation": "Python variable names are strictly case-sensitive. `score` and `Score` are distinct memory locations; thus `score` retains 100."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_5_q1_v3",
+        "sectionId": "1.5.5_1.5.6",
+        "sectionTitleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+        "sectionTitleEn": "1.5.5-1.5.6 Variables & Reassignment",
+        "code": null,
+        "ja": {
+          "question": "プログラミングにおける代入記号 `=` の正確な意味として、最も適切なものはどれですか？",
+          "options": [
+            "右辺の計算結果を評価し、左辺の変数名に格納（束縛）する操作",
+            "左辺と右辺が数学的に等しいことを宣言する等式",
+            "左辺の値を右辺の変数にコピーする操作",
+            "変数をメモリから消去する操作"
+          ],
+          "explanation": "プログラミングの `=` は数学の「等しい」ではなく代入演算子です。「右辺の式を計算した結果の値を、左辺の変数に入れる」という動作を意味します（等しいかの比較には `==` を使います）。"
+        },
+        "en": {
+          "question": "What is the precise meaning of the assignment operator `=` in Python?",
+          "options": [
+            "It evaluates the right-hand expression and stores/binds the resulting value into the left-hand variable",
+            "It asserts that the left and right expressions are mathematically equal",
+            "It copies the left variable into the right expression",
+            "It deallocates the variable from memory"
+          ],
+          "explanation": "In programming, `=` assigns the evaluated right-hand side value to the identifier on the left. Mathematical equality is tested using `==`."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_6_q1_v1",
+        "sectionId": "1.5.5_1.5.6",
+        "sectionTitleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+        "sectionTitleEn": "1.5.5-1.5.6 Variables & Reassignment",
+        "code": "# ノート練習問題 01-05\ncount = 5\ncount = count + 3\ncount = count * 2\nprint(count)",
+        "ja": {
+          "question": "ノート練習問題01-05より: 上記のコードを実行したとき、最終的に `print(count)` で出力される値は何ですか？",
+          "options": [
+            "16",
+            "11",
+            "10",
+            "8"
+          ],
+          "explanation": "1行目で `count = 5`。\n2行目で `count + 3 = 8` が代入されて `count = 8`。\n3行目で `count * 2 = 8 * 2 = 16` が再代入され、最終出力は `16` になります。"
+        },
+        "en": {
+          "question": "From Exercise 01-05: What is the final value printed by the code above?",
+          "options": [
+            "16",
+            "11",
+            "10",
+            "8"
+          ],
+          "explanation": "Step 1: count = 5. Step 2: count = 5 + 3 = 8. Step 3: count = 8 * 2 = 16. Final print yields 16."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_6_q1_v2",
+        "sectionId": "1.5.5_1.5.6",
+        "sectionTitleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+        "sectionTitleEn": "1.5.5-1.5.6 Variables & Reassignment",
+        "code": "a = 10\nb = a\na = 20\nprint(b)",
+        "ja": {
+          "question": "上記のコードを実行したとき、画面に出力される `b` の値は何ですか？",
+          "options": [
+            "10",
+            "20",
+            "30",
+            "None"
+          ],
+          "explanation": "`b = a` の時点で、その時の `a` の値である `10` が `b` に代入されます。その後 `a = 20` と書き換えても、`b` の値には影響しないため `10` が出力されます。"
+        },
+        "en": {
+          "question": "What value is printed by `a = 10; b = a; a = 20; print(b)`?",
+          "options": [
+            "10",
+            "20",
+            "30",
+            "None"
+          ],
+          "explanation": "When `b = a` executes, integer 10 is assigned to `b`. Reassigning `a = 20` later does not alter `b`, which remains 10."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_6_q1_v3",
+        "sectionId": "1.5.5_1.5.6",
+        "sectionTitleJa": "1.5.5-1.5.6 変数・代入文・再代入",
+        "sectionTitleEn": "1.5.5-1.5.6 Variables & Reassignment",
+        "code": "x = 10\nx += 5\nx *= 2\nprint(x)",
+        "ja": {
+          "question": "累犯代入演算子（`+=`, `*=`）を用いた上記のコードの出力結果は何ですか？",
+          "options": [
+            "30 （(10 + 5) * 2）",
+            "20",
+            "25",
+            "15"
+          ],
+          "explanation": "`x += 5` は `x = x + 5`（15）と同じです。続く `x *= 2` は `x = x * 2`（30）と同じなので、結果は `30` となります。"
+        },
+        "en": {
+          "question": "What is printed by `x = 10; x += 5; x *= 2; print(x)`?",
+          "options": [
+            "30 ((10 + 5) * 2)",
+            "20",
+            "25",
+            "15"
+          ],
+          "explanation": "`x += 5` increments x from 10 to 15. `x *= 2` doubles 15 to 30."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_5_7_q1_v1",
+        "sectionId": "1.5.7_1.5.9",
+        "sectionTitleJa": "1.5.7-1.5.9 関数呼び出し・関数定義(def/return)・モジュール",
+        "sectionTitleEn": "1.5.7-1.5.9 Functions & Modules",
+        "code": "text = 'Python'\nprint(len(text))\nprint(max(3, 5, 1, 2, 4))",
+        "ja": {
+          "question": "上記の組み込み関数 `len()` と `max()` を実行したときの2行の出力として正しいものはどれですか？",
+          "options": [
+            "1行目: 6、2行目: 5",
+            "1行目: 5、2行目: 5",
+            "1行目: 6、2行目: 4",
+            "1行目: 7、2行目: 3"
+          ],
+          "explanation": "`len('Python')` は文字列の長さ（6文字）を返し、`max(3, 5, 1, 2, 4)` は引数の中で最大の値である `5` を返します。"
+        },
+        "en": {
+          "question": "What are the two lines printed when running `len('Python')` and `max(3, 5, 1, 2, 4)`?",
+          "options": [
+            "Line 1: 6, Line 2: 5",
+            "Line 1: 5, Line 2: 5",
+            "Line 1: 6, Line 2: 4",
+            "Line 1: 7, Line 2: 3"
+          ],
+          "explanation": "`len('Python')` counts 6 characters. `max(3, 5, 1, 2, 4)` returns the largest argument value, 5."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_7_q1_v2",
+        "sectionId": "1.5.7_1.5.9",
+        "sectionTitleJa": "1.5.7-1.5.9 関数呼び出し・関数定義(def/return)・モジュール",
+        "sectionTitleEn": "1.5.7-1.5.9 Functions & Modules",
+        "code": "def add_tax(price):\n    return price * 1.1\n\nprint(add_tax(100))",
+        "ja": {
+          "question": "上記の自作関数定義において、呼び出し元に計算結果を返すために使われているキーワードは何ですか？",
+          "options": [
+            "return",
+            "def",
+            "send",
+            "output"
+          ],
+          "explanation": "関数から呼び出し側に計算結果の値を引き渡す（返す）には `return` 文を使用します。`def` は関数を定義するためのキーワードです。"
+        },
+        "en": {
+          "question": "In a Python function definition, which keyword passes the calculated result back to the caller?",
+          "options": [
+            "return",
+            "def",
+            "send",
+            "output"
+          ],
+          "explanation": "The `return` statement exits a function and hands back an output value to the caller."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_5_7_q1_v3",
+        "sectionId": "1.5.7_1.5.9",
+        "sectionTitleJa": "1.5.7-1.5.9 関数呼び出し・関数定義(def/return)・モジュール",
+        "sectionTitleEn": "1.5.7-1.5.9 Functions & Modules",
+        "code": "import math\nprint(math.sqrt(16))",
+        "ja": {
+          "question": "標準モジュール `math` を読み込んで `math.sqrt(16)`（平方根）を実行したときに出力される正確な値は何ですか？",
+          "options": [
+            "4.0",
+            "4",
+            "256",
+            "8"
+          ],
+          "explanation": "`math.sqrt()` は平方根（Square Root）を浮動小数点数（float型）で返します。16の平方根なので `4.0` が出力されます。"
+        },
+        "en": {
+          "question": "What is the exact output of `import math; print(math.sqrt(16))` in Python?",
+          "options": [
+            "4.0",
+            "4",
+            "256",
+            "8"
+          ],
+          "explanation": "`math.sqrt()` computes the square root and always returns a floating-point number, outputting `4.0`."
+        },
+        "correctIndex": 0
+      }
+    ],
+    [
+      {
+        "id": "ch1_sub1_6_q1_v1",
+        "sectionId": "1.6",
+        "sectionTitleJa": "1.6 まとめとノート練習問題（秒数計算・BMI等）",
+        "sectionTitleEn": "1.6 Practice Exercises (Seconds/Year, BMI, etc.)",
+        "code": "# ノート練習問題 01-03\n# 1年間（平年＝365日）が何秒であるかを計算する",
+        "ja": {
+          "question": "ノート練習問題01-03より: 平年（365日）の「1年間の秒数」を計算する正しいPythonプログラムと出力結果の組み合わせはどれですか？",
+          "options": [
+            "print(365 * 24 * 60 * 60) → 31536000",
+            "print(365 * 60 * 60) → 1314000",
+            "print(365 * 24 * 60) → 525600",
+            "print(365 * 24 * 3600 * 60) → 1892160000"
+          ],
+          "explanation": "1年は365日、1日は24時間、1時間は60分、1分は60秒なので、`365 * 24 * 60 * 60` と計算します。結果は `31536000` 秒（約3,153万秒）となります。"
+        },
+        "en": {
+          "question": "From Exercise 01-03: Which Python expression correctly calculates the total number of seconds in a standard 365-day year and its result?",
+          "options": [
+            "print(365 * 24 * 60 * 60) → 31536000",
+            "print(365 * 60 * 60) → 1314000",
+            "print(365 * 24 * 60) → 525600",
+            "print(365 * 24 * 3600 * 60) → 1892160000"
+          ],
+          "explanation": "1 year = 365 days × 24 hours/day × 60 minutes/hour × 60 seconds/minute = `365 * 24 * 60 * 60 = 31,536,000` seconds."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_6_q1_v2",
+        "sectionId": "1.6",
+        "sectionTitleJa": "1.6 まとめとノート練習問題（秒数計算・BMI等）",
+        "sectionTitleEn": "1.6 Practice Exercises (Seconds/Year, BMI, etc.)",
+        "code": "# うるう年（366日）の秒数計算",
+        "ja": {
+          "question": "もし「うるう年（366日）」の1年間の秒数を計算する場合の式と出力結果はどうなりますか？",
+          "options": [
+            "print(366 * 24 * 60 * 60) → 31622400",
+            "print(366 * 24 * 60) → 527040",
+            "print(366 * 3600) → 1317600",
+            "print(366 ** 2) → 133956"
+          ],
+          "explanation": "366日に1日の秒数（`24 * 60 * 60 = 86400`）を掛けるため、`366 * 86400 = 31622400` 秒となります。"
+        },
+        "en": {
+          "question": "What is the correct expression and result for calculating the number of seconds in a leap year (366 days)?",
+          "options": [
+            "print(366 * 24 * 60 * 60) → 31622400",
+            "print(366 * 24 * 60) → 527040",
+            "print(366 * 3600) → 1317600",
+            "print(366 ** 2) → 133956"
+          ],
+          "explanation": "366 days × 86,400 seconds/day = 31,622,400 seconds."
+        },
+        "correctIndex": 0
+      },
+      {
+        "id": "ch1_sub1_6_q1_v3",
+        "sectionId": "1.6",
+        "sectionTitleJa": "1.6 まとめとノート練習問題（秒数計算・BMI等）",
+        "sectionTitleEn": "1.6 Practice Exercises (Seconds/Year, BMI, etc.)",
+        "code": "# ノート練習問題 01-07: BMI計算\n# 身長 height (m), 体重 weight (kg)\ndef calc_bmi(weight, height):\n    return weight / (height ** 2)",
+        "ja": {
+          "question": "ノート練習問題01-07より: 体重（kg）と身長（m）からBMI（ボディマス指数）を計算する関数内の正しい数式はどれですか？",
+          "options": [
+            "weight / (height ** 2)",
+            "weight * (height ** 2)",
+            "height / (weight ** 2)",
+            "weight - height * 2"
+          ],
+          "explanation": "BMIの計算公式は「体重(kg) ÷ 身長(m)の2乗」です。Pythonではべき乗に `**` を使うため、`weight / (height ** 2)` と記述します。"
+        },
+        "en": {
+          "question": "From Exercise 01-07: Which formula inside a Python function correctly calculates Body Mass Index (BMI) from weight (kg) and height (m)?",
+          "options": [
+            "weight / (height ** 2)",
+            "weight * (height ** 2)",
+            "height / (weight ** 2)",
+            "weight - height * 2"
+          ],
+          "explanation": "BMI is defined as weight in kg divided by height in meters squared: $BMI = weight / height^2$. In Python, this is `weight / (height ** 2)`."
         },
         "correctIndex": 0
       }
@@ -481,7 +1534,10 @@ const quizData = {
           ],
           "explanation": "input() always returns user input as a string (str). The '+' operator between two strings concatenates them, yielding '55'. To perform arithmetic addition, cast it using int(val)."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "2.1",
+        "sectionTitleJa": "2.1 キーボードからの入力（input・型変換・IDLE）",
+        "sectionTitleEn": "2.1 User Input & Type Casting"
       },
       {
         "id": "ch2_q1_v2",
@@ -506,7 +1562,10 @@ const quizData = {
           ],
           "explanation": "int() casts the strings '3' and '4' into integers 3 and 4, so the addition evaluates to 7."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "2.1",
+        "sectionTitleJa": "2.1 キーボードからの入力（input・型変換・IDLE）",
+        "sectionTitleEn": "2.1 User Input & Type Casting"
       },
       {
         "id": "ch2_q1_v3",
@@ -531,7 +1590,10 @@ const quizData = {
           ],
           "explanation": "Passing a non-numeric string like 'abc' to int() raises a ValueError because it cannot parse it as an integer base 10."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "2.1",
+        "sectionTitleJa": "2.1 キーボードからの入力（input・型変換・IDLE）",
+        "sectionTitleEn": "2.1 User Input & Type Casting"
       }
     ],
     [
@@ -558,7 +1620,10 @@ const quizData = {
           ],
           "explanation": "In an if-elif-else construct, Python evaluates conditions top to bottom and executes only the first matching branch. Since 85 >= 60 is True, it prints '合格' and skips the rest."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "2.2",
+        "sectionTitleJa": "2.2 場合分け（if / elif / else・真偽値・比較演算子）",
+        "sectionTitleEn": "2.2 Conditionals & Booleans"
       },
       {
         "id": "ch2_q2_v2",
@@ -583,7 +1648,10 @@ const quizData = {
           ],
           "explanation": "The first check requires both conditions to hold (True and False -> False). The elif requires at least one condition to hold (True or False -> True), printing 'B'."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "2.2",
+        "sectionTitleJa": "2.2 場合分け（if / elif / else・真偽値・比較演算子）",
+        "sectionTitleEn": "2.2 Conditionals & Booleans"
       },
       {
         "id": "ch2_q2_v3",
@@ -608,7 +1676,10 @@ const quizData = {
           ],
           "explanation": "In Python truthiness rules, numeric zero (0, 0.0), empty collections ([]), and empty strings ('') evaluate to False. The else branch executes, printing 'False判定'."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "2.2",
+        "sectionTitleJa": "2.2 場合分け（if / elif / else・真偽値・比較演算子）",
+        "sectionTitleEn": "2.2 Conditionals & Booleans"
       }
     ],
     [
@@ -635,7 +1706,10 @@ const quizData = {
           ],
           "explanation": "range(start, stop) starts at 'start' and stops before 'stop' (non-inclusive). range(2, 6) generates 2, 3, 4, 5."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "2.3",
+        "sectionTitleJa": "2.3 繰り返し（for / while・無限ループ）",
+        "sectionTitleEn": "2.3 Loops (for & while)"
       },
       {
         "id": "ch2_q3_v2",
@@ -660,7 +1734,10 @@ const quizData = {
           ],
           "explanation": "range(1, 5) iterates over 1, 2, 3, 4. The running sum is 1 + 2 + 3 + 4 = 10."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "2.3",
+        "sectionTitleJa": "2.3 繰り返し（for / while・無限ループ）",
+        "sectionTitleEn": "2.3 Loops (for & while)"
       },
       {
         "id": "ch2_q3_v3",
@@ -685,7 +1762,10 @@ const quizData = {
           ],
           "explanation": "range(5, 0, -2) starts at 5 and steps by -2 down to (but excluding) 0, yielding 5, 3, and 1."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "2.3",
+        "sectionTitleJa": "2.3 繰り返し（for / while・無限ループ）",
+        "sectionTitleEn": "2.3 Loops (for & while)"
       }
     ],
     [
@@ -712,7 +1792,10 @@ const quizData = {
           ],
           "explanation": "Step 1: x=1 (<5) -> x becomes 2. Step 2: x=2 (<5) -> x becomes 4. Step 3: x=4 (<5) -> x becomes 8. Then x < 5 is False, exiting with x = 8."
         },
-        "correctIndex": 2
+        "correctIndex": 2,
+        "sectionId": "2.4_2.5",
+        "sectionTitleJa": "2.4-2.5 range関数と多重ループ（ネスト）",
+        "sectionTitleEn": "2.4-2.5 range() & Nested Loops"
       },
       {
         "id": "ch2_q4_v2",
@@ -737,7 +1820,10 @@ const quizData = {
           ],
           "explanation": "For i=1, count becomes 1. For i=2, count becomes 2. When i=3, the break statement terminates the entire loop immediately, leaving count at 2."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "2.4_2.5",
+        "sectionTitleJa": "2.4-2.5 range関数と多重ループ（ネスト）",
+        "sectionTitleEn": "2.4-2.5 range() & Nested Loops"
       },
       {
         "id": "ch2_q4_v3",
@@ -762,7 +1848,10 @@ const quizData = {
           ],
           "explanation": "For even numbers (n=2, 4), continue skips the remainder of the iteration. Only odd numbers are added: 1 + 3 = 4."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "2.4_2.5",
+        "sectionTitleJa": "2.4-2.5 range関数と多重ループ（ネスト）",
+        "sectionTitleEn": "2.4-2.5 range() & Nested Loops"
       }
     ]
   ],
@@ -791,7 +1880,10 @@ const quizData = {
           ],
           "explanation": "Negative indices count backwards from the end of a list. Index -1 refers to the last element, 'date'."
         },
-        "correctIndex": 2
+        "correctIndex": 2,
+        "sectionId": "3.1",
+        "sectionTitleJa": "3.1 データ型の基礎（int, float, str, bool, list, dict）",
+        "sectionTitleEn": "3.1 Fundamental Data Types"
       },
       {
         "id": "ch3_q1_v2",
@@ -816,7 +1908,10 @@ const quizData = {
           ],
           "explanation": "Because Python uses 0-based indexing, valid indices for a list of length 3 are 0, 1, and 2. Accessing index 3 raises an IndexError: list index out of range."
         },
-        "correctIndex": 2
+        "correctIndex": 2,
+        "sectionId": "3.1",
+        "sectionTitleJa": "3.1 データ型の基礎（int, float, str, bool, list, dict）",
+        "sectionTitleEn": "3.1 Fundamental Data Types"
       },
       {
         "id": "ch3_q1_v3",
@@ -841,7 +1936,10 @@ const quizData = {
           ],
           "explanation": "Python lists are mutable. Assigning to vals[1] directly updates the element at index 1 in place, resulting in [100, 999, 300]."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.1",
+        "sectionTitleJa": "3.1 データ型の基礎（int, float, str, bool, list, dict）",
+        "sectionTitleEn": "3.1 Fundamental Data Types"
       }
     ],
     [
@@ -868,7 +1966,10 @@ const quizData = {
           ],
           "explanation": "Slicing lst[start:stop] extracts items from index start up to, but not including, stop. Indices 1, 2, and 3 are taken, producing [20, 30, 40]."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "3.2",
+        "sectionTitleJa": "3.2 リストの詳細（インデックス・スライス・append）",
+        "sectionTitleEn": "3.2 Lists & Slicing"
       },
       {
         "id": "ch3_q2_v2",
@@ -893,7 +1994,10 @@ const quizData = {
           ],
           "explanation": "Omitting the start index in a slice defaults to index 0. [:3] extracts indices 0, 1, and 2: ['A', 'B', 'C']."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.2",
+        "sectionTitleJa": "3.2 リストの詳細（インデックス・スライス・append）",
+        "sectionTitleEn": "3.2 Lists & Slicing"
       },
       {
         "id": "ch3_q2_v3",
@@ -918,7 +2022,10 @@ const quizData = {
           ],
           "explanation": "The slice [::2] steps through the whole list taking every second item starting from index 0: elements at index 0, 2, and 4 yield [1, 3, 5]."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.2",
+        "sectionTitleJa": "3.2 リストの詳細（インデックス・スライス・append）",
+        "sectionTitleEn": "3.2 Lists & Slicing"
       }
     ],
     [
@@ -945,7 +2052,10 @@ const quizData = {
           ],
           "explanation": "The list .append() method modifies the list in place and returns None. Assigning its return value to 'b' results in None."
         },
-        "correctIndex": 2
+        "correctIndex": 2,
+        "sectionId": "3.3",
+        "sectionTitleJa": "3.3 辞書（キーと値・KeyError・in演算子）",
+        "sectionTitleEn": "3.3 Dictionaries (dict)"
       },
       {
         "id": "ch3_q3_v2",
@@ -970,7 +2080,10 @@ const quizData = {
           ],
           "explanation": ".pop() removes and returns the last element of the list. val receives 30, and stack is reduced to [10, 20]."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.3",
+        "sectionTitleJa": "3.3 辞書（キーと値・KeyError・in演算子）",
+        "sectionTitleEn": "3.3 Dictionaries (dict)"
       },
       {
         "id": "ch3_q3_v3",
@@ -995,7 +2108,10 @@ const quizData = {
           ],
           "explanation": "Strings in Python are immutable. Attempting in-place item assignment raises a TypeError."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.3",
+        "sectionTitleJa": "3.3 辞書（キーと値・KeyError・in演算子）",
+        "sectionTitleEn": "3.3 Dictionaries (dict)"
       }
     ],
     [
@@ -1022,7 +2138,10 @@ const quizData = {
           ],
           "explanation": "Accessing a missing key with square brackets raises a KeyError. Use d.get('c') to return None or a default value safely."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "3.4",
+        "sectionTitleJa": "3.4 可変性と参照（ミュータブル vs イミュータブル）",
+        "sectionTitleEn": "3.4 Mutability & References"
       },
       {
         "id": "ch3_q4_v2",
@@ -1047,7 +2166,10 @@ const quizData = {
           ],
           "explanation": "Dictionary keys must be unique. Assigning to an existing key overwrites its associated value, yielding {'x': 99, 'y': 2}."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.4",
+        "sectionTitleJa": "3.4 可変性と参照（ミュータブル vs イミュータブル）",
+        "sectionTitleEn": "3.4 Mutability & References"
       },
       {
         "id": "ch3_q4_v3",
@@ -1072,7 +2194,10 @@ const quizData = {
           ],
           "explanation": "dict.get(key, default) returns the specified fallback default if the key is not found, returning 0 without raising an error."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "3.4",
+        "sectionTitleJa": "3.4 可変性と参照（ミュータブル vs イミュータブル）",
+        "sectionTitleEn": "3.4 Mutability & References"
       }
     ]
   ],
@@ -1101,7 +2226,10 @@ const quizData = {
           ],
           "explanation": "AI agents can introduce subtle logic bugs or hallucinations. The human developer remains accountable for defining exact requirements, writing automated test suites, and verifying edge-case behavior."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.1",
+        "sectionTitleJa": "4.1 アルゴリズムの基礎と要件",
+        "sectionTitleEn": "4.1 Algorithm Fundamentals"
       },
       {
         "id": "ch4_q1_v2",
@@ -1126,7 +2254,10 @@ const quizData = {
           ],
           "explanation": "Generated code often looks convincing and passes basic smoke tests, yet can fail under corner-case conditions or introduce critical security flaws unless systematically verified."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.1",
+        "sectionTitleJa": "4.1 アルゴリズムの基礎と要件",
+        "sectionTitleEn": "4.1 Algorithm Fundamentals"
       },
       {
         "id": "ch4_q1_v3",
@@ -1151,7 +2282,10 @@ const quizData = {
           ],
           "explanation": "Automated unit test suites provide verifiable, reproducible proof that generated functions conform to explicit specifications and handle edge inputs correctly."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.1",
+        "sectionTitleJa": "4.1 アルゴリズムの基礎と要件",
+        "sectionTitleEn": "4.1 Algorithm Fundamentals"
       }
     ],
     [
@@ -1178,7 +2312,10 @@ const quizData = {
           ],
           "explanation": "The outer loop runs n times and the inner loop runs n times per outer iteration, yielding n * n operations, which is O(n^2)."
         },
-        "correctIndex": 3
+        "correctIndex": 3,
+        "sectionId": "4.2",
+        "sectionTitleJa": "4.2 アラン・チューリングと停止問題（Halting Problem）",
+        "sectionTitleEn": "4.2 Turing & The Halting Problem"
       },
       {
         "id": "ch4_q2_v2",
@@ -1203,7 +2340,10 @@ const quizData = {
           ],
           "explanation": "The order of growth from best to worst is O(1) < O(log n) < O(n) < O(n^2). O(n^2) exhibits quadratic growth, exploding fastest as n increases."
         },
-        "correctIndex": 2
+        "correctIndex": 2,
+        "sectionId": "4.2",
+        "sectionTitleJa": "4.2 アラン・チューリングと停止問題（Halting Problem）",
+        "sectionTitleEn": "4.2 Turing & The Halting Problem"
       },
       {
         "id": "ch4_q2_v3",
@@ -1228,7 +2368,10 @@ const quizData = {
           ],
           "explanation": "In the worst case (the target is at the very end or absent), linear search must inspect every single element, running in O(n) time."
         },
-        "correctIndex": 2
+        "correctIndex": 2,
+        "sectionId": "4.2",
+        "sectionTitleJa": "4.2 アラン・チューリングと停止問題（Halting Problem）",
+        "sectionTitleEn": "4.2 Turing & The Halting Problem"
       }
     ],
     [
@@ -1255,7 +2398,10 @@ const quizData = {
           ],
           "explanation": "Turing mathematically proved that the Halting Problem is undecidable: there cannot exist a universal program that correctly determines if any arbitrary program halts on a given input."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.3",
+        "sectionTitleJa": "4.3 計算量（Big-O記法・線形探索 vs 二分探索）",
+        "sectionTitleEn": "4.3 Computational Complexity (Big-O)"
       },
       {
         "id": "ch4_q3_v2",
@@ -1280,7 +2426,10 @@ const quizData = {
           ],
           "explanation": "Because the general halting problem is undecidable, automated static analysis tools must rely on heuristics; no automated validator can guarantee 100% complete detection of all infinite loops without false positives or negatives."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.3",
+        "sectionTitleJa": "4.3 計算量（Big-O記法・線形探索 vs 二分探索）",
+        "sectionTitleEn": "4.3 Computational Complexity (Big-O)"
       },
       {
         "id": "ch4_q3_v3",
@@ -1305,7 +2454,10 @@ const quizData = {
           ],
           "explanation": "A parser deterministically identifies grammatical syntax errors in finite time. In contrast, whether an arbitrary syntactically valid program eventually halts is undecidable."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.3",
+        "sectionTitleJa": "4.3 計算量（Big-O記法・線形探索 vs 二分探索）",
+        "sectionTitleEn": "4.3 Computational Complexity (Big-O)"
       }
     ],
     [
@@ -1332,7 +2484,10 @@ const quizData = {
           ],
           "explanation": "A formal algorithm must have definite and unambiguous operations, terminate within a finite number of steps, and correctly map inputs to expected outputs."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.4",
+        "sectionTitleJa": "4.4 コーディングエージェントと検証責任（単体テスト）",
+        "sectionTitleEn": "4.4 Coding Agents & Verification"
       },
       {
         "id": "ch4_q4_v2",
@@ -1357,7 +2512,10 @@ const quizData = {
           ],
           "explanation": "Time complexity quantifies how operation count scales with input size n. Space complexity quantifies how auxiliary memory consumption scales with n."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.4",
+        "sectionTitleJa": "4.4 コーディングエージェントと検証責任（単体テスト）",
+        "sectionTitleEn": "4.4 Coding Agents & Verification"
       },
       {
         "id": "ch4_q4_v3",
@@ -1382,7 +2540,10 @@ const quizData = {
           ],
           "explanation": "Worst-case analysis establishes an upper bound, ensuring that the system will predictably complete within acceptable time limits even under adversarial or worst-case input data."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "4.4",
+        "sectionTitleJa": "4.4 コーディングエージェントと検証責任（単体テスト）",
+        "sectionTitleEn": "4.4 Coding Agents & Verification"
       }
     ]
   ],
@@ -1411,7 +2572,10 @@ const quizData = {
           ],
           "explanation": "Artificial Intelligence is the broad umbrella. Machine Learning is the subset that learns from empirical data, and Deep Learning is the specialized subset of ML leveraging deep artificial neural networks."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.1",
+        "sectionTitleJa": "5.1 AI・機械学習・深層学習の包含関係",
+        "sectionTitleEn": "5.1 AI, ML & Deep Learning Hierarchy"
       },
       {
         "id": "ch5_q1_v2",
@@ -1436,7 +2600,10 @@ const quizData = {
           ],
           "explanation": "In rule-based AI, human domain experts explicitly hard-code all logic. In Machine Learning, mathematical algorithms optimize parameters directly from training datasets."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.1",
+        "sectionTitleJa": "5.1 AI・機械学習・深層学習の包含関係",
+        "sectionTitleEn": "5.1 AI, ML & Deep Learning Hierarchy"
       },
       {
         "id": "ch5_q1_v3",
@@ -1461,7 +2628,10 @@ const quizData = {
           ],
           "explanation": "Deep Learning eliminates the bottleneck of manual feature engineering by learning hierarchical, end-to-end representations directly from raw inputs through deep neural architectures."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.1",
+        "sectionTitleJa": "5.1 AI・機械学習・深層学習の包含関係",
+        "sectionTitleEn": "5.1 AI, ML & Deep Learning Hierarchy"
       }
     ],
     [
@@ -1488,7 +2658,10 @@ const quizData = {
           ],
           "explanation": "Supervised Learning provides the model with labeled pairs (input x and target y), training it to approximate a mapping function for classification or regression."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.2",
+        "sectionTitleJa": "5.2 3大学習パラダイム（教師あり・教師なし・強化学習）",
+        "sectionTitleEn": "5.2 3 Paradigms of Machine Learning"
       },
       {
         "id": "ch5_q2_v2",
@@ -1513,7 +2686,10 @@ const quizData = {
           ],
           "explanation": "Unsupervised Learning discovers underlying patterns, groupings, or low-dimensional manifolds from unlabeled inputs (e.g. k-means clustering, PCA)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.2",
+        "sectionTitleJa": "5.2 3大学習パラダイム（教師あり・教師なし・強化学習）",
+        "sectionTitleEn": "5.2 3 Paradigms of Machine Learning"
       },
       {
         "id": "ch5_q2_v3",
@@ -1538,7 +2714,10 @@ const quizData = {
           ],
           "explanation": "Reinforcement Learning centers on an autonomous agent interacting with an environment, guided by scalar reward feedback rather than labeled correct actions."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.2",
+        "sectionTitleJa": "5.2 3大学習パラダイム（教師あり・教師なし・強化学習）",
+        "sectionTitleEn": "5.2 3 Paradigms of Machine Learning"
       }
     ],
     [
@@ -1565,7 +2744,10 @@ const quizData = {
           ],
           "explanation": "In Reinforcement Learning, rewards are often delayed across many sequential steps (the temporal credit assignment problem), unlike supervised learning where immediate error gradients exist for each sample."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.3",
+        "sectionTitleJa": "5.3 強化学習の特徴（試行錯誤・遅延報酬）",
+        "sectionTitleEn": "5.3 Key Characteristics of RL"
       },
       {
         "id": "ch5_q3_v2",
@@ -1590,7 +2772,10 @@ const quizData = {
           ],
           "explanation": "RL feedback is evaluative: the environment provides a scalar reward measuring the success of the chosen action, but never reveals what the optimal alternative action would have been."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.3",
+        "sectionTitleJa": "5.3 強化学習の特徴（試行錯誤・遅延報酬）",
+        "sectionTitleEn": "5.3 Key Characteristics of RL"
       },
       {
         "id": "ch5_q3_v3",
@@ -1615,7 +2800,10 @@ const quizData = {
           ],
           "explanation": "In RL, data collection is active: the trajectory of visited states and collected rewards depends directly on the policy currently deployed by the agent."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.3",
+        "sectionTitleJa": "5.3 強化学習の特徴（試行錯誤・遅延報酬）",
+        "sectionTitleEn": "5.3 Key Characteristics of RL"
       }
     ],
     [
@@ -1642,7 +2830,10 @@ const quizData = {
           ],
           "explanation": "'git add <file>' moves modified working files into the staging area (index) so they can be bundled into the next snapshot."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.4",
+        "sectionTitleJa": "5.4 Gitによるバージョン管理（add, commit, リポジトリ）",
+        "sectionTitleEn": "5.4 Git Version Control Fundamentals"
       },
       {
         "id": "ch5_q4_v2",
@@ -1667,7 +2858,10 @@ const quizData = {
           ],
           "explanation": "'git commit -m \"message\"' takes the staged snapshot and creates a new permanent commit node in the repository tree."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.4",
+        "sectionTitleJa": "5.4 Gitによるバージョン管理（add, commit, リポジトリ）",
+        "sectionTitleEn": "5.4 Git Version Control Fundamentals"
       },
       {
         "id": "ch5_q4_v3",
@@ -1692,7 +2886,10 @@ const quizData = {
           ],
           "explanation": "In ML research, tracking exact configurations and code versions is fundamental for experimental provenance and scientific reproducibility."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "5.4",
+        "sectionTitleJa": "5.4 Gitによるバージョン管理（add, commit, リポジトリ）",
+        "sectionTitleEn": "5.4 Git Version Control Fundamentals"
       }
     ]
   ],
@@ -1721,7 +2918,10 @@ const quizData = {
           ],
           "explanation": "Exploitation means capitalizing on existing knowledge by choosing the greedy action that currently appears best."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.1",
+        "sectionTitleJa": "6.1 多腕バンディット問題の定式化",
+        "sectionTitleEn": "6.1 Multi-Armed Bandit Formulation"
       },
       {
         "id": "ch6_q1_v2",
@@ -1746,7 +2946,10 @@ const quizData = {
           ],
           "explanation": "Without exploration, early variance can bias initial estimates, causing pure greedy agents to exploit a suboptimal arm indefinitely while ignoring superior options."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.1",
+        "sectionTitleJa": "6.1 多腕バンディット問題の定式化",
+        "sectionTitleEn": "6.1 Multi-Armed Bandit Formulation"
       },
       {
         "id": "ch6_q1_v3",
@@ -1771,7 +2974,10 @@ const quizData = {
           ],
           "explanation": "Exploration sacrifices short-term returns to collect information about uncertain actions, preventing premature convergence on suboptimal strategies."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.1",
+        "sectionTitleJa": "6.1 多腕バンディット問題の定式化",
+        "sectionTitleEn": "6.1 Multi-Armed Bandit Formulation"
       }
     ],
     [
@@ -1798,7 +3004,10 @@ const quizData = {
           ],
           "explanation": "The sample-average estimate is simply the empirical average of rewards received from taking that action: Q_k = (1/k) * sum(R_i)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.2",
+        "sectionTitleJa": "6.2 探索と活用のトレードオフ",
+        "sectionTitleEn": "6.2 Exploration vs Exploitation"
       },
       {
         "id": "ch6_q2_v2",
@@ -1823,7 +3032,10 @@ const quizData = {
           ],
           "explanation": "The incremental update requires storing only the current estimate Q_k and step counter k, updating in O(1) time and O(1) memory without retaining historical logs."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.2",
+        "sectionTitleJa": "6.2 探索と活用のトレードオフ",
+        "sectionTitleEn": "6.2 Exploration vs Exploitation"
       },
       {
         "id": "ch6_q2_v3",
@@ -1848,7 +3060,10 @@ const quizData = {
           ],
           "explanation": "Using a constant step-size parameter results in an exponential recency-weighted average, allowing the agent to track changes in dynamic, non-stationary environments."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.2",
+        "sectionTitleJa": "6.2 探索と活用のトレードオフ",
+        "sectionTitleEn": "6.2 Exploration vs Exploitation"
       }
     ],
     [
@@ -1875,7 +3090,10 @@ const quizData = {
           ],
           "explanation": "ε-greedy balances exploitation and exploration: it picks the greedy action with probability 1 - ε, and explores a random action with probability ε."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.3",
+        "sectionTitleJa": "6.3 標本平均法と逐次更新式",
+        "sectionTitleEn": "6.3 Sample-Average Method"
       },
       {
         "id": "ch6_q3_v2",
@@ -1900,7 +3118,10 @@ const quizData = {
           ],
           "explanation": "When multiple actions tie for the maximum estimated value, standard implementations break ties randomly among the maximal candidates to prevent systematic bias."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.3",
+        "sectionTitleJa": "6.3 標本平均法と逐次更新式",
+        "sectionTitleEn": "6.3 Sample-Average Method"
       },
       {
         "id": "ch6_q3_v3",
@@ -1925,7 +3146,10 @@ const quizData = {
           ],
           "explanation": "The greedy action is chosen directly during exploitation (probability 1 - ε = 0.80), plus during exploration when randomly picking among 4 arms (0.20 * 1/4 = 0.05), totaling 0.85."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.3",
+        "sectionTitleJa": "6.3 標本平均法と逐次更新式",
+        "sectionTitleEn": "6.3 Sample-Average Method"
       }
     ],
     [
@@ -1952,7 +3176,10 @@ const quizData = {
           ],
           "explanation": "When ε = 1.0, exploration probability is 100%, causing the agent to pick uniformly random actions without exploiting learned estimates."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.4",
+        "sectionTitleJa": "6.4 ε-greedy法（探索率εの調整）",
+        "sectionTitleEn": "6.4 ε-greedy Action Selection"
       },
       {
         "id": "ch6_q4_v2",
@@ -1977,7 +3204,10 @@ const quizData = {
           ],
           "explanation": "ε-decay gradually shifts the agent's behavior from aggressive early exploration towards reliable late-stage exploitation as value estimates mature."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.4",
+        "sectionTitleJa": "6.4 ε-greedy法（探索率εの調整）",
+        "sectionTitleEn": "6.4 ε-greedy Action Selection"
       },
       {
         "id": "ch6_q4_v3",
@@ -2002,7 +3232,10 @@ const quizData = {
           ],
           "explanation": "A static ε = 0.1 policy continues to take non-greedy exploration steps 10% of the time, perpetually suffering sub-optimal returns on those random exploratory pulls."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "6.4",
+        "sectionTitleJa": "6.4 ε-greedy法（探索率εの調整）",
+        "sectionTitleEn": "6.4 ε-greedy Action Selection"
       }
     ]
   ],
@@ -2031,7 +3264,10 @@ const quizData = {
           ],
           "explanation": "The fundamental RL loop: Agent observes S_t, acts with A_t, and the environment transitions to S_{t+1} while emitting scalar reward R_{t+1}."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.1",
+        "sectionTitleJa": "7.1 エージェントと環境の相互作用ループ",
+        "sectionTitleEn": "7.1 Agent-Environment Interaction Loop"
       },
       {
         "id": "ch7_q1_v2",
@@ -2056,7 +3292,10 @@ const quizData = {
           ],
           "explanation": "The boundary is defined by control: even internal hardware components (like motors or joint dynamics) count as Environment if the agent cannot alter them directly at will."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.1",
+        "sectionTitleJa": "7.1 エージェントと環境の相互作用ループ",
+        "sectionTitleEn": "7.1 Agent-Environment Interaction Loop"
       },
       {
         "id": "ch7_q1_v3",
@@ -2081,7 +3320,10 @@ const quizData = {
           ],
           "explanation": "In standard modern notation (Sutton & Barto), reward R_{t+1} and next state S_{t+1} are emitted jointly by the environment at time step t+1 as the causal consequence of (S_t, A_t)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.1",
+        "sectionTitleJa": "7.1 エージェントと環境の相互作用ループ",
+        "sectionTitleEn": "7.1 Agent-Environment Interaction Loop"
       }
     ],
     [
@@ -2108,7 +3350,10 @@ const quizData = {
           ],
           "explanation": "The Markov Property states that the future is independent of the past given the present: P(S_{t+1}, R_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, ...) = P(S_{t+1}, R_{t+1} | S_t, A_t)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.2",
+        "sectionTitleJa": "7.2 マルコフ決定プロセス（MDP）とマルコフ性",
+        "sectionTitleEn": "7.2 Markov Decision Processes (MDP)"
       },
       {
         "id": "ch7_q2_v2",
@@ -2133,7 +3378,10 @@ const quizData = {
           ],
           "explanation": "A formal MDP is defined by the 5-tuple (S, A, P, R, γ): States, Actions, Transition probability distribution, Reward function, and Discount factor."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.2",
+        "sectionTitleJa": "7.2 マルコフ決定プロセス（MDP）とマルコフ性",
+        "sectionTitleEn": "7.2 Markov Decision Processes (MDP)"
       },
       {
         "id": "ch7_q2_v3",
@@ -2158,7 +3406,10 @@ const quizData = {
           ],
           "explanation": "A single still image lacks velocity/momentum information (e.g. which way a ball is traveling), meaning the past trajectory is needed to predict the next state."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.2",
+        "sectionTitleJa": "7.2 マルコフ決定プロセス（MDP）とマルコフ性",
+        "sectionTitleEn": "7.2 Markov Decision Processes (MDP)"
       }
     ],
     [
@@ -2185,7 +3436,10 @@ const quizData = {
           ],
           "explanation": "The discount factor γ balances immediate versus future rewards and mathematically guarantees that infinite-horizon returns sum to a bounded finite value."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.3",
+        "sectionTitleJa": "7.3 収益 G_t と割引率 γ",
+        "sectionTitleEn": "7.3 Return G_t & Discount Factor γ"
       },
       {
         "id": "ch7_q3_v2",
@@ -2210,7 +3464,10 @@ const quizData = {
           ],
           "explanation": "With γ = 0, G_t = R_{t+1}. The agent cares exclusively about immediate next-step gratification and ignores any consequences beyond step t+1."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.3",
+        "sectionTitleJa": "7.3 収益 G_t と割引率 γ",
+        "sectionTitleEn": "7.3 Return G_t & Discount Factor γ"
       },
       {
         "id": "ch7_q3_v3",
@@ -2235,7 +3492,10 @@ const quizData = {
           ],
           "explanation": "G = R_1 + γ * R_2 = 10 + 0.5 * 10 = 10 + 5.0 = 15.0."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.3",
+        "sectionTitleJa": "7.3 収益 G_t と割引率 γ",
+        "sectionTitleEn": "7.3 Return G_t & Discount Factor γ"
       }
     ],
     [
@@ -2262,7 +3522,10 @@ const quizData = {
           ],
           "explanation": "V(s) evaluates how good it is to be in state s under policy π. Q(s, a) evaluates how good it is to perform action a in state s under policy π."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.4",
+        "sectionTitleJa": "7.4 状態価値関数 V(s) と行動価値関数 Q(s, a)",
+        "sectionTitleEn": "7.4 Value Functions V(s) & Q(s,a)"
       },
       {
         "id": "ch7_q4_v2",
@@ -2287,7 +3550,10 @@ const quizData = {
           ],
           "explanation": "With optimal Q*(s, a), the agent simply acts greedily: π*(s) = argmax_a Q*(s, a), selecting the highest-valued action in each state."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.4",
+        "sectionTitleJa": "7.4 状態価値関数 V(s) と行動価値関数 Q(s, a)",
+        "sectionTitleEn": "7.4 Value Functions V(s) & Q(s,a)"
       },
       {
         "id": "ch7_q4_v3",
@@ -2312,7 +3578,10 @@ const quizData = {
           ],
           "explanation": "A policy π defines the agent's behavior, specifying the probability π(a|s) of selecting action a when in state s."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "7.4",
+        "sectionTitleJa": "7.4 状態価値関数 V(s) と行動価値関数 Q(s, a)",
+        "sectionTitleEn": "7.4 Value Functions V(s) & Q(s,a)"
       }
     ]
   ],
@@ -2341,7 +3610,10 @@ const quizData = {
           ],
           "explanation": "Gymnasium separated the legacy `done` boolean into `terminated` (environment reached terminal state like goal or cliff) and `truncated` (horizon/step limit reached), returning a 5-tuple: `(observation, reward, terminated, truncated, info)`."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "8.1",
+        "sectionTitleJa": "8.1 Gymnasium Core API（reset, step 5要素）",
+        "sectionTitleEn": "8.1 Gymnasium Core API (reset & step)"
       },
       {
         "id": "ch8_q1_v2",
@@ -2366,7 +3638,10 @@ const quizData = {
           ],
           "explanation": "In Gymnasium (v0.26+), `env.reset()` returns a 2-tuple: `(obs, info)`, where `obs` is the initial observation and `info` is a dictionary containing diagnostic metrics."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "8.1",
+        "sectionTitleJa": "8.1 Gymnasium Core API（reset, step 5要素）",
+        "sectionTitleEn": "8.1 Gymnasium Core API (reset & step)"
       },
       {
         "id": "ch8_q1_v3",
@@ -2391,7 +3666,10 @@ const quizData = {
           ],
           "explanation": "Episodes can conclude either through natural task completion/failure (`terminated`) or through an arbitrary horizon timeout (`truncated`). In both scenarios, the episode must end and trigger `env.reset()`."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "8.1",
+        "sectionTitleJa": "8.1 Gymnasium Core API（reset, step 5要素）",
+        "sectionTitleEn": "8.1 Gymnasium Core API (reset & step)"
       }
     ],
     [
@@ -2418,7 +3696,10 @@ const quizData = {
           ],
           "explanation": "Stepping onto any cliff cell (indices 37 to 46) yields an immediate harsh penalty of -100 reward and sends the agent straight back to the starting cell (index 36)."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "8.2",
+        "sectionTitleJa": "8.2 Cliff Walking環境の構造と崖転落ペナルティ",
+        "sectionTitleEn": "8.2 Cliff Walking Grid Dynamics"
       },
       {
         "id": "ch8_q2_v2",
@@ -2443,7 +3724,10 @@ const quizData = {
           ],
           "explanation": "Each regular step incurs a -1 reward. With zero falls into the cliff, a 13-step path accumulates 13 * (-1) = -13, and a 17-step path accumulates 17 * (-1) = -17."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "8.2",
+        "sectionTitleJa": "8.2 Cliff Walking環境の構造と崖転落ペナルティ",
+        "sectionTitleEn": "8.2 Cliff Walking Grid Dynamics"
       },
       {
         "id": "ch8_q2_v3",
@@ -2468,7 +3752,10 @@ const quizData = {
           ],
           "explanation": "Step 1 yields -1 (normal move), Step 2 yields -100 (cliff penalty), and Step 3 yields -1 (normal move), summing up to -1 + -100 + -1 = -102."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "8.2",
+        "sectionTitleJa": "8.2 Cliff Walking環境の構造と崖転落ペナルティ",
+        "sectionTitleEn": "8.2 Cliff Walking Grid Dynamics"
       }
     ],
     [
@@ -2495,7 +3782,10 @@ const quizData = {
           ],
           "explanation": "Q-learning is off-policy and optimizes assuming greedy future actions, choosing the edge path. SARSA is on-policy and takes the agent's ε-exploration mistakes into account, thus favoring the safe detour away from the deadly cliff."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "8.3",
+        "sectionTitleJa": "8.3 最短崖際ルート vs 安全大回りルート（Q vs SARSA）",
+        "sectionTitleEn": "8.3 Optimal vs Safe Detour (Q vs SARSA)"
       },
       {
         "id": "ch8_q3_v2",
@@ -2520,7 +3810,10 @@ const quizData = {
           ],
           "explanation": "Attempting to move outside the grid boundary leaves the agent in its current position while still consuming a step and incurring the standard -1 reward penalty."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "8.3",
+        "sectionTitleJa": "8.3 最短崖際ルート vs 安全大回りルート（Q vs SARSA）",
+        "sectionTitleEn": "8.3 Optimal vs Safe Detour (Q vs SARSA)"
       },
       {
         "id": "ch8_q3_v3",
@@ -2545,7 +3838,10 @@ const quizData = {
           ],
           "explanation": "Stepping into the goal tile incurs the final -1 step cost and sets `terminated = True`. The environment does not give an artificial positive reward; maximizing return naturally drives the agent to take the minimum number of -1 steps."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "8.3",
+        "sectionTitleJa": "8.3 最短崖際ルート vs 安全大回りルート（Q vs SARSA）",
+        "sectionTitleEn": "8.3 Optimal vs Safe Detour (Q vs SARSA)"
       }
     ],
     [
@@ -2572,7 +3868,10 @@ const quizData = {
           ],
           "explanation": "Actions are {UP, RIGHT, DOWN, LEFT} represented as `Discrete(4)`. Observations are discrete integer indices from 0 to 47 (4x12 grid), represented as `Discrete(48)`."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "8.4",
+        "sectionTitleJa": "8.4 行動空間・観測空間と環境レンダリング",
+        "sectionTitleEn": "8.4 Observation & Action Spaces"
       },
       {
         "id": "ch8_q4_v2",
@@ -2597,7 +3896,10 @@ const quizData = {
           ],
           "explanation": "`Discrete(4)` draws uniformly from the discrete set {0, 1, 2, 3}. 4 is out of bounds."
         },
-        "correctIndex": 3
+        "correctIndex": 3,
+        "sectionId": "8.4",
+        "sectionTitleJa": "8.4 行動空間・観測空間と環境レンダリング",
+        "sectionTitleEn": "8.4 Observation & Action Spaces"
       },
       {
         "id": "ch8_q4_v3",
@@ -2622,7 +3924,10 @@ const quizData = {
           ],
           "explanation": "Gymnasium requires setting `render_mode` (such as `'human'`, `'ansi'`, or `'rgb_array'`) during `gym.make` initialization to enable visual or terminal rendering."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "8.4",
+        "sectionTitleJa": "8.4 行動空間・観測空間と環境レンダリング",
+        "sectionTitleEn": "8.4 Observation & Action Spaces"
       }
     ]
   ],
@@ -2651,7 +3956,10 @@ const quizData = {
           ],
           "explanation": "Monte Carlo is a model-free approach that learns directly from complete episodes of experience by averaging observed returns $G_t$ after termination, without bootstrapping intermediate estimates."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "9.1",
+        "sectionTitleJa": "9.1 モンテカルロ法の基本原理（エピソード収益平均化）",
+        "sectionTitleEn": "9.1 Monte Carlo Principle"
       },
       {
         "id": "ch9_q1_v2",
@@ -2676,7 +3984,10 @@ const quizData = {
           ],
           "explanation": "DP requires an explicit mathematical transition model $P(s'|s, a)$. Monte Carlo is model-free, requiring only simulated sample interactions without explicit transition matrices."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "9.1",
+        "sectionTitleJa": "9.1 モンテカルロ法の基本原理（エピソード収益平均化）",
+        "sectionTitleEn": "9.1 Monte Carlo Principle"
       },
       {
         "id": "ch9_q1_v3",
@@ -2701,7 +4012,10 @@ const quizData = {
           ],
           "explanation": "Because Monte Carlo updates value functions using empirical episode returns $G_t$, the environment must eventually terminate in finite steps (episodic task)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.1",
+        "sectionTitleJa": "9.1 モンテカルロ法の基本原理（エピソード収益平均化）",
+        "sectionTitleEn": "9.1 Monte Carlo Principle"
       }
     ],
     [
@@ -2728,7 +4042,10 @@ const quizData = {
           ],
           "explanation": "Observations in `Blackjack-v1` are tuples `(player_sum, dealer_showing_card, usable_ace)`, conveying player points (4-21), dealer face card (1-10), and whether player holds an Ace counted as 11 without busting."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.2",
+        "sectionTitleJa": "9.2 Blackjackの状態表現（手札合計, 見せ札, 使えるA）",
+        "sectionTitleEn": "9.2 Blackjack State Tuple"
       },
       {
         "id": "ch9_q2_v2",
@@ -2753,7 +4070,10 @@ const quizData = {
           ],
           "explanation": "A usable ace is an ace that counts as 11 points without causing the player to bust (sum > 21). If drawing an additional card threatens to bust, it can be demoted to value 1."
         },
-        "correctIndex": 1
+        "correctIndex": 1,
+        "sectionId": "9.2",
+        "sectionTitleJa": "9.2 Blackjackの状態表現（手札合計, 見せ札, 使えるA）",
+        "sectionTitleEn": "9.2 Blackjack State Tuple"
       },
       {
         "id": "ch9_q2_v3",
@@ -2778,7 +4098,10 @@ const quizData = {
           ],
           "explanation": "In Gymnasium's Blackjack, action 0 is Stick (stand / stop drawing) and action 1 is Hit (request another card)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.2",
+        "sectionTitleJa": "9.2 Blackjackの状態表現（手札合計, 見せ札, 使えるA）",
+        "sectionTitleEn": "9.2 Blackjack State Tuple"
       }
     ],
     [
@@ -2805,7 +4128,10 @@ const quizData = {
           ],
           "explanation": "With $\\gamma = 1$, return $G_t = \\sum_{k=t}^T R_k$. Since intermediate rewards are 0 and the final outcome reward is +1, every state-action pair in the winning trajectory receives return $G_t = 1$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.3",
+        "sectionTitleJa": "9.3 収益 G_t 計算トレースとQ値標本平均更新",
+        "sectionTitleEn": "9.3 Return Calculation & Sample-Average"
       },
       {
         "id": "ch9_q3_v2",
@@ -2830,7 +4156,10 @@ const quizData = {
           ],
           "explanation": "The sample average is the arithmetic mean of returns: $(1 + (-1) + 1 + 1) / 4 = 2 / 4 = 0.5$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.3",
+        "sectionTitleJa": "9.3 収益 G_t 計算トレースとQ値標本平均更新",
+        "sectionTitleEn": "9.3 Return Calculation & Sample-Average"
       },
       {
         "id": "ch9_q3_v3",
@@ -2855,7 +4184,10 @@ const quizData = {
           ],
           "explanation": "$Q_{new} = 0.2 + \\frac{1}{5}(0.8 - 0.2) = 0.2 + 0.12 = 0.32$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.3",
+        "sectionTitleJa": "9.3 収益 G_t 計算トレースとQ値標本平均更新",
+        "sectionTitleEn": "9.3 Return Calculation & Sample-Average"
       }
     ],
     [
@@ -2882,7 +4214,10 @@ const quizData = {
           ],
           "explanation": "First-visit MC averages returns following the initial encounter with state s within each episode. Every-visit MC averages returns following every visit to state s."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.4",
+        "sectionTitleJa": "9.4 初回訪問MC vs 全訪問MC、最適方策抽出",
+        "sectionTitleEn": "9.4 First-visit vs Every-visit MC"
       },
       {
         "id": "ch9_q4_v2",
@@ -2907,7 +4242,10 @@ const quizData = {
           ],
           "explanation": "The greedy action is $\\arg\\max_a Q(s, a)$. Since $0.15 > -0.42$, action 0 (Stick) has higher expected return and is selected."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.4",
+        "sectionTitleJa": "9.4 初回訪問MC vs 全訪問MC、最適方策抽出",
+        "sectionTitleEn": "9.4 First-visit vs Every-visit MC"
       },
       {
         "id": "ch9_q4_v3",
@@ -2932,7 +4270,10 @@ const quizData = {
           ],
           "explanation": "The reward structure in Gymnasium's Blackjack is: Win = +1.0, Loss = -1.0, Draw/Push = 0.0."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "9.4",
+        "sectionTitleJa": "9.4 初回訪問MC vs 全訪問MC、最適方策抽出",
+        "sectionTitleEn": "9.4 First-visit vs Every-visit MC"
       }
     ]
   ],
@@ -2961,7 +4302,10 @@ const quizData = {
           ],
           "explanation": "TD learning bootstraps: it updates its estimate $V(s)$ based on another estimate $R + \\gamma V(s')$ (the TD target) after just one step, rather than waiting for empirical episode returns."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.1",
+        "sectionTitleJa": "10.1 TD学習（時間的差分学習）とブートストラップ",
+        "sectionTitleEn": "10.1 TD Learning & Bootstrapping"
       },
       {
         "id": "ch10_q1_v2",
@@ -2986,7 +4330,10 @@ const quizData = {
           ],
           "explanation": "TD error is $\\delta = R + \\gamma V(s') - V(s) = 1.0 + 0.9(2.0) - 1.5 = 2.8 - 1.5 = 1.3$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.1",
+        "sectionTitleJa": "10.1 TD学習（時間的差分学習）とブートストラップ",
+        "sectionTitleEn": "10.1 TD Learning & Bootstrapping"
       },
       {
         "id": "ch10_q1_v3",
@@ -3011,7 +4358,10 @@ const quizData = {
           ],
           "explanation": "Monte Carlo relies on actual rollout returns (unbiased, but high variance across stochastic paths). TD bootstraps on estimated values (introduces bias initially, but achieves significantly lower variance per step)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.1",
+        "sectionTitleJa": "10.1 TD学習（時間的差分学習）とブートストラップ",
+        "sectionTitleEn": "10.1 TD Learning & Bootstrapping"
       }
     ],
     [
@@ -3038,7 +4388,10 @@ const quizData = {
           ],
           "explanation": "Q-learning is off-policy because the policy used to generate actions (behavior policy, such as ε-greedy) differs from the policy being evaluated and improved (target policy, greedy $\\max_{a'} Q(s', a')$)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.2",
+        "sectionTitleJa": "10.2 Q-learning更新式（Off-policy, TD誤差, 学習率α）",
+        "sectionTitleEn": "10.2 Q-Learning Update Equation"
       },
       {
         "id": "ch10_q2_v2",
@@ -3063,7 +4416,10 @@ const quizData = {
           ],
           "explanation": "Q-learning is off-policy, bootstrapping using $\\max_{a'} Q(s', a')$. SARSA is on-policy, bootstrapping using $Q(s', a')$ where $a'$ is the specific action chosen by the current policy."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.2",
+        "sectionTitleJa": "10.2 Q-learning更新式（Off-policy, TD誤差, 学習率α）",
+        "sectionTitleEn": "10.2 Q-Learning Update Equation"
       },
       {
         "id": "ch10_q2_v3",
@@ -3088,7 +4444,10 @@ const quizData = {
           ],
           "explanation": "When $\\alpha = 1$, $Q(s, a) + 1.0 \\cdot [Target - Q(s, a)] = Target$. Prior estimates are discarded and fully overwritten by the newly observed target."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.2",
+        "sectionTitleJa": "10.2 Q-learning更新式（Off-policy, TD誤差, 学習率α）",
+        "sectionTitleEn": "10.2 Q-Learning Update Equation"
       }
     ],
     [
@@ -3115,7 +4474,10 @@ const quizData = {
           ],
           "explanation": "$Q \\leftarrow 0.0 + 0.5 \\times [1.0 + 0.9(0.0) - 0.0] = 0.5 \\times 1.0 = 0.5$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.3",
+        "sectionTitleJa": "10.3 Q値更新の数値計算トレース",
+        "sectionTitleEn": "10.3 Q-Table Calculation Trace"
       },
       {
         "id": "ch10_q3_v2",
@@ -3140,7 +4502,10 @@ const quizData = {
           ],
           "explanation": "Target = $0.0 + 0.9(0.8) = 0.72$. TD error = $0.72 - 0.4 = 0.32$. Updated Q = $0.4 + 0.2(0.32) = 0.4 + 0.064 = 0.464$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.3",
+        "sectionTitleJa": "10.3 Q値更新の数値計算トレース",
+        "sectionTitleEn": "10.3 Q-Table Calculation Trace"
       },
       {
         "id": "ch10_q3_v3",
@@ -3165,7 +4530,10 @@ const quizData = {
           ],
           "explanation": "Target = -1.0. TD error = $-1.0 - 0.5 = -1.5$. New Q = $0.5 + 0.1(-1.5) = 0.5 - 0.15 = 0.35$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.3",
+        "sectionTitleJa": "10.3 Q値更新の数値計算トレース",
+        "sectionTitleEn": "10.3 Q-Table Calculation Trace"
       }
     ],
     [
@@ -3192,7 +4560,10 @@ const quizData = {
           ],
           "explanation": "With slippery ice enabled, the agent moves in the intended direction with probability 1/3, and slips into the two perpendicular orthogonal directions with probability 1/3 each."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.4",
+        "sectionTitleJa": "10.4 滑る氷の確率的遷移（is_slippery=True）",
+        "sectionTitleEn": "10.4 Slippery Surface Dynamics"
       },
       {
         "id": "ch10_q4_v2",
@@ -3217,7 +4588,10 @@ const quizData = {
           ],
           "explanation": "Standard FrozenLake uses sparse rewards: reaching the goal yields 1.0, while falling into a hole or moving across ice yields 0.0."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.4",
+        "sectionTitleJa": "10.4 滑る氷の確率的遷移（is_slippery=True）",
+        "sectionTitleEn": "10.4 Slippery Surface Dynamics"
       },
       {
         "id": "ch10_q4_v3",
@@ -3242,7 +4616,10 @@ const quizData = {
           ],
           "explanation": "Disabling slipperiness makes transitions 100% deterministic, eliminating environment stochasticity and drastically simplifying value convergence."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "10.4",
+        "sectionTitleJa": "10.4 滑る氷の確率的遷移（is_slippery=True）",
+        "sectionTitleEn": "10.4 Slippery Surface Dynamics"
       }
     ]
   ],
@@ -3271,7 +4648,10 @@ const quizData = {
           ],
           "explanation": "The 4 continuous observation variables in CartPole are: cart position, cart velocity, pole angle (radians), and pole angular velocity at tip."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.1",
+        "sectionTitleJa": "11.1 CartPole-v1の4連続物理状態と行動空間",
+        "sectionTitleEn": "11.1 CartPole 4D Continuous State"
       },
       {
         "id": "ch11_q1_v2",
@@ -3296,7 +4676,10 @@ const quizData = {
           ],
           "explanation": "CartPole has two discrete action choices: 0 applies a force pushing the cart leftwards, and 1 pushes the cart rightwards."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.1",
+        "sectionTitleJa": "11.1 CartPole-v1の4連続物理状態と行動空間",
+        "sectionTitleEn": "11.1 CartPole 4D Continuous State"
       },
       {
         "id": "ch11_q1_v3",
@@ -3321,7 +4704,10 @@ const quizData = {
           ],
           "explanation": "In CartPole-v1, the agent earns +1.0 reward for every time step the pole remains balanced within the acceptable angle and position thresholds (up to 500 steps)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.1",
+        "sectionTitleJa": "11.1 CartPole-v1の4連続物理状態と行動空間",
+        "sectionTitleEn": "11.1 CartPole 4D Continuous State"
       }
     ],
     [
@@ -3348,7 +4734,10 @@ const quizData = {
           ],
           "explanation": "Continuous spaces contain an infinite continuum of states. A discrete table cannot represent infinite states, and an exact table lookup cannot generalize knowledge to nearby unvisited states."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.2",
+        "sectionTitleJa": "11.2 連続状態空間における表形式手法の限界と次元の呪い",
+        "sectionTitleEn": "11.2 Curse of Dimensionality"
       },
       {
         "id": "ch11_q2_v2",
@@ -3373,7 +4762,10 @@ const quizData = {
           ],
           "explanation": "The Curse of Dimensionality describes how state space volume and necessary sample counts grow exponentially with the number of state dimensions ($K^D$)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.2",
+        "sectionTitleJa": "11.2 連続状態空間における表形式手法の限界と次元の呪い",
+        "sectionTitleEn": "11.2 Curse of Dimensionality"
       },
       {
         "id": "ch11_q2_v3",
@@ -3398,7 +4790,10 @@ const quizData = {
           ],
           "explanation": "Deep RL employs deep neural networks as function approximators $Q(s, a; \\theta)$, enabling the agent to generalize patterns across an infinite continuous state continuum without lookup tables."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.2",
+        "sectionTitleJa": "11.2 連続状態空間における表形式手法の限界と次元の呪い",
+        "sectionTitleEn": "11.2 Curse of Dimensionality"
       }
     ],
     [
@@ -3425,7 +4820,10 @@ const quizData = {
           ],
           "explanation": "`np.digitize` returns the 1-based bucket index. Since 0.5 is greater than bins[0] (-2.4), bins[1] (-1.2), and bins[2] (0.0), but less than bins[3] (1.2), it falls into bin 3."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.3",
+        "sectionTitleJa": "11.3 離散化（ビニング）と np.digitize 計算トレース",
+        "sectionTitleEn": "11.3 Discretization via np.digitize"
       },
       {
         "id": "ch11_q3_v2",
@@ -3450,7 +4848,10 @@ const quizData = {
           ],
           "explanation": "The number of discrete states is $6^4 = 1,296$. Multiplying by 2 available actions yields $1,296 \\times 2 = 2,592$ Q-values."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.3",
+        "sectionTitleJa": "11.3 離散化（ビニング）と np.digitize 計算トレース",
+        "sectionTitleEn": "11.3 Discretization via np.digitize"
       },
       {
         "id": "ch11_q3_v3",
@@ -3475,7 +4876,10 @@ const quizData = {
           ],
           "explanation": "Clipping observation values with `np.clip` prevents out-of-bounds indices from causing `IndexError` exceptions when indexing fixed-size Q-tables."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.3",
+        "sectionTitleJa": "11.3 離散化（ビニング）と np.digitize 計算トレース",
+        "sectionTitleEn": "11.3 Discretization via np.digitize"
       }
     ],
     [
@@ -3502,7 +4906,10 @@ const quizData = {
           ],
           "explanation": "In CartPole-v1, an episode terminates as failed when the pole angle exceeds $\\pm 12^\\circ$ ($\\approx \\pm 0.2095$ rad) or the cart position strays beyond $\\pm 2.4$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.4",
+        "sectionTitleJa": "11.4 終了条件（角度 ±12度, 500ステップ, 攻略基準）",
+        "sectionTitleEn": "11.4 CartPole Termination & Solved Criteria"
       },
       {
         "id": "ch11_q4_v2",
@@ -3527,7 +4934,10 @@ const quizData = {
           ],
           "explanation": "Surviving until step 500 is a horizon cutoff (timeout), so `terminated` remains `False` and `truncated` becomes `True`."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.4",
+        "sectionTitleJa": "11.4 終了条件（角度 ±12度, 500ステップ, 攻略基準）",
+        "sectionTitleEn": "11.4 CartPole Termination & Solved Criteria"
       },
       {
         "id": "ch11_q4_v3",
@@ -3552,7 +4962,10 @@ const quizData = {
           ],
           "explanation": "Gymnasium benchmark standards define `CartPole-v1` as solved when the agent achieves an average return of $\\ge 475.0$ over 100 consecutive evaluation episodes."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "11.4",
+        "sectionTitleJa": "11.4 終了条件（角度 ±12度, 500ステップ, 攻略基準）",
+        "sectionTitleEn": "11.4 CartPole Termination & Solved Criteria"
       }
     ]
   ],
@@ -3581,7 +4994,10 @@ const quizData = {
           ],
           "explanation": "Subclassing `gymnasium.Env` requires defining `reset()` (to re-initialize state) and `step()` (to advance the environment transition given an action)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.1",
+        "sectionTitleJa": "12.1 gymnasium.Env のサブクラス化とメソッド",
+        "sectionTitleEn": "12.1 Subclassing gym.Env"
       },
       {
         "id": "ch12_q1_v2",
@@ -3606,7 +5022,10 @@ const quizData = {
           ],
           "explanation": "Gymnasium specs require `reset(self, seed=None, options=None)` which seeds PRNG via `super().reset(seed=seed)` and returns `(obs, info)`."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.1",
+        "sectionTitleJa": "12.1 gymnasium.Env のサブクラス化とメソッド",
+        "sectionTitleEn": "12.1 Subclassing gym.Env"
       },
       {
         "id": "ch12_q1_v3",
@@ -3631,7 +5050,10 @@ const quizData = {
           ],
           "explanation": "`ansi` render mode returns a formatted string representation of the grid, while `human` mode displays an interactive graphical window."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.1",
+        "sectionTitleJa": "12.1 gymnasium.Env のサブクラス化とメソッド",
+        "sectionTitleEn": "12.1 Subclassing gym.Env"
       }
     ],
     [
@@ -3658,7 +5080,10 @@ const quizData = {
           ],
           "explanation": "Actions are 4 discrete values (`Discrete(4)`). A 2D integer coordinate vector bounded between 0 and 4 is specified as `Box(low=0, high=4, shape=(2,), dtype=np.int32)`."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.2",
+        "sectionTitleJa": "12.2 行動空間・観測空間の定義（Discrete, Box）",
+        "sectionTitleEn": "12.2 Action & Observation Spaces"
       },
       {
         "id": "ch12_q2_v2",
@@ -3683,7 +5108,10 @@ const quizData = {
           ],
           "explanation": "`Discrete(4)` represents {0, 1, 2, 3}. 3 is valid (True), but 4 is outside the range (False)."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.2",
+        "sectionTitleJa": "12.2 行動空間・観測空間の定義（Discrete, Box）",
+        "sectionTitleEn": "12.2 Action & Observation Spaces"
       },
       {
         "id": "ch12_q2_v3",
@@ -3708,7 +5136,10 @@ const quizData = {
           ],
           "explanation": "Converting 2D grid coordinates to a 1D index uses row-major formula: $2 \\times 4 + 3 = 11$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.2",
+        "sectionTitleJa": "12.2 行動空間・観測空間の定義（Discrete, Box）",
+        "sectionTitleEn": "12.2 Action & Observation Spaces"
       }
     ],
     [
@@ -3735,7 +5166,10 @@ const quizData = {
           ],
           "explanation": "`np.clip(-1, 0, 4)` clamps values below 0 up to the minimum bound 0, preventing the agent from walking through walls."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.3",
+        "sectionTitleJa": "12.3 グリッド座標更新と np.clip 境界クリッピング",
+        "sectionTitleEn": "12.3 Grid Step & Boundary Clipping"
       },
       {
         "id": "ch12_q3_v2",
@@ -3760,7 +5194,10 @@ const quizData = {
           ],
           "explanation": "Giving a -1 step cost with `terminated = False` encourages the agent to find the shortest trajectory to the goal without lingering indefinitely."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.3",
+        "sectionTitleJa": "12.3 グリッド座標更新と np.clip 境界クリッピング",
+        "sectionTitleEn": "12.3 Grid Step & Boundary Clipping"
       },
       {
         "id": "ch12_q3_v3",
@@ -3785,7 +5222,10 @@ const quizData = {
           ],
           "explanation": "`truncated = True` signals that the episode hit a maximum step cutoff rather than a natural terminal goal, cleanly triggering episode termination."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.3",
+        "sectionTitleJa": "12.3 グリッド座標更新と np.clip 境界クリッピング",
+        "sectionTitleEn": "12.3 Grid Step & Boundary Clipping"
       }
     ],
     [
@@ -3812,7 +5252,10 @@ const quizData = {
           ],
           "explanation": "`info` must always be a dictionary (`dict`), containing diagnostic metadata. Passing a string violates the Gymnasium API contract."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.4",
+        "sectionTitleJa": "12.4 step戻り値型仕様と check_env 検証",
+        "sectionTitleEn": "12.4 Step Signature & check_env"
       },
       {
         "id": "ch12_q4_v2",
@@ -3837,7 +5280,10 @@ const quizData = {
           ],
           "explanation": "`check_env(env)` inspects action/observation spaces, verifies `step` and `reset` return types, and catches common compliance bugs."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.4",
+        "sectionTitleJa": "12.4 step戻り値型仕様と check_env 検証",
+        "sectionTitleEn": "12.4 Step Signature & check_env"
       },
       {
         "id": "ch12_q4_v3",
@@ -3862,7 +5308,10 @@ const quizData = {
           ],
           "explanation": "Registering with Gymnasium assigns a standardized environment ID, permitting instantiation via `gym.make(...)` with built-in wrapper wrappers and step limits."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "12.4",
+        "sectionTitleJa": "12.4 step戻り値型仕様と check_env 検証",
+        "sectionTitleEn": "12.4 Step Signature & check_env"
       }
     ]
   ],
@@ -3891,7 +5340,10 @@ const quizData = {
           ],
           "explanation": "Without updating `obs = next_obs`, the agent perpetually perceives itself at the old state, generating invalid transition updates."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.1",
+        "sectionTitleJa": "13.1 強化学習トレーニングループの実装",
+        "sectionTitleEn": "13.1 RL Training Loop Architecture"
       },
       {
         "id": "ch13_q1_v2",
@@ -3916,7 +5368,10 @@ const quizData = {
           ],
           "explanation": "Plotting episode return (with a moving average smoothing window) over episode index reveals whether the agent's policy is improving and converging."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.1",
+        "sectionTitleJa": "13.1 強化学習トレーニングループの実装",
+        "sectionTitleEn": "13.1 RL Training Loop Architecture"
       },
       {
         "id": "ch13_q1_v3",
@@ -3941,7 +5396,10 @@ const quizData = {
           ],
           "explanation": "Online RL involves continuously updating policies or value estimates directly from real-time transitions acquired through ongoing environment interaction."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.1",
+        "sectionTitleJa": "13.1 強化学習トレーニングループの実装",
+        "sectionTitleEn": "13.1 RL Training Loop Architecture"
       }
     ],
     [
@@ -3968,7 +5426,10 @@ const quizData = {
           ],
           "explanation": "After episode 1: $1.0 \\times 0.9 = 0.90$. After episode 2: $0.90 \\times 0.9 = 0.81$. Both exceed $\\epsilon_{min} = 0.05$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.2",
+        "sectionTitleJa": "13.2 ε-decay（減衰）スケジュール計算トレース",
+        "sectionTitleEn": "13.2 ε-Decay Schedules"
       },
       {
         "id": "ch13_q2_v2",
@@ -3993,7 +5454,10 @@ const quizData = {
           ],
           "explanation": "Decaying $\\epsilon$ balances the exploration-exploitation tradeoff: high exploration initially builds comprehensive state knowledge, followed by high exploitation to refine and stabilize optimal behavior."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.2",
+        "sectionTitleJa": "13.2 ε-decay（減衰）スケジュール計算トレース",
+        "sectionTitleEn": "13.2 ε-Decay Schedules"
       },
       {
         "id": "ch13_q2_v3",
@@ -4018,7 +5482,10 @@ const quizData = {
           ],
           "explanation": "The total span to decay is $1.0 - 0.1 = 0.9$. At $ep = 50$, half the span has decayed ($0.9 \\times 0.5 = 0.45$). Therefore $\\epsilon = 1.0 - 0.45 = 0.55$."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.2",
+        "sectionTitleJa": "13.2 ε-decay（減衰）スケジュール計算トレース",
+        "sectionTitleEn": "13.2 ε-Decay Schedules"
       }
     ],
     [
@@ -4045,7 +5512,10 @@ const quizData = {
           ],
           "explanation": "In evaluation mode, exploration is eliminated (setting $\\epsilon = 0$ or selecting $\\arg\\max_a Q(s, a)$) to test the deterministic quality of the learned policy."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.3",
+        "sectionTitleJa": "13.3 評価フェーズにおけるグリーディ方策適用",
+        "sectionTitleEn": "13.3 Greedy Evaluation Mode"
       },
       {
         "id": "ch13_q3_v2",
@@ -4070,7 +5540,10 @@ const quizData = {
           ],
           "explanation": "Default `np.argmax` breaks ties deterministically by returning the first index occurrence. To break ties uniformly, one should randomly sample among all maximizing actions."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.3",
+        "sectionTitleJa": "13.3 評価フェーズにおけるグリーディ方策適用",
+        "sectionTitleEn": "13.3 Greedy Evaluation Mode"
       },
       {
         "id": "ch13_q3_v3",
@@ -4095,7 +5568,10 @@ const quizData = {
           ],
           "explanation": "NumPy's native `.npy` binary serialization (`np.save` / `np.load`) preserves multidimensional array shapes, floating-point precision, and loads instantaneously."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.3",
+        "sectionTitleJa": "13.3 評価フェーズにおけるグリーディ方策適用",
+        "sectionTitleEn": "13.3 Greedy Evaluation Mode"
       }
     ],
     [
@@ -4122,7 +5598,10 @@ const quizData = {
           ],
           "explanation": "RL agents optimize cumulative scalar reward, not designer intent. Lingering to collect an unbounded stream of small bonuses yields far higher return than terminating at the goal."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.4",
+        "sectionTitleJa": "13.4 報酬設計（Reward Shaping）と報酬ハッキング防止",
+        "sectionTitleEn": "13.4 Reward Shaping & Hacking Prevention"
       },
       {
         "id": "ch13_q4_v2",
@@ -4147,7 +5626,10 @@ const quizData = {
           ],
           "explanation": "With sparse rewards, all unguided trajectories receive identical zero rewards, providing zero informational signal to differentiate good moves from bad moves until the goal is found by chance."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.4",
+        "sectionTitleJa": "13.4 報酬設計（Reward Shaping）と報酬ハッキング防止",
+        "sectionTitleEn": "13.4 Reward Shaping & Hacking Prevention"
       },
       {
         "id": "ch13_q4_v3",
@@ -4172,7 +5654,10 @@ const quizData = {
           ],
           "explanation": "With $\\gamma = 0$, return $G_t = R_{t+1}$. The agent ignores all future consequences and cares solely about the immediate one-step payoff."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "13.4",
+        "sectionTitleJa": "13.4 報酬設計（Reward Shaping）と報酬ハッキング防止",
+        "sectionTitleEn": "13.4 Reward Shaping & Hacking Prevention"
       }
     ]
   ],
@@ -4201,7 +5686,10 @@ const quizData = {
           ],
           "explanation": "High-dimensional visual state spaces contain far too many configurations for table lookups. Deep neural networks approximate $Q(s, a; \\theta)$, generalizing across unseen but semantically similar states."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.1",
+        "sectionTitleJa": "14.1 表形式の限界と深層強化学習（DQN: 関数近似）",
+        "sectionTitleEn": "14.1 Tabular Limits & DQN"
       },
       {
         "id": "ch14_q1_v2",
@@ -4226,7 +5714,10 @@ const quizData = {
           ],
           "explanation": "DQN formulates learning as a regression problem: treating the bootstrapped TD target $r + \\gamma \\max_{a'} Q(s', a')$ as the pseudo-label and minimizing mean squared Bellman error via backpropagation."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.1",
+        "sectionTitleJa": "14.1 表形式の限界と深層強化学習（DQN: 関数近似）",
+        "sectionTitleEn": "14.1 Tabular Limits & DQN"
       },
       {
         "id": "ch14_q1_v3",
@@ -4251,7 +5742,10 @@ const quizData = {
           ],
           "explanation": "Value-based methods struggle with continuous action spaces because computing $\\max_a Q(s, a)$ requires solving an optimization problem at every step. Policy gradient methods parameterize actions directly as continuous probability distributions."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.1",
+        "sectionTitleJa": "14.1 表形式の限界と深層強化学習（DQN: 関数近似）",
+        "sectionTitleEn": "14.1 Tabular Limits & DQN"
       }
     ],
     [
@@ -4278,7 +5772,10 @@ const quizData = {
           ],
           "explanation": "Sequential transitions are heavily correlated, which destabilizes gradient descent. Randomly sampling mini-batches from an experience buffer breaks correlation and reuses transitions efficiently."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.2",
+        "sectionTitleJa": "14.2 DQNの安定化技術（Experience Replay と Target Network）",
+        "sectionTitleEn": "14.2 Experience Replay & Target Network"
       },
       {
         "id": "ch14_q2_v2",
@@ -4303,7 +5800,10 @@ const quizData = {
           ],
           "explanation": "Updating weights while simultaneously using the same weights to generate targets causes instability (chasing a moving target). Periodically freezing target network parameters provides a fixed, stable regression target."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.2",
+        "sectionTitleJa": "14.2 DQNの安定化技術（Experience Replay と Target Network）",
+        "sectionTitleEn": "14.2 Experience Replay & Target Network"
       },
       {
         "id": "ch14_q2_v3",
@@ -4328,7 +5828,10 @@ const quizData = {
           ],
           "explanation": "Nature DQN demonstrated that a single deep reinforcement learning architecture could master human-level skills directly from raw screen pixels and game scores across dozens of Atari 2600 games without handcrafted features."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.2",
+        "sectionTitleJa": "14.2 DQNの安定化技術（Experience Replay と Target Network）",
+        "sectionTitleEn": "14.2 Experience Replay & Target Network"
       }
     ],
     [
@@ -4355,7 +5858,10 @@ const quizData = {
           ],
           "explanation": "RL implementations fail silently: buggy equations still produce executable code and loss curves, but converge to degenerate policies. Developers must mathematically verify state traces rather than relying on vibes."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.3",
+        "sectionTitleJa": "14.3 AI生成コードの検証責任と単体テスト",
+        "sectionTitleEn": "14.3 Code Verification & Unit Testing"
       },
       {
         "id": "ch14_q3_v2",
@@ -4380,7 +5886,10 @@ const quizData = {
           ],
           "explanation": "Because no transitions exist after termination, the discounted future value $\\gamma \\max_{a'} Q(s', a')$ is identically 0. Failing to mask terminal targets severely biases the value function."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.3",
+        "sectionTitleJa": "14.3 AI生成コードの検証責任と単体テスト",
+        "sectionTitleEn": "14.3 Code Verification & Unit Testing"
       },
       {
         "id": "ch14_q3_v3",
@@ -4405,7 +5914,10 @@ const quizData = {
           ],
           "explanation": "Testing mathematical update equations using deterministic hand-calculated test assertions quickly isolates arithmetic and indexing bugs without expensive debugging runs."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.3",
+        "sectionTitleJa": "14.3 AI生成コードの検証責任と単体テスト",
+        "sectionTitleEn": "14.3 Code Verification & Unit Testing"
       }
     ],
     [
@@ -4432,7 +5944,10 @@ const quizData = {
           ],
           "explanation": "RLHF employs reinforcement learning algorithms (like PPO or DPO) to guide language model generation toward outputs preferred by humans, aligning AI behavior with safety and helpfulness criteria."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.4",
+        "sectionTitleJa": "14.4 現代強化学習の応用（LLMのRLHF、バンディット配信）",
+        "sectionTitleEn": "14.4 Real-World RL & AI Alignment"
       },
       {
         "id": "ch14_q4_v2",
@@ -4457,7 +5972,10 @@ const quizData = {
           ],
           "explanation": "Bandit algorithms power personalized recommendation engines, article placement, and adaptive A/B testing on major platforms by balancing exploratory content testing with exploiting top-performing items."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.4",
+        "sectionTitleJa": "14.4 現代強化学習の応用（LLMのRLHF、バンディット配信）",
+        "sectionTitleEn": "14.4 Real-World RL & AI Alignment"
       },
       {
         "id": "ch14_q4_v3",
@@ -4482,7 +6000,10 @@ const quizData = {
           ],
           "explanation": "The AI Alignment problem addresses the challenge of ensuring that an agent's objective function accurately captures the full intent, ethics, and safety considerations of human designers without dangerous loopholes."
         },
-        "correctIndex": 0
+        "correctIndex": 0,
+        "sectionId": "14.4",
+        "sectionTitleJa": "14.4 現代強化学習の応用（LLMのRLHF、バンディット配信）",
+        "sectionTitleEn": "14.4 Real-World RL & AI Alignment"
       }
     ]
   ]

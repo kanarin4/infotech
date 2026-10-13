@@ -1,5 +1,5 @@
 // InfoTech — Quiz Practice Application
-// Chapters 1-14, Bilingual JA/EN, Practice/Test Modes, Tactile Feedback & Responsive Design
+// Chapters 1-14, Subsection Drills & Full Chapter Tests, Bilingual JA/EN, Practice/Test Modes, Tactile Feedback & Responsive Design
 
 (function () {
   'use strict';
@@ -9,7 +9,11 @@
     lang: 'ja', // 'ja' | 'en'
     mode: 'practice', // 'practice' | 'test'
     activeView: 'hub', // 'hub' | 'quiz' | 'results'
+    quizType: 'chapter', // 'chapter' | 'subsection'
     currentChapterId: 1,
+    currentSubsectionId: null, // e.g. '1.5.1'
+    currentSubsectionTitleJa: '',
+    currentSubsectionTitleEn: '',
     currentQuestionIndex: 0,
     currentQuestions: [],
     userAnswers: [], // array of numbers or null
@@ -24,8 +28,8 @@
       appSubtitle: "小テスト対策",
       heroBadge: "事前学習クイズ",
       heroTitle: "授業前の確認クイズ",
-      heroDesc: "授業前の予習や復習用のクイズです。各回の小テストで扱われるコードの挙動や重要概念を章ごとに確認できます。",
-      heroTotalQ: "全14章 / 168問 (各問3〜4バリエーション)",
+      heroDesc: "授業前の予習や復習用のクイズです。各回の小テストで扱われるコードの挙動や重要概念を節ごと・章ごとに確認できます。",
+      heroTotalQ: "全14章 / 192問 (各節ごとの練習 & 総合テスト)",
       heroModeDesc: "モード: 練習（即時回答）/ テスト（採点）",
       practiceMode: "💡 練習モード",
       testMode: "⏱ テストモード",
@@ -46,20 +50,26 @@
       explanationLabel: "【解説】",
       startQuiz: "開始",
       verdictPerfectTitle: "全問正解です",
-      verdictPerfectDesc: "この章の内容をしっかり理解できています。",
+      verdictPerfectDesc: "この単元の内容をしっかり理解できています。",
       verdictGoodTitle: "合格点です",
       verdictGoodDesc: "間違えた問題の解説を確認しておきましょう。",
       verdictReviewTitle: "復習が必要です",
       verdictReviewDesc: "下の解説を確認して、もう一度挑戦してみましょう。",
-      noMissedQuestions: "全問正解です。間違えた問題はありません。"
+      noMissedQuestions: "全問正解です。間違えた問題はありません。",
+      subsectionsToggle: "📚 節ごとの個別練習を開く",
+      drillBtn: "練習 →",
+      startFullChapterQuiz: "総合テストを開始 (全問演習) →",
+      retakeSubsection: "この節をもう一度解く",
+      nextSubsection: "次の節へ進む",
+      toFullChapterQuiz: "章の総合テストへ →"
     },
     en: {
       appTitle: "InfoTech",
       appSubtitle: "Quiz Prep",
       heroBadge: "Weekly Quiz Prep",
       heroTitle: "Prepare for In-Class Quizzes",
-      heroDesc: "Quizzes for weekly class preparation and review. Check your understanding of code behavior and core concepts chapter by chapter.",
-      heroTotalQ: "14 Chapters / 168 Questions (3–4 variants per topic)",
+      heroDesc: "Quizzes for weekly class preparation and review. Check your understanding of code behavior and core concepts by subsection or full chapter.",
+      heroTotalQ: "14 Chapters / 192 Questions (Subsections & Full Tests)",
       heroModeDesc: "Mode: Practice (immediate feedback) / Test (scored)",
       practiceMode: "💡 Practice Mode",
       testMode: "⏱ Test Mode",
@@ -85,7 +95,13 @@
       verdictGoodDesc: "Review the explanations below for questions you missed.",
       verdictReviewTitle: "Needs Review",
       verdictReviewDesc: "Review the explanations below and try the quiz again.",
-      noMissedQuestions: "No missed questions. You got everything right."
+      noMissedQuestions: "No missed questions. You got everything right.",
+      subsectionsToggle: "📚 Practice by Subsection",
+      drillBtn: "Drill →",
+      startFullChapterQuiz: "Start Chapter Quiz (All Topics) →",
+      retakeSubsection: "Retake Subsection",
+      nextSubsection: "Next Subsection",
+      toFullChapterQuiz: "To Chapter Quiz →"
     }
   };
 
@@ -199,8 +215,8 @@
     el.modeTestBtn.textContent = t.testMode;
     el.backHubLabel.textContent = t.backToHub;
     el.qCategoryTag.textContent = t.qCategory;
-    el.retakeLabel.textContent = t.retakeQuiz;
-    el.nextChapLabel.textContent = t.nextChapter;
+    el.retakeLabel.textContent = state.quizType === 'subsection' ? t.retakeSubsection : t.retakeQuiz;
+    el.nextChapLabel.textContent = state.quizType === 'subsection' ? t.nextSubsection : t.nextChapter;
     el.backHubResultsLabel.textContent = t.backToHubResults;
     el.reviewHeadingText.textContent = t.reviewHeading;
     el.filterAllBtn.textContent = t.filterAll;
@@ -215,7 +231,29 @@
     }
   }
 
-  // Render Hub Chapter Cards with Double-Bezel Architecture
+  // Helper: Find chapter metadata by ID
+  function getChapterMeta(chId) {
+    if (typeof courseSections === 'undefined') return null;
+    for (const part of courseSections) {
+      for (const ch of part.chapters) {
+        if (ch.id === chId) return ch;
+      }
+    }
+    return null;
+  }
+
+  // Helper: Find next subsection in the same chapter
+  function getNextSubsection(chId, currentSubId) {
+    const ch = getChapterMeta(chId);
+    if (!ch || !ch.subsections) return null;
+    const idx = ch.subsections.findIndex(s => s.id === currentSubId);
+    if (idx !== -1 && idx < ch.subsections.length - 1) {
+      return ch.subsections[idx + 1];
+    }
+    return null;
+  }
+
+  // Render Hub Chapter Cards with Subsection Accents
   function renderHub() {
     el.coursePartsContainer.innerHTML = '';
 
@@ -241,20 +279,50 @@
         const totalVarieties = rawSlots.reduce((sum, slot) => sum + (Array.isArray(slot) ? slot.length : 1), 0);
         const title = state.lang === 'ja' ? ch.titleJa : ch.titleEn;
         const topics = state.lang === 'ja' ? ch.topicsJa : ch.topicsEn;
+        const t = i18n[state.lang];
 
         // Check local storage for score
         const savedScore = localStorage.getItem(`it_score_ch_${ch.id}`);
 
         const cardShell = document.createElement('article');
         cardShell.className = `chapter-card-shell ${savedScore ? 'completed' : ''}`;
-        cardShell.setAttribute('role', 'button');
-        cardShell.setAttribute('tabindex', '0');
-        cardShell.setAttribute('aria-label', `${title} - ${sessionCount} questions (${totalVarieties} variants)`);
 
         const chLabel = state.lang === 'ja' ? `第 ${ch.id} 章` : `CHAPTER ${ch.id}`;
         const qCountLabel = state.lang === 'ja' 
           ? `${sessionCount} 問 (全${totalVarieties}パターン)` 
           : `${sessionCount} Qs (${totalVarieties} variants)`;
+
+        // Subsections Accordion HTML
+        let subsectionsHtml = '';
+        if (ch.subsections && ch.subsections.length > 0) {
+          const subRowsHtml = ch.subsections.map(sub => {
+            const subTitle = state.lang === 'ja' ? sub.titleJa : sub.titleEn;
+            const displayId = sub.id.replace('_', '–');
+            return `
+              <div class="subsection-item-row">
+                <div class="sub-meta-group">
+                  <span class="sub-id-badge">§ ${displayId}</span>
+                  <span class="sub-title-text" title="${escapeHtml(subTitle)}">${escapeHtml(subTitle)}</span>
+                </div>
+                <button type="button" class="btn-drill-sub" data-chid="${ch.id}" data-subid="${sub.id}" aria-label="${escapeHtml(subTitle)}">${t.drillBtn}</button>
+              </div>
+            `;
+          }).join('');
+
+          const countLabel = state.lang === 'ja' ? ` (${ch.subsections.length}節)` : ` (${ch.subsections.length} parts)`;
+
+          subsectionsHtml = `
+            <div class="subsections-accordion">
+              <button type="button" class="subsections-toggle-btn" aria-expanded="false">
+                <span>${t.subsectionsToggle}${countLabel}</span>
+                <span class="toggle-arrow">▾</span>
+              </button>
+              <div class="subsections-list">
+                ${subRowsHtml}
+              </div>
+            </div>
+          `;
+        }
 
         cardShell.innerHTML = `
           <div class="chapter-card-core">
@@ -266,21 +334,52 @@
               <h4 class="chapter-title">${escapeHtml(title)}</h4>
               <p class="chapter-desc">${escapeHtml(topics)}</p>
             </div>
-            <div class="chapter-card-bottom">
-              <span class="question-count-badge">${qCountLabel}</span>
-              ${savedScore ? `<span class="score-chip">${savedScore}</span>` : ''}
-              <span class="start-link-arrow">&rarr;</span>
+            ${subsectionsHtml}
+            <div class="chapter-card-bottom" style="margin-top: 14px; flex-direction: column; align-items: stretch; gap: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span class="question-count-badge">${qCountLabel}</span>
+                ${savedScore ? `<span class="score-chip">${savedScore}</span>` : ''}
+              </div>
+              <button type="button" class="btn-chapter-full-quiz" data-chid="${ch.id}">
+                <span>${t.startFullChapterQuiz}</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
             </div>
           </div>
         `;
 
-        cardShell.addEventListener('click', () => startChapterQuiz(ch.id));
-        cardShell.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            startChapterQuiz(ch.id);
-          }
+        // Bind Accordion Toggle
+        const toggleBtn = cardShell.querySelector('.subsections-toggle-btn');
+        const subList = cardShell.querySelector('.subsections-list');
+        const arrow = cardShell.querySelector('.toggle-arrow');
+        if (toggleBtn && subList) {
+          toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = subList.classList.toggle('open');
+            toggleBtn.setAttribute('aria-expanded', isOpen);
+            if (arrow) arrow.textContent = isOpen ? '▴' : '▾';
+          });
+        }
+
+        // Bind Subsection Drill Buttons
+        const drillBtns = cardShell.querySelectorAll('.btn-drill-sub');
+        drillBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const chId = parseInt(btn.getAttribute('data-chid'), 10);
+            const subId = btn.getAttribute('data-subid');
+            startSubsectionQuiz(chId, subId);
+          });
         });
+
+        // Bind Full Chapter Quiz Button
+        const fullQuizBtn = cardShell.querySelector('.btn-chapter-full-quiz');
+        if (fullQuizBtn) {
+          fullQuizBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            startChapterQuiz(ch.id);
+          });
+        }
 
         grid.appendChild(cardShell);
       });
@@ -312,13 +411,69 @@
     return q;
   }
 
-  // Start Quiz for Specific Chapter with Dynamic Variety Sampling & Shuffling
+  // Start Full Chapter Quiz (Sample 1 variety per slot, shuffle options)
   function startChapterQuiz(chapterId) {
+    state.quizType = 'chapter';
     state.currentChapterId = chapterId;
+    state.currentSubsectionId = null;
+    state.currentSubsectionTitleJa = '';
+    state.currentSubsectionTitleEn = '';
     const rawSlots = quizData[chapterId] || [];
 
-    // For each slot, pick 1 random variety from the bank, then shuffle options
     state.currentQuestions = rawSlots.map(slot => {
+      if (Array.isArray(slot)) {
+        const picked = slot[Math.floor(Math.random() * slot.length)];
+        return prepareQuestion(picked);
+      }
+      return prepareQuestion(slot);
+    });
+
+    state.currentQuestionIndex = 0;
+    state.userAnswers = new Array(state.currentQuestions.length).fill(null);
+    state.practiceAnswered = false;
+
+    showView('quiz');
+    renderCurrentQuestion();
+  }
+
+  // Start Subsection Drill (Focus on specific topic slots)
+  function startSubsectionQuiz(chapterId, subsectionId) {
+    state.quizType = 'subsection';
+    state.currentChapterId = chapterId;
+    state.currentSubsectionId = subsectionId;
+
+    const ch = getChapterMeta(chapterId);
+    if (ch && ch.subsections) {
+      const sub = ch.subsections.find(s => s.id === subsectionId);
+      if (sub) {
+        state.currentSubsectionTitleJa = sub.titleJa;
+        state.currentSubsectionTitleEn = sub.titleEn;
+      }
+    }
+
+    const rawSlots = quizData[chapterId] || [];
+    // Match slots belonging to this subsection
+    const matchedSlots = [];
+    rawSlots.forEach(slot => {
+      const firstQ = Array.isArray(slot) ? slot[0] : slot;
+      if (firstQ && firstQ.sectionId === subsectionId) {
+        matchedSlots.push(slot);
+      }
+    });
+
+    // Fallback if no exact match (e.g. range matching like 1.3_1.4)
+    if (matchedSlots.length === 0) {
+      rawSlots.forEach(slot => {
+        const firstQ = Array.isArray(slot) ? slot[0] : slot;
+        if (firstQ && firstQ.sectionId && (subsectionId.includes(firstQ.sectionId) || firstQ.sectionId.includes(subsectionId))) {
+          matchedSlots.push(slot);
+        }
+      });
+    }
+
+    const targetSlots = matchedSlots.length > 0 ? matchedSlots : rawSlots;
+
+    state.currentQuestions = targetSlots.map(slot => {
       if (Array.isArray(slot)) {
         const picked = slot[Math.floor(Math.random() * slot.length)];
         return prepareQuestion(picked);
@@ -343,12 +498,26 @@
     const totalQ = state.currentQuestions.length;
     const currentNum = state.currentQuestionIndex + 1;
 
-    // Header info
-    el.currentChapterPill.textContent = `Ch ${state.currentChapterId}`;
+    // Header info: Chapter / Subsection Pill
+    if (state.quizType === 'subsection') {
+      const displaySub = (state.currentSubsectionId || '').replace('_', '–');
+      el.currentChapterPill.textContent = `Ch ${state.currentChapterId} · § ${displaySub}`;
+    } else {
+      el.currentChapterPill.textContent = `Ch ${state.currentChapterId}`;
+    }
+
     el.quizProgressCounter.textContent = `${t.qCountPrefix} ${currentNum} / ${totalQ}`;
 
     const percentProgress = ((currentNum - 1) / totalQ) * 100;
     el.quizProgressFill.style.width = `${percentProgress}%`;
+
+    // Display Subsection Tag above question
+    if (q.sectionTitleJa || q.sectionTitleEn) {
+      const secTitle = state.lang === 'ja' ? (q.sectionTitleJa || q.sectionId) : (q.sectionTitleEn || q.sectionId);
+      el.qCategoryTag.textContent = `§ ${secTitle}`;
+    } else {
+      el.qCategoryTag.textContent = t.qCategory;
+    }
 
     // Question text & code
     const qData = q[state.lang];
@@ -503,7 +672,11 @@
     const percent = Math.round((correctCount / totalQ) * 100);
 
     // Save to LocalStorage
-    localStorage.setItem(`it_score_ch_${state.currentChapterId}`, `${correctCount}/${totalQ} (${percent}%)`);
+    if (state.quizType === 'subsection') {
+      localStorage.setItem(`it_score_sub_${state.currentChapterId}_${state.currentSubsectionId}`, `${correctCount}/${totalQ} (${percent}%)`);
+    } else {
+      localStorage.setItem(`it_score_ch_${state.currentChapterId}`, `${correctCount}/${totalQ} (${percent}%)`);
+    }
 
     // Update Percentage
     el.resultScorePercent.textContent = `${percent}%`;
@@ -535,6 +708,21 @@
     } else {
       el.resultVerdictTitle.textContent = t.verdictReviewTitle;
       el.resultVerdictDesc.textContent = t.verdictReviewDesc;
+    }
+
+    // Action button texts
+    if (state.quizType === 'subsection') {
+      el.retakeLabel.textContent = t.retakeSubsection;
+      const nextSub = getNextSubsection(state.currentChapterId, state.currentSubsectionId);
+      if (nextSub) {
+        const nextSubId = nextSub.id.replace('_', '–');
+        el.nextChapLabel.textContent = state.lang === 'ja' ? `次の節へ進む (§ ${nextSubId})` : `Next Subsection (§ ${nextSubId})`;
+      } else {
+        el.nextChapLabel.textContent = t.toFullChapterQuiz;
+      }
+    } else {
+      el.retakeLabel.textContent = t.retakeQuiz;
+      el.nextChapLabel.textContent = t.nextChapter;
     }
 
     // Render breakdown review
@@ -623,9 +811,8 @@
     }
   }
 
-  // Keyboard Shortcuts (Linear/Raycast-grade tactile navigation)
+  // Keyboard Shortcuts (Tactile navigation)
   function handleKeyboardShortcuts(e) {
-    // If typing in an input, don't hijack
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
     if (state.activeView === 'quiz') {
@@ -655,7 +842,11 @@
     } else if (state.activeView === 'results') {
       if (e.key === 'Enter' || e.key === 'r' || e.key === 'R') {
         e.preventDefault();
-        startChapterQuiz(state.currentChapterId);
+        if (state.quizType === 'subsection') {
+          startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
+        } else {
+          startChapterQuiz(state.currentChapterId);
+        }
       } else if (e.key === 'Escape') {
         e.preventDefault();
         showView('hub');
@@ -736,12 +927,26 @@
 
     // Results Actions
     el.retakeQuizBtn.addEventListener('click', () => {
-      startChapterQuiz(state.currentChapterId);
+      if (state.quizType === 'subsection') {
+        startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
+      } else {
+        startChapterQuiz(state.currentChapterId);
+      }
     });
 
     el.nextChapterBtn.addEventListener('click', () => {
-      const nextId = (state.currentChapterId % 14) + 1;
-      startChapterQuiz(nextId);
+      if (state.quizType === 'subsection') {
+        const nextSub = getNextSubsection(state.currentChapterId, state.currentSubsectionId);
+        if (nextSub) {
+          startSubsectionQuiz(state.currentChapterId, nextSub.id);
+        } else {
+          // Finished all subsections in chapter -> move to full chapter quiz
+          startChapterQuiz(state.currentChapterId);
+        }
+      } else {
+        const nextId = (state.currentChapterId % 14) + 1;
+        startChapterQuiz(nextId);
+      }
     });
 
     // Review Filters
