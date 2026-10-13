@@ -1,5 +1,5 @@
-// InfoTech — Vanguard Quiz Hub Application Engine
-// Supports Chapters 1-14, Bilingual JA/EN, Practice/Test Modes, Tactile Feedback & Keyboard Shortcuts
+// InfoTech — Quiz Practice Application
+// Chapters 1-14, Bilingual JA/EN, Practice/Test Modes, Tactile Feedback & Responsive Design
 
 (function () {
   'use strict';
@@ -21,69 +21,71 @@
   const i18n = {
     ja: {
       appTitle: "InfoTech",
-      appSubtitle: "小テスト対策ハブ",
-      heroBadge: "Interactive Prep Terminal",
-      heroTitle: "授業前クイズで理解度を完全チェック",
-      heroDesc: "本講義は事前学習を前提としたハイブリッド形式です。講義カリキュラムに基づき、各回の授業内小テストで頻出するコード追跡・重要概念・典型的な引っ掛け問題を章ごとに特訓できます。",
-      heroTotalQ: "全 14 章 / 56 問収録",
-      heroModeDesc: "モード: 練習（即時解説）または本番テスト（採点）",
+      appSubtitle: "小テスト対策",
+      heroBadge: "事前学習クイズ",
+      heroTitle: "授業前の確認クイズ",
+      heroDesc: "授業前の予習や復習用のクイズです。各回の小テストで扱われるコードの挙動や重要概念を章ごとに確認できます。",
+      heroTotalQ: "全14章 / 56問",
+      heroModeDesc: "モード: 練習（即時回答）/ テスト（採点）",
       practiceMode: "💡 練習モード",
-      testMode: "⏱ 本番テスト",
+      testMode: "⏱ テストモード",
       backToHub: "章選択へ戻る",
       qCategory: "確認問題",
       qCountPrefix: "問題",
       nextQ: "次の問題へ",
-      finishQuiz: "テストを提出して結果を見る",
+      finishQuiz: "テストを提出する",
       retakeQuiz: "もう一度解く",
       nextChapter: "次の章へ進む",
-      backToHubResults: "ハブに戻る",
-      reviewHeading: "解答の解説と詳細分析 (Why & How)",
+      backToHubResults: "章選択に戻る",
+      reviewHeading: "解答と解説",
       filterAll: "全問表示",
       filterMissed: "不正解のみ",
-      scoreSuffix: "正解",
-      statusCorrect: "正解！",
+      scoreSuffix: "問正解",
+      statusCorrect: "正解",
       statusIncorrect: "不正解",
-      explanationLabel: "【解説 & 思考プロセス】",
-      startQuiz: "挑戦する",
-      verdictPerfectTitle: "完璧です！授業内小テストの準備完了",
-      verdictPerfectDesc: "この章の重要概念とコードの挙動を的確に理解できています。この調子で本番の小テストに臨みましょう！",
-      verdictGoodTitle: "合格ライン達成！あと一歩で満点です",
-      verdictGoodDesc: "基礎はしっかり固まっています。間違えた問題の解説を確認して、小テスト本番で100点を目指しましょう！",
-      verdictReviewTitle: "復習をおすすめします",
-      verdictReviewDesc: "いくつかの重要なトラップや概念でつまずきがありました。下の解説（Why & How）を熟読し、もう一度チャレンジしてみましょう。"
+      explanationLabel: "【解説】",
+      startQuiz: "開始",
+      verdictPerfectTitle: "全問正解です",
+      verdictPerfectDesc: "この章の内容をしっかり理解できています。",
+      verdictGoodTitle: "合格点です",
+      verdictGoodDesc: "間違えた問題の解説を確認しておきましょう。",
+      verdictReviewTitle: "復習が必要です",
+      verdictReviewDesc: "下の解説を確認して、もう一度挑戦してみましょう。",
+      noMissedQuestions: "全問正解です。間違えた問題はありません。"
     },
     en: {
       appTitle: "InfoTech",
-      appSubtitle: "Interactive Prep Terminal",
-      heroBadge: "Interactive Prep Terminal",
-      heroTitle: "Master Weekly In-Class Quizzes in Advance",
-      heroDesc: "This is a hybrid course where students must prepare beforehand. Practice key code-tracing questions, essential RL concepts, and typical traps chapter by chapter.",
+      appSubtitle: "Quiz Prep",
+      heroBadge: "Weekly Quiz Prep",
+      heroTitle: "Prepare for In-Class Quizzes",
+      heroDesc: "Quizzes for weekly class preparation and review. Check your understanding of code behavior and core concepts chapter by chapter.",
       heroTotalQ: "14 Chapters / 56 Questions",
-      heroModeDesc: "Mode: Practice (Instant Feedback) or Test (Exam Sim)",
+      heroModeDesc: "Mode: Practice (immediate feedback) / Test (scored)",
       practiceMode: "💡 Practice Mode",
       testMode: "⏱ Test Mode",
-      backToHub: "Back to Chapter Hub",
-      qCategory: "Check Question",
+      backToHub: "Back to Chapters",
+      qCategory: "Question",
       qCountPrefix: "Question",
       nextQ: "Next Question",
-      finishQuiz: "Submit & View Results",
-      retakeQuiz: "Retake Quiz",
+      finishQuiz: "Submit Quiz",
+      retakeQuiz: "Retake",
       nextChapter: "Next Chapter",
-      backToHubResults: "Return to Hub",
-      reviewHeading: "Question Breakdown & Explanations (Why & How)",
-      filterAll: "All Questions",
+      backToHubResults: "Back to Chapters",
+      reviewHeading: "Answers & Explanations",
+      filterAll: "All",
       filterMissed: "Missed Only",
       scoreSuffix: "Correct",
-      statusCorrect: "Correct!",
+      statusCorrect: "Correct",
       statusIncorrect: "Incorrect",
-      explanationLabel: "【Explanation & Trace】",
-      startQuiz: "Start Quiz",
-      verdictPerfectTitle: "Outstanding! Fully Ready for In-Class Quiz",
-      verdictPerfectDesc: "You have a flawless grasp of this chapter's mechanics and code. You are well-prepared for the in-class evaluation!",
-      verdictGoodTitle: "Great Job! Near Perfect Score",
-      verdictGoodDesc: "Your foundation is solid. Review the missed question explanations below to ensure full marks in class!",
-      verdictReviewTitle: "Recommended Review",
-      verdictReviewDesc: "You tripped on some key misconceptions. Read through the detailed 'Why & How' breakdown below and retake the quiz."
+      explanationLabel: "【Explanation】",
+      startQuiz: "Start",
+      verdictPerfectTitle: "Perfect Score",
+      verdictPerfectDesc: "You answered all questions correctly.",
+      verdictGoodTitle: "Passed",
+      verdictGoodDesc: "Review the explanations below for questions you missed.",
+      verdictReviewTitle: "Needs Review",
+      verdictReviewDesc: "Review the explanations below and try the quiz again.",
+      noMissedQuestions: "No missed questions. You got everything right."
     }
   };
 
@@ -184,7 +186,7 @@
   function applyLanguage() {
     const t = i18n[state.lang];
     document.documentElement.lang = state.lang;
-    document.title = state.lang === 'ja' ? "InfoTech | 小テスト対策ハブ" : "InfoTech | Interactive Prep Terminal";
+    document.title = state.lang === 'ja' ? "InfoTech | 小テスト対策" : "InfoTech | Quiz Prep";
 
     el.appTitleText.textContent = t.appTitle;
     el.appSubtitleText.textContent = t.appSubtitle;
@@ -247,18 +249,21 @@
         cardShell.setAttribute('tabindex', '0');
         cardShell.setAttribute('aria-label', `${title} - ${questions.length} questions`);
 
+        const chLabel = state.lang === 'ja' ? `第 ${ch.id} 章` : `CHAPTER ${ch.id}`;
+        const qCountLabel = state.lang === 'ja' ? `${questions.length} 問` : `${questions.length} Questions`;
+
         cardShell.innerHTML = `
           <div class="chapter-card-core">
             <div class="chapter-card-top">
               <div class="chapter-id-badge">
-                <span>CHAPTER ${ch.id}</span>
+                <span>${chLabel}</span>
                 <span class="chapter-status-dot"></span>
               </div>
               <h4 class="chapter-title">${escapeHtml(title)}</h4>
               <p class="chapter-desc">${escapeHtml(topics)}</p>
             </div>
             <div class="chapter-card-bottom">
-              <span class="question-count-badge">${questions.length} Questions</span>
+              <span class="question-count-badge">${qCountLabel}</span>
               ${savedScore ? `<span class="score-chip">${savedScore}</span>` : ''}
               <span class="start-link-arrow">&rarr;</span>
             </div>
@@ -575,8 +580,8 @@
 
     if (el.reviewCardsContainer.children.length === 0) {
       el.reviewCardsContainer.innerHTML = `
-        <div style="text-align: center; padding: 48px; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-inner); border: 1px solid var(--border-subtle);">
-          <p style="font-family: var(--font-display); font-size: 1.1rem; color: var(--accent-emerald);">🎉 不正解の問題はありません！全問正解です。</p>
+        <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); background: var(--bg-surface); border-radius: var(--radius-inner); border: 1px solid var(--border-subtle);">
+          <p style="font-family: var(--font-display); font-size: 1.05rem; color: var(--accent-emerald);">${t.noMissedQuestions}</p>
         </div>
       `;
     }
