@@ -61,7 +61,17 @@
       startFullChapterQuiz: "総合テストを開始 (全問演習) →",
       retakeSubsection: "この節をもう一度解く",
       nextSubsection: "次の節へ進む",
-      toFullChapterQuiz: "章の総合テストへ →"
+      toFullChapterQuiz: "章の総合テストへ →",
+      subBreakdownHeading: "節ごとの習熟度・弱点分析",
+      subBreakdownHint: "各節の正答率を比較して、重点的に復習すべき弱点を確認できます。",
+      pillMastered: "習得",
+      pillGood: "概ね良好",
+      pillWeak: "🚨 重点復習",
+      pillUntested: "未実施",
+      btnDrillFocus: "この節を特訓 →",
+      subMasteredDone: "✓ 習得完了",
+      btnFocusWeakestPrefix: "🚨 最も苦手な「§ ",
+      btnFocusWeakestSuffix: "」を集中特訓 →"
     },
     en: {
       appTitle: "InfoTech",
@@ -101,7 +111,17 @@
       startFullChapterQuiz: "Start Chapter Quiz (All Topics) →",
       retakeSubsection: "Retake Subsection",
       nextSubsection: "Next Subsection",
-      toFullChapterQuiz: "To Chapter Quiz →"
+      toFullChapterQuiz: "To Chapter Quiz →",
+      subBreakdownHeading: "Subsection Mastery Breakdown",
+      subBreakdownHint: "Compare accuracy across subsections to identify weak areas needing focused practice.",
+      pillMastered: "Mastered",
+      pillGood: "Good",
+      pillWeak: "🚨 Focus Area",
+      pillUntested: "Untested",
+      btnDrillFocus: "Drill Section →",
+      subMasteredDone: "✓ Mastered",
+      btnFocusWeakestPrefix: "🚨 Drill Weakest: § ",
+      btnFocusWeakestSuffix: " →"
     }
   };
 
@@ -160,6 +180,11 @@
     nextChapLabel: document.getElementById('next-chap-label'),
     resultsHubBtn: document.getElementById('results-hub-btn'),
     backHubResultsLabel: document.getElementById('back-hub-results-label'),
+    subBreakdownCard: document.getElementById('sub-breakdown-card'),
+    subBreakdownHeading: document.getElementById('sub-breakdown-heading'),
+    subBreakdownHint: document.getElementById('sub-breakdown-hint'),
+    subBreakdownGrid: document.getElementById('sub-breakdown-grid'),
+    resultsActionsGroup: document.getElementById('results-actions-group'),
     reviewHeadingText: document.getElementById('review-heading-text'),
     filterAllBtn: document.getElementById('filter-all-btn'),
     filterMissedBtn: document.getElementById('filter-missed-btn'),
@@ -215,9 +240,11 @@
     el.modeTestBtn.textContent = t.testMode;
     el.backHubLabel.textContent = t.backToHub;
     el.qCategoryTag.textContent = t.qCategory;
-    el.retakeLabel.textContent = state.quizType === 'subsection' ? t.retakeSubsection : t.retakeQuiz;
-    el.nextChapLabel.textContent = state.quizType === 'subsection' ? t.nextSubsection : t.nextChapter;
-    el.backHubResultsLabel.textContent = t.backToHubResults;
+    if (el.retakeLabel) el.retakeLabel.textContent = state.quizType === 'subsection' ? t.retakeSubsection : t.retakeQuiz;
+    if (el.nextChapLabel) el.nextChapLabel.textContent = state.quizType === 'subsection' ? t.nextSubsection : t.nextChapter;
+    if (el.backHubResultsLabel) el.backHubResultsLabel.textContent = t.backToHubResults;
+    if (el.subBreakdownHeading) el.subBreakdownHeading.textContent = t.subBreakdownHeading;
+    if (el.subBreakdownHint) el.subBreakdownHint.textContent = t.subBreakdownHint;
     el.reviewHeadingText.textContent = t.reviewHeading;
     el.filterAllBtn.textContent = t.filterAll;
     el.filterMissedBtn.textContent = t.filterMissed;
@@ -657,6 +684,362 @@
     showView('results');
   }
 
+  // Render Per-Subsection Results & Weakness Comparison
+  function renderSubsectionBreakdown() {
+    const chMeta = getChapterMeta(state.currentChapterId);
+    if (!chMeta || !chMeta.subsections || chMeta.subsections.length === 0) {
+      if (el.subBreakdownCard) el.subBreakdownCard.style.display = 'none';
+      return { statsList: [], weakestSub: null, allMastered: false };
+    }
+
+    if (el.subBreakdownCard) el.subBreakdownCard.style.display = 'block';
+    const t = i18n[state.lang];
+
+    // Compute statistics per subsection
+    const statsList = chMeta.subsections.map(sub => {
+      let correct = 0;
+      let total = 0;
+      let tested = false;
+
+      if (state.quizType === 'chapter') {
+        const subQuestions = state.currentQuestions.filter(q => {
+          if (!q) return false;
+          if (q.sectionId === sub.id) return true;
+          if (q.sectionId && (sub.id.includes(q.sectionId) || q.sectionId.includes(sub.id))) return true;
+          return false;
+        });
+
+        if (subQuestions.length > 0) {
+          tested = true;
+          total = subQuestions.length;
+          subQuestions.forEach(q => {
+            const idx = state.currentQuestions.indexOf(q);
+            if (idx !== -1 && state.userAnswers[idx] === q.correctIndex) {
+              correct++;
+            }
+          });
+          const pct = Math.round((correct / total) * 100);
+          localStorage.setItem(`it_score_sub_${state.currentChapterId}_${sub.id}`, `${correct}/${total} (${pct}%)`);
+        }
+      } else if (state.quizType === 'subsection') {
+        if (state.currentSubsectionId === sub.id) {
+          tested = true;
+          total = state.currentQuestions.length;
+          correct = state.currentQuestions.filter((q, idx) => state.userAnswers[idx] === q.correctIndex).length;
+          const pct = Math.round((correct / total) * 100);
+          localStorage.setItem(`it_score_sub_${state.currentChapterId}_${sub.id}`, `${correct}/${total} (${pct}%)`);
+        } else {
+          // Read previously saved score from localStorage
+          const saved = localStorage.getItem(`it_score_sub_${state.currentChapterId}_${sub.id}`);
+          if (saved) {
+            tested = true;
+            const match = saved.match(/^(\d+)\/(\d+)\s*\(([\d.]+)%\)/);
+            if (match) {
+              correct = parseInt(match[1], 10);
+              total = parseInt(match[2], 10);
+            }
+          }
+        }
+      }
+
+      const percent = tested && total > 0 ? Math.round((correct / total) * 100) : null;
+      let status = 'untested';
+      if (tested) {
+        if (percent === 100) status = 'mastered';
+        else if (percent >= 75) status = 'good';
+        else status = 'weak';
+      }
+
+      return {
+        sub,
+        tested,
+        correct,
+        total,
+        percent,
+        status
+      };
+    });
+
+    // Populate UI
+    el.subBreakdownGrid.innerHTML = '';
+
+    statsList.forEach(item => {
+      const sub = item.sub;
+      const subTitle = state.lang === 'ja' ? sub.titleJa : sub.titleEn;
+      const displayId = sub.id.replace('_', '–');
+
+      let pillClass = 'pill-untested';
+      let pillText = t.pillUntested;
+      let meterWidth = 0;
+      let meterColor = 'rgba(255, 255, 255, 0.1)';
+      let fractionText = '—';
+      let percentText = '—%';
+
+      if (item.tested) {
+        meterWidth = item.percent;
+        percentText = `${item.percent}%`;
+        fractionText = state.lang === 'ja' ? `${item.correct} / ${item.total}問` : `${item.correct} / ${item.total} Qs`;
+
+        if (item.status === 'mastered') {
+          pillClass = 'pill-mastered';
+          pillText = t.pillMastered;
+          meterColor = 'var(--accent-emerald)';
+        } else if (item.status === 'good') {
+          pillClass = 'pill-good';
+          pillText = t.pillGood;
+          meterColor = 'var(--accent-amber)';
+        } else {
+          pillClass = 'pill-weak';
+          pillText = t.pillWeak;
+          meterColor = 'var(--accent-rose)';
+        }
+      }
+
+      const itemCard = document.createElement('div');
+      itemCard.className = `sub-breakdown-item ${item.status}`;
+
+      itemCard.innerHTML = `
+        <div class="sub-breakdown-row-top">
+          <div class="sub-breakdown-info">
+            <span class="sub-badge-id">§ ${displayId}</span>
+            <span class="sub-name-label" title="${escapeHtml(subTitle)}">${escapeHtml(subTitle)}</span>
+          </div>
+          <div class="sub-breakdown-stats">
+            <span class="sub-fraction">${fractionText}</span>
+            <span class="sub-percentage">${percentText}</span>
+            <span class="sub-status-pill ${pillClass}">${pillText}</span>
+          </div>
+        </div>
+        <div class="sub-meter-bar" role="progressbar" aria-valuenow="${meterWidth}" aria-valuemin="0" aria-valuemax="100">
+          <div class="sub-meter-fill" style="width: ${meterWidth}%; background-color: ${meterColor};"></div>
+        </div>
+        <div class="sub-breakdown-action-row">
+          ${
+            item.status === 'mastered'
+              ? `<span class="sub-mastered-tag">${t.subMasteredDone}</span>
+                 <button type="button" class="btn-sub-drill-focus" data-subid="${sub.id}" style="margin-left: 8px;">${t.btnDrillFocus}</button>`
+              : `<button type="button" class="btn-sub-drill-focus ${item.status === 'weak' ? 'urgent' : ''}" data-subid="${sub.id}">
+                   ${item.status === 'weak' ? '🚨 ' : ''}${t.btnDrillFocus}
+                 </button>`
+          }
+        </div>
+      `;
+
+      const drillBtn = itemCard.querySelector('.btn-sub-drill-focus');
+      if (drillBtn) {
+        drillBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          startSubsectionQuiz(state.currentChapterId, sub.id);
+        });
+      }
+
+      el.subBreakdownGrid.appendChild(itemCard);
+    });
+
+    // Identify weak subsections
+    const testedList = statsList.filter(s => s.tested);
+    const weakList = testedList.filter(s => s.percent < 100);
+    weakList.sort((a, b) => a.percent - b.percent);
+
+    const allMastered = testedList.length === chMeta.subsections.length && weakList.length === 0;
+    const weakestSub = weakList.length > 0 ? weakList[0].sub : null;
+
+    return { statsList, weakestSub, allMastered };
+  }
+
+  // Render Dynamic Remediation & Navigation Actions
+  function renderResultsActions(weakestSub, allMastered, percent) {
+    if (!el.resultsActionsGroup) return;
+    const t = i18n[state.lang];
+    el.resultsActionsGroup.innerHTML = '';
+
+    if (state.quizType === 'chapter') {
+      if (weakestSub) {
+        // Prioritize focused drill for the weakest subsection
+        const displaySubId = weakestSub.id.replace('_', '–');
+        const focusBtn = document.createElement('button');
+        focusBtn.type = 'button';
+        focusBtn.className = 'primary-action-btn btn-weakest-focus';
+        focusBtn.id = 'focus-weakest-btn';
+        focusBtn.innerHTML = `
+          <span>${t.btnFocusWeakestPrefix}${displaySubId}${t.btnFocusWeakestSuffix}</span>
+          <span class="btn-trailing-disk" aria-hidden="true">&rarr;</span>
+        `;
+        focusBtn.addEventListener('click', () => {
+          startSubsectionQuiz(state.currentChapterId, weakestSub.id);
+        });
+        el.resultsActionsGroup.appendChild(focusBtn);
+
+        // Retake Chapter Quiz
+        const retakeBtn = document.createElement('button');
+        retakeBtn.type = 'button';
+        retakeBtn.className = 'secondary-action-btn';
+        retakeBtn.id = 'retake-quiz-btn';
+        retakeBtn.innerHTML = `
+          <span>${t.retakeQuiz}</span>
+          <span aria-hidden="true">&#x21bb;</span>
+        `;
+        retakeBtn.addEventListener('click', () => {
+          startChapterQuiz(state.currentChapterId);
+        });
+        el.resultsActionsGroup.appendChild(retakeBtn);
+
+        // Advance to Next Chapter (secondary/optional)
+        const nextChapBtn = document.createElement('button');
+        nextChapBtn.type = 'button';
+        nextChapBtn.className = 'secondary-action-btn';
+        nextChapBtn.id = 'next-chapter-btn';
+        nextChapBtn.innerHTML = `
+          <span>${t.nextChapter}</span>
+          <span aria-hidden="true">&rarr;</span>
+        `;
+        nextChapBtn.addEventListener('click', () => {
+          const nextId = (state.currentChapterId % 14) + 1;
+          startChapterQuiz(nextId);
+        });
+        el.resultsActionsGroup.appendChild(nextChapBtn);
+      } else {
+        // All mastered!
+        const nextChapBtn = document.createElement('button');
+        nextChapBtn.type = 'button';
+        nextChapBtn.className = 'primary-action-btn';
+        nextChapBtn.id = 'next-chapter-btn';
+        nextChapBtn.innerHTML = `
+          <span>${t.nextChapter}</span>
+          <span class="btn-trailing-disk" aria-hidden="true">&rarr;</span>
+        `;
+        nextChapBtn.addEventListener('click', () => {
+          const nextId = (state.currentChapterId % 14) + 1;
+          startChapterQuiz(nextId);
+        });
+        el.resultsActionsGroup.appendChild(nextChapBtn);
+
+        const retakeBtn = document.createElement('button');
+        retakeBtn.type = 'button';
+        retakeBtn.className = 'secondary-action-btn';
+        retakeBtn.id = 'retake-quiz-btn';
+        retakeBtn.innerHTML = `
+          <span>${t.retakeQuiz}</span>
+          <span aria-hidden="true">&#x21bb;</span>
+        `;
+        retakeBtn.addEventListener('click', () => {
+          startChapterQuiz(state.currentChapterId);
+        });
+        el.resultsActionsGroup.appendChild(retakeBtn);
+      }
+    } else {
+      // Subsection quiz mode
+      const nextSub = getNextSubsection(state.currentChapterId, state.currentSubsectionId);
+
+      if (percent === 100 && nextSub) {
+        // High score on subsection -> Offer next subsection as primary
+        const nextSubId = nextSub.id.replace('_', '–');
+        const nextSubBtn = document.createElement('button');
+        nextSubBtn.type = 'button';
+        nextSubBtn.className = 'primary-action-btn';
+        nextSubBtn.id = 'next-chapter-btn';
+        nextSubBtn.innerHTML = `
+          <span>${state.lang === 'ja' ? `次の節へ (§ ${nextSubId})` : `Next Subsection (§ ${nextSubId})`}</span>
+          <span class="btn-trailing-disk" aria-hidden="true">&rarr;</span>
+        `;
+        nextSubBtn.addEventListener('click', () => {
+          startSubsectionQuiz(state.currentChapterId, nextSub.id);
+        });
+        el.resultsActionsGroup.appendChild(nextSubBtn);
+
+        const retakeBtn = document.createElement('button');
+        retakeBtn.type = 'button';
+        retakeBtn.className = 'secondary-action-btn';
+        retakeBtn.id = 'retake-quiz-btn';
+        retakeBtn.innerHTML = `
+          <span>${t.retakeSubsection}</span>
+          <span aria-hidden="true">&#x21bb;</span>
+        `;
+        retakeBtn.addEventListener('click', () => {
+          startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
+        });
+        el.resultsActionsGroup.appendChild(retakeBtn);
+      } else if (percent === 100 && !nextSub) {
+        // Finished last subsection of the chapter! Offer full chapter quiz as primary!
+        const fullChapBtn = document.createElement('button');
+        fullChapBtn.type = 'button';
+        fullChapBtn.className = 'primary-action-btn';
+        fullChapBtn.innerHTML = `
+          <span>${t.startFullChapterQuiz}</span>
+          <span class="btn-trailing-disk" aria-hidden="true">&rarr;</span>
+        `;
+        fullChapBtn.addEventListener('click', () => {
+          startChapterQuiz(state.currentChapterId);
+        });
+        el.resultsActionsGroup.appendChild(fullChapBtn);
+
+        const retakeBtn = document.createElement('button');
+        retakeBtn.type = 'button';
+        retakeBtn.className = 'secondary-action-btn';
+        retakeBtn.id = 'retake-quiz-btn';
+        retakeBtn.innerHTML = `
+          <span>${t.retakeSubsection}</span>
+          <span aria-hidden="true">&#x21bb;</span>
+        `;
+        retakeBtn.addEventListener('click', () => {
+          startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
+        });
+        el.resultsActionsGroup.appendChild(retakeBtn);
+      } else {
+        // Under 100% on subsection -> retake is primary
+        const retakeBtn = document.createElement('button');
+        retakeBtn.type = 'button';
+        retakeBtn.className = 'primary-action-btn';
+        retakeBtn.id = 'retake-quiz-btn';
+        retakeBtn.innerHTML = `
+          <span>${t.retakeSubsection}</span>
+          <span class="btn-trailing-disk" aria-hidden="true">&#x21bb;</span>
+        `;
+        retakeBtn.addEventListener('click', () => {
+          startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
+        });
+        el.resultsActionsGroup.appendChild(retakeBtn);
+
+        if (nextSub) {
+          const nextSubId = nextSub.id.replace('_', '–');
+          const nextSubBtn = document.createElement('button');
+          nextSubBtn.type = 'button';
+          nextSubBtn.className = 'secondary-action-btn';
+          nextSubBtn.id = 'next-chapter-btn';
+          nextSubBtn.innerHTML = `
+            <span>${state.lang === 'ja' ? `次の節へ (§ ${nextSubId})` : `Next Subsection (§ ${nextSubId})`}</span>
+            <span aria-hidden="true">&rarr;</span>
+          `;
+          nextSubBtn.addEventListener('click', () => {
+            startSubsectionQuiz(state.currentChapterId, nextSub.id);
+          });
+          el.resultsActionsGroup.appendChild(nextSubBtn);
+        }
+
+        const fullChapBtn = document.createElement('button');
+        fullChapBtn.type = 'button';
+        fullChapBtn.className = 'secondary-action-btn';
+        fullChapBtn.innerHTML = `
+          <span>${t.toFullChapterQuiz}</span>
+          <span aria-hidden="true">&rarr;</span>
+        `;
+        fullChapBtn.addEventListener('click', () => {
+          startChapterQuiz(state.currentChapterId);
+        });
+        el.resultsActionsGroup.appendChild(fullChapBtn);
+      }
+    }
+
+    // Always include Back to Hub
+    const hubBtn = document.createElement('button');
+    hubBtn.type = 'button';
+    hubBtn.className = 'secondary-action-btn';
+    hubBtn.id = 'results-hub-btn';
+    hubBtn.innerHTML = `<span>${t.backToHubResults}</span>`;
+    hubBtn.addEventListener('click', () => showView('hub'));
+    el.resultsActionsGroup.appendChild(hubBtn);
+  }
+
   // Render Results Dashboard & Analytics
   function renderResults() {
     const t = i18n[state.lang];
@@ -698,34 +1081,46 @@
       el.resultCircleProgress.style.stroke = 'var(--accent-rose)';
     }
 
-    // Verdict copy
+    // Render Per-Subsection Breakdown
+    const subBreakdown = renderSubsectionBreakdown();
+
+    // Verdict copy with subsection awareness
     if (percent === 100) {
       el.resultVerdictTitle.textContent = t.verdictPerfectTitle;
-      el.resultVerdictDesc.textContent = t.verdictPerfectDesc;
-    } else if (percent >= 75) {
-      el.resultVerdictTitle.textContent = t.verdictGoodTitle;
-      el.resultVerdictDesc.textContent = t.verdictGoodDesc;
-    } else {
-      el.resultVerdictTitle.textContent = t.verdictReviewTitle;
-      el.resultVerdictDesc.textContent = t.verdictReviewDesc;
-    }
-
-    // Action button texts
-    if (state.quizType === 'subsection') {
-      el.retakeLabel.textContent = t.retakeSubsection;
-      const nextSub = getNextSubsection(state.currentChapterId, state.currentSubsectionId);
-      if (nextSub) {
-        const nextSubId = nextSub.id.replace('_', '–');
-        el.nextChapLabel.textContent = state.lang === 'ja' ? `次の節へ進む (§ ${nextSubId})` : `Next Subsection (§ ${nextSubId})`;
+      el.resultVerdictDesc.textContent = state.lang === 'ja'
+        ? "すべての節で満点を獲得しました！この章の内容を完全にマスターしています。"
+        : "Perfect score across all subsections! You have full mastery of this chapter.";
+    } else if (subBreakdown && subBreakdown.weakestSub) {
+      const weakDisplayId = subBreakdown.weakestSub.id.replace('_', '–');
+      if (percent >= 75) {
+        el.resultVerdictTitle.textContent = state.lang === 'ja'
+          ? "合格点ですが、復習推奨の節があります"
+          : "Passed, but review recommended for some topics";
+        el.resultVerdictDesc.textContent = state.lang === 'ja'
+          ? `下の節別分析で「§ ${weakDisplayId}」などの弱点を確認し、集中特訓で理解を深めてから次へ進みましょう。`
+          : `Review the breakdown below for § ${weakDisplayId} and practice your weaker topics before moving on.`;
       } else {
-        el.nextChapLabel.textContent = t.toFullChapterQuiz;
+        el.resultVerdictTitle.textContent = state.lang === 'ja'
+          ? "重点的な復習が必要です"
+          : "Needs Focused Review";
+        el.resultVerdictDesc.textContent = state.lang === 'ja'
+          ? `特に正答率の低かった「§ ${weakDisplayId}」から順に、下のボタンから集中特訓を行いましょう。`
+          : `Start targeted practice on your lowest-scoring subsections, starting with § ${weakDisplayId}.`;
       }
     } else {
-      el.retakeLabel.textContent = t.retakeQuiz;
-      el.nextChapLabel.textContent = t.nextChapter;
+      if (percent >= 75) {
+        el.resultVerdictTitle.textContent = t.verdictGoodTitle;
+        el.resultVerdictDesc.textContent = t.verdictGoodDesc;
+      } else {
+        el.resultVerdictTitle.textContent = t.verdictReviewTitle;
+        el.resultVerdictDesc.textContent = t.verdictReviewDesc;
+      }
     }
 
-    // Render breakdown review
+    // Render Dynamic Action Buttons (Focus on weakest vs Next chapter)
+    renderResultsActions(subBreakdown ? subBreakdown.weakestSub : null, subBreakdown ? subBreakdown.allMastered : false, percent);
+
+    // Render breakdown review questions
     renderReviewCards();
   }
 
@@ -842,7 +1237,10 @@
     } else if (state.activeView === 'results') {
       if (e.key === 'Enter' || e.key === 'r' || e.key === 'R') {
         e.preventDefault();
-        if (state.quizType === 'subsection') {
+        const focusBtn = document.getElementById('focus-weakest-btn');
+        if (e.key === 'Enter' && focusBtn) {
+          focusBtn.click();
+        } else if (state.quizType === 'subsection') {
           startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
         } else {
           startChapterQuiz(state.currentChapterId);
@@ -920,34 +1318,11 @@
 
     // Back Buttons
     el.quizBackBtn.addEventListener('click', () => showView('hub'));
-    el.resultsHubBtn.addEventListener('click', () => showView('hub'));
 
     // Next Question Button
     el.quizNextBtn.addEventListener('click', onNextQuestionClick);
 
-    // Results Actions
-    el.retakeQuizBtn.addEventListener('click', () => {
-      if (state.quizType === 'subsection') {
-        startSubsectionQuiz(state.currentChapterId, state.currentSubsectionId);
-      } else {
-        startChapterQuiz(state.currentChapterId);
-      }
-    });
-
-    el.nextChapterBtn.addEventListener('click', () => {
-      if (state.quizType === 'subsection') {
-        const nextSub = getNextSubsection(state.currentChapterId, state.currentSubsectionId);
-        if (nextSub) {
-          startSubsectionQuiz(state.currentChapterId, nextSub.id);
-        } else {
-          // Finished all subsections in chapter -> move to full chapter quiz
-          startChapterQuiz(state.currentChapterId);
-        }
-      } else {
-        const nextId = (state.currentChapterId % 14) + 1;
-        startChapterQuiz(nextId);
-      }
-    });
+    // Results Actions: Dynamic buttons and handlers are attached in renderResultsActions()
 
     // Review Filters
     el.filterAllBtn.addEventListener('click', () => {
