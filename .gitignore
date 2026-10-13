@@ -2,3 +2,5 @@
 *.log
 .system_generated/
 scratch/
+__pycache__/
+*.pyc

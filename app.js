@@ -25,7 +25,7 @@
       heroBadge: "事前学習クイズ",
       heroTitle: "授業前の確認クイズ",
       heroDesc: "授業前の予習や復習用のクイズです。各回の小テストで扱われるコードの挙動や重要概念を章ごとに確認できます。",
-      heroTotalQ: "全14章 / 56問",
+      heroTotalQ: "全14章 / 168問 (各問3〜4バリエーション)",
       heroModeDesc: "モード: 練習（即時回答）/ テスト（採点）",
       practiceMode: "💡 練習モード",
       testMode: "⏱ テストモード",
@@ -59,7 +59,7 @@
       heroBadge: "Weekly Quiz Prep",
       heroTitle: "Prepare for In-Class Quizzes",
       heroDesc: "Quizzes for weekly class preparation and review. Check your understanding of code behavior and core concepts chapter by chapter.",
-      heroTotalQ: "14 Chapters / 56 Questions",
+      heroTotalQ: "14 Chapters / 168 Questions (3–4 variants per topic)",
       heroModeDesc: "Mode: Practice (immediate feedback) / Test (scored)",
       practiceMode: "💡 Practice Mode",
       testMode: "⏱ Test Mode",
@@ -236,7 +236,9 @@
       grid.className = 'chapter-grid';
 
       part.chapters.forEach(ch => {
-        const questions = quizData[ch.id] || [];
+        const rawSlots = quizData[ch.id] || [];
+        const sessionCount = rawSlots.length;
+        const totalVarieties = rawSlots.reduce((sum, slot) => sum + (Array.isArray(slot) ? slot.length : 1), 0);
         const title = state.lang === 'ja' ? ch.titleJa : ch.titleEn;
         const topics = state.lang === 'ja' ? ch.topicsJa : ch.topicsEn;
 
@@ -247,10 +249,12 @@
         cardShell.className = `chapter-card-shell ${savedScore ? 'completed' : ''}`;
         cardShell.setAttribute('role', 'button');
         cardShell.setAttribute('tabindex', '0');
-        cardShell.setAttribute('aria-label', `${title} - ${questions.length} questions`);
+        cardShell.setAttribute('aria-label', `${title} - ${sessionCount} questions (${totalVarieties} variants)`);
 
         const chLabel = state.lang === 'ja' ? `第 ${ch.id} 章` : `CHAPTER ${ch.id}`;
-        const qCountLabel = state.lang === 'ja' ? `${questions.length} 問` : `${questions.length} Questions`;
+        const qCountLabel = state.lang === 'ja' 
+          ? `${sessionCount} 問 (全${totalVarieties}パターン)` 
+          : `${sessionCount} Qs (${totalVarieties} variants)`;
 
         cardShell.innerHTML = `
           <div class="chapter-card-core">
@@ -286,10 +290,42 @@
     });
   }
 
-  // Start Quiz for Specific Chapter
+  // Helper: Deep-clone a question and shuffle option order while remapping correctIndex
+  function prepareQuestion(rawQ) {
+    if (!rawQ) return null;
+    const q = JSON.parse(JSON.stringify(rawQ));
+    if (!q.ja || !q.ja.options || !q.en || !q.en.options) return q;
+
+    const count = q.ja.options.length;
+    const indices = Array.from({ length: count }, (_, i) => i);
+    // Fisher-Yates shuffle
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+
+    const origCorrect = q.correctIndex !== undefined ? q.correctIndex : 0;
+    q.correctIndex = indices.indexOf(origCorrect);
+    q.ja.options = indices.map(idx => rawQ.ja.options[idx]);
+    q.en.options = indices.map(idx => rawQ.en.options[idx]);
+
+    return q;
+  }
+
+  // Start Quiz for Specific Chapter with Dynamic Variety Sampling & Shuffling
   function startChapterQuiz(chapterId) {
     state.currentChapterId = chapterId;
-    state.currentQuestions = quizData[chapterId] || [];
+    const rawSlots = quizData[chapterId] || [];
+
+    // For each slot, pick 1 random variety from the bank, then shuffle options
+    state.currentQuestions = rawSlots.map(slot => {
+      if (Array.isArray(slot)) {
+        const picked = slot[Math.floor(Math.random() * slot.length)];
+        return prepareQuestion(picked);
+      }
+      return prepareQuestion(slot);
+    });
+
     state.currentQuestionIndex = 0;
     state.userAnswers = new Array(state.currentQuestions.length).fill(null);
     state.practiceAnswered = false;

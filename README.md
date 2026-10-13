@@ -8,7 +8,7 @@ Includes bilingual (Japanese & English) question banks, practice mode with immed
 
 ## 📚 Curriculum & Chapter Coverage
 
-The quiz bank includes 56 questions organized across 14 chapters in 4 parts:
+The quiz bank includes 168 total questions (4 question slots per chapter, 3–4 dynamic varieties per slot) across all 14 chapters. On each quiz session or retake, questions and option choices are dynamically sampled and shuffled to prevent rote answer memorization and reinforce conceptual understanding:
 
 ### Part 1: Programming & Algorithm Foundations
 - **Chapter 1: What is a Program?**: Computer architecture, CPU (ALU vs. Control Unit), Fetch-Decode-Execute-Writeback cycle, Main memory volatility (DRAM) vs. secondary storage (SSD/HDD), Python IDLE environment.
