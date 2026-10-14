@@ -647,6 +647,64 @@ body {
   color: var(--accent-emerald);
 }
 
+/* Subsection Version Buttons (Ver A / Ver B per subsection) */
+.sub-version-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-sub-version {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 9px;
+  min-height: 30px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-base);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--duration-snap) var(--ease-snappy);
+  touch-action: manipulation;
+}
+
+.btn-sub-version:hover {
+  background: rgba(56, 189, 248, 0.09);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38BDF8;
+  transform: translateY(-1px);
+}
+
+.btn-sub-version:active {
+  transform: translateY(0);
+}
+
+.btn-sub-version .sub-ver-tag {
+  font-weight: 700;
+  color: #38BDF8;
+}
+
+.btn-sub-version .sub-ver-count {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.btn-sub-version .sub-score-chip {
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  border-radius: var(--radius-pill);
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  margin-left: 2px;
+}
+
 /* Chapter Card Version Selector (Ver A / Ver B) */
 .quiz-version-block {
   margin-top: 10px;
@@ -1888,6 +1946,29 @@ body {
   .chapter-card-bottom {
     margin-top: 12px;
     padding-top: 10px;
+  }
+
+  .subsection-item-row {
+    flex-wrap: wrap;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .sub-meta-group {
+    flex: 1 1 100%;
+  }
+
+  .sub-version-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .btn-sub-version {
+    justify-content: center;
+    padding: 6px 8px;
+    min-height: 34px;
   }
 
   /* Quiz Runner */
