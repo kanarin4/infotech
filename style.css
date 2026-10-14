@@ -647,11 +647,109 @@ body {
   color: var(--accent-emerald);
 }
 
+/* Chapter Card Version Selector (Ver A / Ver B) */
+.quiz-version-block {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.quiz-version-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.version-header-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+
+.version-header-hint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.quiz-version-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn-version-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--duration-snap) var(--ease-snappy);
+  position: relative;
+  touch-action: manipulation;
+  gap: 2px;
+}
+
+.btn-version-card:hover {
+  background: rgba(56, 189, 248, 0.07);
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-version-card:active {
+  transform: translateY(0);
+}
+
+.version-badge-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ver-code {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #38BDF8;
+}
+
+.ver-q-count {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1px 5px;
+  border-radius: var(--radius-pill);
+}
+
+.ver-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.25;
+}
+
+.ver-score-chip {
+  margin-top: 3px;
+  font-size: 0.66rem;
+  padding: 1px 6px;
+  align-self: flex-start;
+}
+
 /* Chapter Card Primary Full Quiz Button */
 .btn-chapter-full-quiz {
   width: 100%;
-  margin-top: 10px;
-  padding: 9px 12px;
+  margin-top: 8px;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
